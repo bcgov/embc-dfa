@@ -1,1 +1,1 @@
-# embc-dfa
+# EMBC DFA repository
