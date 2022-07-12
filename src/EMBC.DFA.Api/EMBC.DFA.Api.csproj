@@ -27,4 +27,8 @@
     <ItemGroup>
       <None Include="..\.editorconfig" Link=".editorconfig" />
     </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\EMBC.DFA\EMBC.DFA.csproj" />
+    </ItemGroup>
 </Project>
