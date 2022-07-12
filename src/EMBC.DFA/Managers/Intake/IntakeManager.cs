@@ -1,4 +1,7 @@
-﻿namespace EMBC.DFA.Api.Services.Intake
+﻿using System;
+using System.Threading.Tasks;
+
+namespace EMBC.DFA.Managers.Intake
 {
     public class IntakeManager : IIntakeManager
     {

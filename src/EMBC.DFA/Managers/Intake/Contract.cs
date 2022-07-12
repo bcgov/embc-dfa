@@ -1,6 +1,6 @@
-﻿using EMBC.DFA.Api.Models;
+﻿using System.Threading.Tasks;
 
-namespace EMBC.DFA.Api.Services.Intake
+namespace EMBC.DFA.Managers.Intake
 {
     public interface IIntakeManager
     {
@@ -31,5 +31,17 @@ namespace EMBC.DFA.Api.Services.Intake
     public class NewIndFormSubmissionCommand : IntakeCommand
     {
         public IndForm Form { get; set; } = null!;
+    }
+
+    public class SmbForm
+    {
+    }
+
+    public class GovForm
+    {
+    }
+
+    public class IndForm
+    {
     }
 }
