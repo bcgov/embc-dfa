@@ -3,15 +3,16 @@
     public class SmbForm
     {
 #pragma warning disable CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
-        public Data data { get; set; }
+        public SmbFormData data { get; set; }
         public Metadata metadata { get; set; }
     }
 
-    public class Data
+    public class SmbFormData
     {
-        public string pleaseSelectTheAppropriateOption { get; set; }
+        public string pleaseSelectTheAppropriateOption { get; set; } //Applicant Type
         public string yes7 { get; set; } //Indigenous Status
         public string yes6 { get; set; } //On First Nations Reserve?
+        public string? nameOfFirstNationsReserve { get; set; }
         public string primaryContactNameLastFirst { get; set; } //Applicant First name
         public string primaryContactNameLastFirst3 { get; set; } //Applicant Last name
         public string primaryContactNameLastFirst4 { get; set; } //Applicant Initial
@@ -36,7 +37,7 @@
         public string alternateContactNameWhereYouCanBeReachedIfApplicable { get; set; }
         public string alternatePhoneNumber { get; set; }
         public DamageLoss causeOfDamageLoss { get; set; }
-        public string pleaseSpecify { get; set; } //Other
+        public string pleaseSpecify { get; set; } //Other damage loss
         public string provideABriefDescriptionOfDamage { get; set; }
         public string pleaseDecideToChooseAOrB { get; set; } //ApplicantType - Small Business or Farm Owner
         public bool yes8 { get; set; } //Written confirmation from your insurance broker/agent that you could not have purchased insurance to cover the loss to your small business, farm or charitable organization
@@ -61,12 +62,16 @@
         public string applicantFirstName1 { get; set; } //Appendix B Applicant Last Name
         public DamagedItem[] listByRoomItemsSubmittedForDamageAssessment { get; set; }
         public bool submit1 { get; set; }
-        public string yes { get; set; } //Is your business managed by all owners of the business on a day to day basis?
-        public string yes1 { get; set; } //Are the gross revenues of the business more than $10,000 but less than $2 million in the year before the disaster?
-        public string yes2 { get; set; } //Does the business employ less than 50 employees at any one time?
-        public string yes3 { get; set; } //Is the farm operation identified in the current assessment of the British Columbia Assessment Authority as a developing or established agricultural operation?
-        public string yes4 { get; set; } //Is the farm operation owned and operated by a person(s) who full-time employment is as a farmer?
-        public string yes5 { get; set; } //Is the farm operation the means by which the owner(s) derives the majority of that person’s income?
+
+        //Small Business Applicant only
+        public string? yes { get; set; } //Is your business managed by all owners of the business on a day to day basis?
+        public string? yes1 { get; set; } //Are the gross revenues of the business more than $10,000 but less than $2 million in the year before the disaster?
+        public string? yes2 { get; set; } //Does the business employ less than 50 employees at any one time?
+
+        //Farm Owner Applicant only
+        public string? yes3 { get; set; } //Is the farm operation identified in the current assessment of the British Columbia Assessment Authority as a developing or established agricultural operation?
+        public string? yes4 { get; set; } //Is the farm operation owned and operated by a person(s) who full-time employment is as a farmer?
+        public string? yes5 { get; set; } //Is the farm operation the means by which the owner(s) derives the majority of that person’s income?
     }
 
     public class DamageLoss

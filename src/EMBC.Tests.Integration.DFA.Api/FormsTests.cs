@@ -32,7 +32,7 @@ namespace EMBC.Tests.Integration.DFA.Api
         {
             var form = new SmbForm
             {
-                data = new Data
+                data = new SmbFormData
                 {
                     pleaseSelectTheAppropriateOption = ApplicationTypes.SmallBusiness,
                     yes7 = "No",
@@ -119,6 +119,157 @@ namespace EMBC.Tests.Integration.DFA.Api
             var res = await manager.Handle(new NewSmbFormSubmissionCommand { Form = form });
             res.ShouldBe("smb");
         }
+
+        [Test]
+        public async Task SubmitIndForm()
+        {
+            var form = new IndForm
+            {
+                data = new IndFormData
+                {
+                    pleaseCheckAppropriateBox = ApplicationTypes.HomeOwner,
+                    yes7 = "No",
+                    yes6 = "No",
+                    primaryContactNameLastFirst = "John",
+                    primaryContactNameLastFirst1 = "Test",
+                    primaryContactNameLastFirst2 = "Q",
+                    dateOfDamage = DateTime.Now.AddDays(-2),
+                    dateOfDamage1 = DateTime.Now,
+                    street1 = "123 Test St.",
+                    street3 = String.Empty,
+                    cityTown1 = "Langley",
+                    province1 = "BC",
+                    postalCode1 = "V2V2V2",
+                    mailingAddress = "123 Mail St.",
+                    street2 = String.Empty,
+                    cityTown = "Calgary",
+                    province = "AB",
+                    postalCode = "C2C2C2",
+                    businessTelephoneNumber = "(778) 321-4567",
+                    cellularTelephoneNumber = "(778) 123-4567",
+                    eMailAddress = "test@test.com",
+                    alternateContactNameWhereYouCanBeReachedIfApplicable = String.Empty,
+                    alternatePhoneNumber = String.Empty,
+                    provideRegisteredBuildingOwnerSAndOrLandlordSNameS = "Landlord",
+                    contactTelephoneNumberS = "(604) 123-4567",
+                    contactTelephoneNumberS1 = "(604) 321-4567",
+                    manufacturedHome = new ManufacturedHome
+                    {
+                        no = false,
+                        yes = true
+                    },
+                    causeOfDamageLoss = new DamageLoss
+                    {
+                        flooding = true,
+                        landslide = false,
+                        windstorm = false,
+                        other = false
+                    },
+                    pleaseSpecifyIfOthers = String.Empty,
+                    provideABriefDescriptionOfDamage = "Too much water",
+                    yes = "no",
+                    yes1 = "no",
+                    yes2 = "no",
+                    yes3 = "no",
+                    yes4 = "no",
+                    yes5 = "no",
+                    occupants = new []
+                    {
+                        new Occupant
+                        {
+                            listTheNamesOfAllFullTimeOccupantsWhoResidedInTheHomeAtTheTimeOfTheEvent = "Mr",
+                            listTheNamesOfAllFullTimeOccupantsWhoResidedInTheHomeAtTheTimeOfTheEvent1 = "Squatter"
+                        },
+                        new Occupant
+                        {
+                            listTheNamesOfAllFullTimeOccupantsWhoResidedInTheHomeAtTheTimeOfTheEvent = "Mrs",
+                            listTheNamesOfAllFullTimeOccupantsWhoResidedInTheHomeAtTheTimeOfTheEvent1 = "Squatter"
+                        },
+                    },
+                    aCopyOfARentalAgreementOrLeaseIfApplicableForResidentialTenantApplication = false,
+                    ifYouHaveInvoicesReceiptsForCleanupOrRepairsPleaseHaveThemAvailableDuringTheSiteMeetingToHelpTheEvaluatorIdentifyEligibleCosts = true,
+                    signature1 = defaultSignature,
+                    printName1 = "Signer Name",
+                    dateYyyyMDay1 = DateTime.Now,
+                    signature2 = defaultSignature,
+                    printName2 = "Second Signer",
+                    dateYyyyMDay2 = DateTime.Now,
+                    applicantFirstName = String.Empty,
+                    applicantFirstName1 = String.Empty,
+                    cleanupLogDetails = new[] {
+                        new CleanUpDetail
+                        {
+                            dateYyyyMDay = DateTime.Now,
+                            descriptionOfWork = "removing water",
+                            hoursWorked = 25,
+                            nameOfFamilyMemberVolunteer = "Test Member"
+                        }
+                    },
+                    applicantFirstName2 = String.Empty,
+                    applicantFirstName3 = String.Empty,
+                    listByRoomItemsSubmittedForDamageAssessment = new[] {
+                        new DamagedItem
+                        {
+                            listByRoomItemsSubmittedForDamageAssessment1 = "item1"
+                        },
+                        new DamagedItem
+                        {
+                            listByRoomItemsSubmittedForDamageAssessment1 = "item2"
+                        }
+                    },
+                    submit1 = true,
+                    nameOfFirstNationsReserve = String.Empty,
+                    date = DateTime.Now
+                },
+                metadata = new Metadata { }
+            };
+
+            var res = await manager.Handle(new NewIndFormSubmissionCommand { Form = form });
+            res.ShouldBe("ind");
+        }
+
+        [Test]
+        public async Task SubmitGovFormCommand()
+        {
+            var form = new GovForm
+            {
+                data = new GovFormData
+                {
+                    indigenousGoverningBodyAndLocalGovernmentApplicationForDisasterFinancialAssistanceDfa1 = "Test Legal Name",
+                    date = DateTime.Now,
+                    primaryContactNameLastFirst = "John",
+                    primaryContactNameLastFirst1 = "Test",
+                    title = "Supreme Leader of the Universe",
+                    mailingAddress = "123 Mail St.",
+                    street2 = String.Empty,
+                    cityTown = "Calgary",
+                    province = "AB",
+                    postalCode = "C2C2C2",
+                    businessTelephoneNumber = "(778) 321-4567",
+                    cellularTelephoneNumber = "(778) 123-4567",
+                    eMailAddress = "test@test.com",
+                    businessTelephoneNumber1 = "(779) 321-4567",
+                    cellularTelephoneNumber1 = "(779) 123-4567",
+                    eMailAddress1 = String.Empty,
+                    causeOfDamageLoss = new DamageLoss
+                    {
+                        flooding = true,
+                        landslide = false,
+                        windstorm = false,
+                        other = false
+                    },
+                    pleaseSpecifyIfOthers = String.Empty,
+                    dateOfDamageLoss = DateTime.Now,
+                    dateOfDamageLoss1 = DateTime.Now,
+                    provideABriefDescriptionOfDamage = "Too much water",
+                    submit1 = true,
+                },
+                metadata = new Metadata { }
+            };
+
+            var res = await manager.Handle(new NewGovFormSubmissionCommand { Form = form });
+            res.ShouldBe("gov");
+        }
     }
 
     public static class ApplicationTypes
@@ -126,6 +277,8 @@ namespace EMBC.Tests.Integration.DFA.Api
         public const string SmallBusiness = "smallBusinessOwner";
         public const string FarmOwner = "farmOwner";
         public const string CharitableOrganization = "charitableOrganization";
+        public const string HomeOwner = "homeOwner";
+        public const string ResidentialTenant = "residentialTenant";
 
     }
 
