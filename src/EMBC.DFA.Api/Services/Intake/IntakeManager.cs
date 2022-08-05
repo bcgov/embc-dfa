@@ -1,7 +1,17 @@
-﻿namespace EMBC.DFA.Api.Services.Intake
+﻿using AutoMapper;
+using EMBC.DFA.Api.Resources.Forms;
+
+namespace EMBC.DFA.Api.Services.Intake
 {
     public class IntakeManager : IIntakeManager
     {
+        private readonly IMapper mapper;
+
+        public IntakeManager (IMapper mapper)
+        {
+            this.mapper = mapper;
+        }
+
         public async Task<string> Handle(IntakeCommand cmd)
         {
             return cmd switch
@@ -20,6 +30,9 @@
 
         private async Task<string> HandleSubmitSmbForm(NewSmbFormSubmissionCommand cmd)
         {
+            //add any validations
+
+            var smbForm = mapper.Map<SmbForm>(cmd.Form.data);
             return await Task.FromResult("smb");
         }
 

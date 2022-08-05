@@ -11,7 +11,8 @@ builder.Services.AddEndpointsApiExplorer()
     .AddCors()
     .AddCache()
     .AddDfaDynamics(builder.Configuration)
-    .AddIntakeManager();
+    .AddIntakeManager()
+    .AddAutoMapper(typeof(Program).Assembly);
 
 var app = builder.Build();
 
