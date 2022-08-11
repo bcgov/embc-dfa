@@ -2,6 +2,7 @@
 using EMBC.DFA.Api;
 using EMBC.DFA.Api.Dynamics;
 using EMBC.DFA.Api.Models;
+using EMBC.DFA.Api.Resources.Forms;
 using EMBC.DFA.Api.Services.Intake;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -12,6 +13,7 @@ builder.Services.AddEndpointsApiExplorer()
     .AddCache()
     .AddDfaDynamics(builder.Configuration)
     .AddIntakeManager()
+    .AddFormsRepository()
     .AddAutoMapper(typeof(Program).Assembly);
 
 var app = builder.Build();

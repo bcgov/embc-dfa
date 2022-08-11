@@ -6,10 +6,12 @@ namespace EMBC.DFA.Api.Services.Intake
     public class IntakeManager : IIntakeManager
     {
         private readonly IMapper mapper;
+        private readonly IFormsRepository formsRepository;
 
-        public IntakeManager (IMapper mapper)
+        public IntakeManager (IMapper mapper, IFormsRepository formsRepository)
         {
             this.mapper = mapper;
+            this.formsRepository = formsRepository;
         }
 
         public async Task<string> Handle(IntakeCommand cmd)
@@ -32,18 +34,26 @@ namespace EMBC.DFA.Api.Services.Intake
         {
             //add any validations
 
-            var smbForm = mapper.Map<SmbForm>(cmd.Form.data);
-            return await Task.FromResult("smb");
+            var smbForm = mapper.Map<Form>(cmd.Form.data);
+
+            var caseId = (await formsRepository.Manage(new SubmitNewForm { Form = smbForm })).Id;
+            return await Task.FromResult(caseId);
         }
 
         private async Task<string> HandleSubmitGovForm(NewGovFormSubmissionCommand cmd)
         {
-            return await Task.FromResult("gov");
+            var govForm = mapper.Map<Form>(cmd.Form.data);
+
+            var caseId = (await formsRepository.Manage(new SubmitNewForm { Form = govForm })).Id;
+            return await Task.FromResult(caseId);
         }
 
         private async Task<string> HandleSubmitIndForm(NewIndFormSubmissionCommand cmd)
         {
-            return await Task.FromResult("ind");
+            var indForm = mapper.Map<Form>(cmd.Form.data);
+
+            var caseId = (await formsRepository.Manage(new SubmitNewForm { Form = indForm })).Id;
+            return await Task.FromResult(caseId);
         }
     }
 }

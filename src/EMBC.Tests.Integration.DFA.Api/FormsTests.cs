@@ -1,8 +1,6 @@
 ﻿using System.Net;
-using AutoMapper;
 using EMBC.DFA.Api.Models;
 using EMBC.DFA.Api.Resources.Forms;
-using EMBC.DFA.Api.Services.Intake;
 using Shouldly;
 
 namespace EMBC.Tests.Integration.DFA.Api
@@ -59,7 +57,7 @@ namespace EMBC.Tests.Integration.DFA.Api
             });
 
             ManageFormCommandResult res = result.ResponseBody.ReadAsJson<ManageFormCommandResult>();
-            res.ShouldNotBeNull().Id.ShouldBe("gov");
+            res.ShouldNotBeNull().Id.ShouldBe("caseId");
         }
 
         [Test]
@@ -160,7 +158,7 @@ namespace EMBC.Tests.Integration.DFA.Api
             });
 
             ManageFormCommandResult res = result.ResponseBody.ReadAsJson<ManageFormCommandResult>();
-            res.ShouldNotBeNull().Id.ShouldBe("smb");
+            res.ShouldNotBeNull().Id.ShouldBe("caseId");
         }
 
         [Test]
@@ -218,15 +216,15 @@ namespace EMBC.Tests.Integration.DFA.Api
                     yes5 = "no",
                     occupants = new []
                     {
-                        new Occupant
+                        new EMBC.DFA.Api.Models.Occupant
                         {
                             listTheNamesOfAllFullTimeOccupantsWhoResidedInTheHomeAtTheTimeOfTheEvent = "Mr",
-                            listTheNamesOfAllFullTimeOccupantsWhoResidedInTheHomeAtTheTimeOfTheEvent1 = "Squatter"
+                            listTheNamesOfAllFullTimeOccupantsWhoResidedInTheHomeAtTheTimeOfTheEvent1 = "Occupant"
                         },
-                        new Occupant
+                        new EMBC.DFA.Api.Models.Occupant
                         {
                             listTheNamesOfAllFullTimeOccupantsWhoResidedInTheHomeAtTheTimeOfTheEvent = "Mrs",
-                            listTheNamesOfAllFullTimeOccupantsWhoResidedInTheHomeAtTheTimeOfTheEvent1 = "Squatter"
+                            listTheNamesOfAllFullTimeOccupantsWhoResidedInTheHomeAtTheTimeOfTheEvent1 = "Occupant"
                         },
                     },
                     aCopyOfARentalAgreementOrLeaseIfApplicableForResidentialTenantApplication = false,
@@ -276,7 +274,7 @@ namespace EMBC.Tests.Integration.DFA.Api
             });
 
             ManageFormCommandResult res = result.ResponseBody.ReadAsJson<ManageFormCommandResult>();
-            res.ShouldNotBeNull().Id.ShouldBe("ind");
+            res.ShouldNotBeNull().Id.ShouldBe("caseId");
         }
     }
 
