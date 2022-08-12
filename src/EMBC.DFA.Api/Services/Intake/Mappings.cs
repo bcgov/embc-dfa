@@ -49,6 +49,10 @@ namespace EMBC.DFA.Api.Services.Intake
                 .ForMember(d => d.CleanUpLogs, opts => opts.MapFrom(s => s.cleanupLogDetails))
                 .ForMember(d => d.BuildingOwner, opts => opts.Ignore())
 
+
+                .ForMember(d => d.HasRentalAgreement, opts => opts.MapFrom(s => s.yes9))
+                .ForMember(d => d.HasReceipts, opts => opts.MapFrom(s => s.yes10))
+
                 .ForMember(d => d.SmbInsuranceDetails, opts => opts.MapFrom(s => new SmbInsuranceDetails
                 {
                     IsBusinessManaged = s.yes == "yes",
@@ -58,8 +62,6 @@ namespace EMBC.DFA.Api.Services.Intake
                     FullTimeFarmer = s.yes4 == "yes",
                     MajorityIncome = s.yes5 == "yes",
                     CouldNotPurchaseInsurance = s.yes8,
-                    HasRentalAgreement = s.yes9,
-                    HasReceipts = s.yes10,
                     HasFinancialStatements = s.yes11,
                     HasTaxReturn = s.yes12,
                     HasProofOfOwnership = s.yes13,
@@ -80,7 +82,7 @@ namespace EMBC.DFA.Api.Services.Intake
                 //.ForMember(d => d.AppendixALastName, opts => opts.MapFrom(s => s.applicantFirstName3))
                 //.ForMember(d => d.AppendixBFirstName, opts => opts.MapFrom(s => s.applicantFirstName))
                 //.ForMember(d => d.AppendixBLastName, opts => opts.MapFrom(s => s.applicantFirstName1))
-                //.ForMember(d => d.DamagedItems, opts => opts.MapFrom(s => s.listByRoomItemsSubmittedForDamageAssessment))
+                .ForMember(d => d.DamagedItems, opts => opts.MapFrom(s => s.listByRoomItemsSubmittedForDamageAssessment))
                 //.ForMember(d => d.IsSubmit, opts => opts.MapFrom(s => s.submit1))
                 .AfterMap((s, d) =>
                 {
@@ -216,7 +218,7 @@ namespace EMBC.DFA.Api.Services.Intake
                 .ForMember(d => d.ContactName, opts => opts.MapFrom(s => s.nameOfFamilyMemberVolunteer))
                 ;
 
-            CreateMap<DamagedItem, Item>()
+            CreateMap<DamagedItem, DamageItem>()
                 .ForMember(d => d.ItemName, opts => opts.MapFrom(s => s.listByRoomItemsSubmittedForDamageAssessment1))
                 .ForMember(d => d.EmbcOfficeUseOnlyComments, opts => opts.MapFrom(s => s.embcOfficeUseOnlyComments))
                 ;

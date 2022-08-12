@@ -48,10 +48,14 @@ namespace EMBC.DFA.Api.Resources.Forms
         public SmbInsuranceDetails? SmbInsuranceDetails { get; set; }
         public IndInsuranceDetails? IndInsuranceDetails { get; set; }
 
+        public bool? HasRentalAgreement { get; set; }
+        public bool? HasReceipts { get; set; }
+
         public Occupant[] Occupants { get; set; }
 
         public CleanUpLog[] CleanUpLogs { get; set; }
 
+        public DamageItem[] DamagedItems { get; set; }
 
         //public string Signature { get; set; }
         //public string SignerName { get; set; }
@@ -63,7 +67,6 @@ namespace EMBC.DFA.Api.Resources.Forms
         //public string AppendixALastName { get; set; }
         //public string AppendixBFirstName { get; set; }
         //public string AppendixBLastName { get; set; }
-        //public Item[] DamagedItems { get; set; }
         //public bool IsSubmit { get; set; }
     }
 
@@ -117,7 +120,7 @@ namespace EMBC.DFA.Api.Resources.Forms
         public string ContactName { get; set; }
     }
 
-    public class Item
+    public class DamageItem
     {
         public string ItemName { get; set; }
         public string EmbcOfficeUseOnlyComments { get; set; }
@@ -132,8 +135,6 @@ namespace EMBC.DFA.Api.Resources.Forms
         public bool? FullTimeFarmer { get; set; }
         public bool? MajorityIncome { get; set; }
         public bool CouldNotPurchaseInsurance { get; set; }
-        public bool HasRentalAgreement { get; set; }
-        public bool HasReceipts { get; set; }
         public bool HasFinancialStatements { get; set; }
         public bool HasTaxReturn { get; set; }
         public bool HasProofOfOwnership { get; set; }
