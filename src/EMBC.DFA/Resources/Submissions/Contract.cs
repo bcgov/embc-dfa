@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Threading.Tasks;
 using EMBC.DFA.Managers.Intake;
 
 namespace EMBC.DFA.Resources.Submissions
@@ -19,11 +20,11 @@ namespace EMBC.DFA.Resources.Submissions
 
     public class SubmitIndFormCommand : Command
     {
-        public SmbForm Form { get; set; } = null!;
+        public IndForm Form { get; set; } = null!;
     }
 
     public class SubmitGovFormCommand : Command
     {
-        public SmbForm Form { get; set; } = null!;
+        public GovForm Form { get; set; } = null!;
     }
 }

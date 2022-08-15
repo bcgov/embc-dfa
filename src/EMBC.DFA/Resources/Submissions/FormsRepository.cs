@@ -5,6 +5,13 @@ namespace EMBC.DFA.Resources.Submissions
 {
     public class SubmissionsRepository : ISubmissionsRepository
     {
+        //private readonly IDfaContextFactory dfaContextFactory;
+
+        public SubmissionsRepository()
+        {
+            //this.dfaContextFactory = dfaContextFactory;
+        }
+
         public async Task<string> Manage(Command form) => await (form switch
         {
             SubmitGovFormCommand f => Handle(f),
@@ -23,9 +30,22 @@ namespace EMBC.DFA.Resources.Submissions
             throw new NotImplementedException();
         }
 
-        private Task<string> Handle(SubmitSmbFormCommand f)
+        private async Task<string> Handle(SubmitSmbFormCommand f)
         {
-            throw new NotImplementedException();
+            return await Task.FromResult("caseId");
+
+            //throw new NotImplementedException();
+
+            //var ctx = dfaContextFactory.Create();
+            //var incident = Mapper.Map<incident>(cmd.Form);
+            //incident.incidentid = Guid.NewGuid();
+
+            //ctx.AddToincidents(incident);
+
+            //await ctx.SaveChangesAsync();
+            //ctx.DetachAll();
+
+            //return incident.incidentid.ToString();
         }
     }
 }
