@@ -12,7 +12,8 @@ builder.Services.AddEndpointsApiExplorer()
     .AddCache()
     .AddDfaDynamics(builder.Configuration)
     .AddIntakeManager()
-    .AddSubmissionsRepository();
+    .AddSubmissionsRepository()
+    ;
 
 var app = builder.Build();
 

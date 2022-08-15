@@ -1,5 +1,4 @@
-﻿using AutoMapper;
-using EMBC.DFA.Resources.Submissions;
+﻿using EMBC.DFA.Resources.Submissions;
 using System;
 using System.Threading.Tasks;
 
