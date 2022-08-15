@@ -1,4 +1,6 @@
-﻿namespace EMBC.DFA.Api.Services.Intake
+﻿using Microsoft.Extensions.DependencyInjection;
+
+namespace EMBC.DFA.Managers.Intake
 {
     public static class Configuration
     {
