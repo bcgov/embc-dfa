@@ -1,35 +1,40 @@
-﻿
-#pragma warning disable CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
-namespace EMBC.DFA.Api.Resources.Forms
+﻿using System;
+using System.Threading.Tasks;
+
+namespace EMBC.DFA.Managers.Intake
 {
-    public interface IFormsRepository
+    public interface IIntakeManager
     {
-        Task<ManageFormCommandResult> Manage(ManageFormCommand cmd);
+        Task<string> Handle(IntakeCommand cmd);
+
+        Task<IntakeQueryResults> Handle(IntakeQuery query);
     }
 
-    public abstract class ManageFormCommand
+    public abstract class IntakeCommand
     { }
 
-    public class ManageFormCommandResult
+    public abstract class IntakeQuery
+    { }
+
+    public abstract class IntakeQueryResults
+    { }
+
+    public class NewSmbFormSubmissionCommand : IntakeCommand
     {
-        public string Id { get; set; }
+        public SmbForm Form { get; set; } = null!;
     }
 
-    public class SubmitNewSmbForm : ManageFormCommand
+    public class NewGovFormSubmissionCommand : IntakeCommand
     {
-        public SmbForm Form { get; set; }
+        public GovForm Form { get; set; } = null!;
     }
 
-    public class SubmitNewIndForm : ManageFormCommand
+    public class NewIndFormSubmissionCommand : IntakeCommand
     {
-        public IndForm Form { get; set; }
+        public IndForm Form { get; set; } = null!;
     }
 
-    public class SubmitNewGovForm : ManageFormCommand
-    {
-        public GovForm Form { get; set; }
-    }
-
+#pragma warning disable CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
     public class SmbForm
     {
         public ApplicantType ApplicantType { get; set; }
@@ -223,5 +228,4 @@ namespace EMBC.DFA.Api.Resources.Forms
         GovernmentBody
     }
 }
-
 #pragma warning restore CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
