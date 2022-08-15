@@ -37,7 +37,7 @@ app.MapPost("/forms/smb", async ctx =>
         return;
     }
     var mgr = ctx.RequestServices.GetRequiredService<IIntakeManager>();
-    var submissionId = await mgr.Handle(new NewSmbFormSubmissionCommand { Form = Mapper.Map<SmbForm>(model.Payload) ?? null! });
+    var submissionId = await mgr.Handle(new NewSmbFormSubmissionCommand { Form = Mapper.Map<EMBC.DFA.Managers.Intake.SmbForm>(model.Payload) ?? null! });
     ctx.Response.StatusCode = (int)HttpStatusCode.Created;
     await ctx.Response.WriteAsJsonAsync(new { id = submissionId });
 }).WithName("SMB Form");
@@ -51,7 +51,7 @@ app.MapPost("/forms/ind", async ctx =>
         return;
     }
     var mgr = ctx.RequestServices.GetRequiredService<IIntakeManager>();
-    var submissionId = await mgr.Handle(new NewIndFormSubmissionCommand { Form = Mapper.Map<IndForm>(model.Payload) ?? null! });
+    var submissionId = await mgr.Handle(new NewIndFormSubmissionCommand { Form = Mapper.Map<EMBC.DFA.Managers.Intake.IndForm>(model.Payload) ?? null! });
     ctx.Response.StatusCode = (int)HttpStatusCode.Created;
     await ctx.Response.WriteAsJsonAsync(new { id = submissionId });
 }).WithName("Individual Form");
@@ -65,7 +65,7 @@ app.MapPost("/forms/gov", async ctx =>
         return;
     }
     var mgr = ctx.RequestServices.GetRequiredService<IIntakeManager>();
-    var submissionId = await mgr.Handle(new NewGovFormSubmissionCommand { Form = Mapper.Map<GovForm>(model.Payload) ?? null! });
+    var submissionId = await mgr.Handle(new NewGovFormSubmissionCommand { Form = Mapper.Map<EMBC.DFA.Managers.Intake.GovForm>(model.Payload) ?? null! });
     ctx.Response.StatusCode = (int)HttpStatusCode.Created;
     await ctx.Response.WriteAsJsonAsync(new { id = submissionId });
 }).WithName("Local government Form");
