@@ -31,7 +31,7 @@ app.UseCors(opts =>
 });
 app.MapPost("/forms/smb", async ctx =>
 {
-    var model = await ctx.Request.ReadJsonModelAsync<SmbForm>();
+    var model = await ctx.Request.ReadJsonModelAsync<EMBC.DFA.Api.Models.SmbForm>();
     if (!model.IsValid)
     {
         await ctx.Response.ValidationError("Invalid payload");
@@ -45,7 +45,7 @@ app.MapPost("/forms/smb", async ctx =>
 
 app.MapPost("/forms/ind", async ctx =>
 {
-    var model = await ctx.Request.ReadJsonModelAsync<IndForm>();
+    var model = await ctx.Request.ReadJsonModelAsync<EMBC.DFA.Api.Models.IndForm>();
     if (!model.IsValid)
     {
         await ctx.Response.ValidationError("Invalid payload");
@@ -59,7 +59,7 @@ app.MapPost("/forms/ind", async ctx =>
 
 app.MapPost("/forms/gov", async ctx =>
 {
-    var model = await ctx.Request.ReadJsonModelAsync<GovForm>();
+    var model = await ctx.Request.ReadJsonModelAsync<EMBC.DFA.Api.Models.GovForm>();
     if (!model.IsValid)
     {
         await ctx.Response.ValidationError("Invalid payload");

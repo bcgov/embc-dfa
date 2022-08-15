@@ -12,7 +12,7 @@ namespace EMBC.Tests.Integration.DFA.Api
         [Test]
         public async Task SubmitGovForm()
         {
-            var form = new GovForm
+            var form = new EMBC.DFA.Api.Models.GovForm
             {
                 data = new GovFormData
                 {
@@ -164,7 +164,7 @@ namespace EMBC.Tests.Integration.DFA.Api
         [Test]
         public async Task SubmitIndForm()
         {
-            var form = new IndForm
+            var form = new EMBC.DFA.Api.Models.IndForm
             {
                 data = new IndFormData
                 {

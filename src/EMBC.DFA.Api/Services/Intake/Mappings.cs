@@ -8,7 +8,7 @@ namespace EMBC.DFA.Api.Services.Intake
     {
         public Mappings()
         {
-            CreateMap<SmbFormData, Form>()
+            CreateMap<SmbFormData, Resources.Forms.SmbForm>()
                 .ForMember(d => d.ApplicantType, opts => opts.MapFrom(s => (ApplicantType)Enum.Parse(typeof(ApplicantType), s.pleaseSelectTheAppropriateOption, true)))
                 .ForMember(d => d.IndigenousStatus, opts => opts.MapFrom(s => s.yes7 == "yes"))
                 .ForMember(d => d.OnFirstNationReserve, opts => opts.MapFrom(s => s.yes6 == "yes"))
@@ -42,35 +42,27 @@ namespace EMBC.DFA.Api.Services.Intake
                     Province = s.province,
                     PostalCode = s.postalCode
                 }))
-                .ForMember(d => d.OtherEmail, opts => opts.MapFrom(s => s.eMailAddress1))
                 .ForMember(d => d.AlternateContact, opts => opts.MapFrom(s => s.alternateContactNameWhereYouCanBeReachedIfApplicable))
                 .ForMember(d => d.AlternatePhoneNumber, opts => opts.MapFrom(s => s.alternatePhoneNumber))
                 .ForMember(d => d.DamageInfo, opts => opts.MapFrom(s => s.causeOfDamageLoss))
                 .ForMember(d => d.CleanUpLogs, opts => opts.MapFrom(s => s.cleanupLogDetails))
-                .ForMember(d => d.BuildingOwner, opts => opts.Ignore())
 
 
+                .ForMember(d => d.IsBusinessManaged, opts => opts.MapFrom(s => s.yes == "yes"))
+                .ForMember(d => d.AreRevenuesInRange, opts => opts.MapFrom(s => s.yes1 == "yes"))
+                .ForMember(d => d.EmployLessThanFifty, opts => opts.MapFrom(s => s.yes2 == "yes"))
+                .ForMember(d => d.DevelopingOperaton, opts => opts.MapFrom(s => s.yes3 == "yes"))
+                .ForMember(d => d.FullTimeFarmer, opts => opts.MapFrom(s => s.yes4 == "yes"))
+                .ForMember(d => d.MajorityIncome, opts => opts.MapFrom(s => s.yes5 == "yes"))
+                .ForMember(d => d.CouldNotPurchaseInsurance, opts => opts.MapFrom(s => s.yes8))
                 .ForMember(d => d.HasRentalAgreement, opts => opts.MapFrom(s => s.yes9))
                 .ForMember(d => d.HasReceipts, opts => opts.MapFrom(s => s.yes10))
-
-                .ForMember(d => d.SmbInsuranceDetails, opts => opts.MapFrom(s => new SmbInsuranceDetails
-                {
-                    IsBusinessManaged = s.yes == "yes",
-                    AreRevenuesInRange = s.yes1 == "yes",
-                    EmployLessThanFifty = s.yes2 == "yes",
-                    DevelopingOperaton = s.yes3 == "yes",
-                    FullTimeFarmer = s.yes4 == "yes",
-                    MajorityIncome = s.yes5 == "yes",
-                    CouldNotPurchaseInsurance = s.yes8,
-                    HasFinancialStatements = s.yes11,
-                    HasTaxReturn = s.yes12,
-                    HasProofOfOwnership = s.yes13,
-                    HasListOfDirectors = s.yes14,
-                    HasProofOfRegistration = s.yes15,
-                    HasEligibilityDocuments = s.yes16,
-                }))
-                .ForMember(d => d.IndInsuranceDetails, opts => opts.Ignore())
-                .ForMember(d => d.Occupants, opts => opts.MapFrom(s => Array.Empty<Resources.Forms.Occupant>()))
+                .ForMember(d => d.HasFinancialStatements, opts => opts.MapFrom(s => s.yes11))
+                .ForMember(d => d.HasTaxReturn, opts => opts.MapFrom(s => s.yes12))
+                .ForMember(d => d.HasProofOfOwnership, opts => opts.MapFrom(s => s.yes13))
+                .ForMember(d => d.HasListOfDirectors, opts => opts.MapFrom(s => s.yes14))
+                .ForMember(d => d.HasProofOfRegistration, opts => opts.MapFrom(s => s.yes15))
+                .ForMember(d => d.HasEligibilityDocuments, opts => opts.MapFrom(s => s.yes16))
 
                 //.ForMember(d => d.Signature, opts => opts.MapFrom(s => s.signature1))
                 //.ForMember(d => d.SignerName, opts => opts.MapFrom(s => s.printName1))
@@ -91,7 +83,7 @@ namespace EMBC.DFA.Api.Services.Intake
                 })
                 ;
 
-            CreateMap<IndFormData, Form>()
+            CreateMap<IndFormData, Resources.Forms.IndForm>()
                 .ForMember(d => d.ApplicantType, opts => opts.MapFrom(s => (ApplicantType)Enum.Parse(typeof(ApplicantType), s.pleaseCheckAppropriateBox, true)))
                 .ForMember(d => d.IndigenousStatus, opts => opts.MapFrom(s => s.yes7 == "yes"))
                 .ForMember(d => d.OnFirstNationReserve, opts => opts.MapFrom(s => s.yes6 == "yes"))
@@ -107,8 +99,6 @@ namespace EMBC.DFA.Api.Services.Intake
                 }))
                 .ForMember(d => d.DamageFrom, opts => opts.MapFrom(s => s.dateOfDamage))
                 .ForMember(d => d.DamageTo, opts => opts.MapFrom(s => s.dateOfDamage1))
-                .ForMember(d => d.BusinessLegalName, opts => opts.Ignore())
-                .ForMember(d => d.ContactName, opts => opts.Ignore())
                 .ForMember(d => d.DamagePropertyAddress, opts => opts.MapFrom(s => new Address
                 {
                     AddressLine1 = s.street1,
@@ -125,7 +115,6 @@ namespace EMBC.DFA.Api.Services.Intake
                     Province = s.province,
                     PostalCode = s.postalCode
                 }))
-                .ForMember(d => d.OtherEmail, opts => opts.Ignore())
                 .ForMember(d => d.AlternateContact, opts => opts.MapFrom(s => s.alternateContactNameWhereYouCanBeReachedIfApplicable))
                 .ForMember(d => d.AlternatePhoneNumber, opts => opts.MapFrom(s => s.alternatePhoneNumber))
 
@@ -138,22 +127,15 @@ namespace EMBC.DFA.Api.Services.Intake
 
                 .ForMember(d => d.DamageInfo, opts => opts.MapFrom(s => s.causeOfDamageLoss))
 
-                .ForMember(d => d.SmbInsuranceDetails, opts => opts.Ignore())
-                .ForMember(d => d.IndInsuranceDetails, opts => opts.MapFrom(s => new IndInsuranceDetails
-                {
-                    HasInsurance = s.yes == "yes",
-                    IsPrimaryResidence = s.yes1 == "yes",
-                    EligibleForGrant = s.yes2 == "yes",
-                    LossesOverOneThousand = s.yes3 == "yes",
-                    WasEvacuated = s.yes4 == "yes",
-                    InResidence = s.yes5 == "yes",
-
-                }))
+                .ForMember(d => d.HasInsurance, opts => opts.MapFrom(s => s.yes == "yes"))
+                .ForMember(d => d.IsPrimaryResidence, opts => opts.MapFrom(s => s.yes1 == "yes"))
+                .ForMember(d => d.EligibleForGrant, opts => opts.MapFrom(s => s.yes2 == "yes"))
+                .ForMember(d => d.LossesOverOneThousand, opts => opts.MapFrom(s => s.yes3 == "yes"))
+                .ForMember(d => d.WasEvacuated, opts => opts.MapFrom(s => s.yes4 == "yes"))
+                .ForMember(d => d.InResidence, opts => opts.MapFrom(s => s.yes5 == "yes"))
 
                 .ForMember(d => d.Occupants, opts => opts.MapFrom(s => s.occupants))
-
                 .ForMember(d => d.CleanUpLogs, opts => opts.MapFrom(s => s.cleanupLogDetails))
-
                 .AfterMap((s, d) =>
                 {
                     d.DamageInfo.OtherDescription = s.pleaseSpecifyIfOthers;
@@ -162,7 +144,7 @@ namespace EMBC.DFA.Api.Services.Intake
                 })
                 ;
 
-            CreateMap<GovFormData, Form>()
+            CreateMap<GovFormData, Resources.Forms.GovForm>()
                 .ForMember(d => d.ApplicantType, opts => opts.MapFrom(s => ApplicantType.GovernmentBody))
                 .ForMember(d => d.Applicant, opts => opts.MapFrom(s => new Applicant
                 {
@@ -175,14 +157,6 @@ namespace EMBC.DFA.Api.Services.Intake
                 }))
                 .ForMember(d => d.DamageFrom, opts => opts.MapFrom(s => s.dateOfDamageLoss))
                 .ForMember(d => d.DamageTo, opts => opts.MapFrom(s => s.dateOfDamageLoss1))
-                .ForMember(d => d.DamagePropertyAddress, opts => opts.MapFrom(s => new Address
-                {
-                    AddressLine1 = s.mailingAddress,
-                    AddressLine2 = s.street2,
-                    City = s.cityTown,
-                    Province = s.province,
-                    PostalCode = s.postalCode
-                }))
                 .ForMember(d => d.MailingAddress, opts => opts.MapFrom(s => new Address
                 {
                     AddressLine1 = s.mailingAddress,
@@ -191,7 +165,6 @@ namespace EMBC.DFA.Api.Services.Intake
                     Province = s.province,
                     PostalCode = s.postalCode
                 }))
-                .ForMember(d => d.OtherEmail, opts => opts.MapFrom(s => s.eMailAddress1))
                 .ForMember(d => d.AlternatePhoneNumber, opts => opts.MapFrom(s => s.businessTelephoneNumber1))
                 .ForMember(d => d.AlternateCellNumber, opts => opts.MapFrom(s => s.cellularTelephoneNumber1))
                 .ForMember(d => d.DamageInfo, opts => opts.MapFrom(s => s.causeOfDamageLoss))

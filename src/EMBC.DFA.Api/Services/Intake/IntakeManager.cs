@@ -34,25 +34,25 @@ namespace EMBC.DFA.Api.Services.Intake
         {
             //add any validations
 
-            var smbForm = mapper.Map<Form>(cmd.Form.data);
+            var smbForm = mapper.Map<SmbForm>(cmd.Form.data);
 
-            var caseId = (await formsRepository.Manage(new SubmitNewForm { Form = smbForm })).Id;
+            var caseId = (await formsRepository.Manage(new SubmitNewSmbForm { Form = smbForm })).Id;
             return await Task.FromResult(caseId);
         }
 
         private async Task<string> HandleSubmitGovForm(NewGovFormSubmissionCommand cmd)
         {
-            var govForm = mapper.Map<Form>(cmd.Form.data);
+            var govForm = mapper.Map<GovForm>(cmd.Form.data);
 
-            var caseId = (await formsRepository.Manage(new SubmitNewForm { Form = govForm })).Id;
+            var caseId = (await formsRepository.Manage(new SubmitNewGovForm { Form = govForm })).Id;
             return await Task.FromResult(caseId);
         }
 
         private async Task<string> HandleSubmitIndForm(NewIndFormSubmissionCommand cmd)
         {
-            var indForm = mapper.Map<Form>(cmd.Form.data);
+            var indForm = mapper.Map<IndForm>(cmd.Form.data);
 
-            var caseId = (await formsRepository.Manage(new SubmitNewForm { Form = indForm })).Id;
+            var caseId = (await formsRepository.Manage(new SubmitNewIndForm { Form = indForm })).Id;
             return await Task.FromResult(caseId);
         }
     }

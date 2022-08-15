@@ -19,12 +19,14 @@ namespace EMBC.DFA.Api.Resources.Forms
         {
             return cmd switch
             {
-                SubmitNewForm c => await HandleSubmitNewForm(c),
+                SubmitNewSmbForm c => await HandleSubmitNewSmbForm(c),
+                SubmitNewIndForm c => await HandleSubmitNewIndForm(c),
+                SubmitNewGovForm c => await HandleSubmitNewGovForm(c),
                 _ => throw new NotSupportedException($"{cmd.GetType().Name} is not supported")
             };
         }
 
-        public async Task<ManageFormCommandResult> HandleSubmitNewForm(SubmitNewForm cmd)
+        public async Task<ManageFormCommandResult> HandleSubmitNewSmbForm(SubmitNewSmbForm cmd)
         {
             return await Task.FromResult(new ManageFormCommandResult { Id = "caseId" });
 
@@ -38,6 +40,16 @@ namespace EMBC.DFA.Api.Resources.Forms
             //ctx.DetachAll();
 
             //return new ManageFormCommandResult { Id = incident.incidentid.ToString() };
+        }
+
+        public async Task<ManageFormCommandResult> HandleSubmitNewIndForm(SubmitNewIndForm cmd)
+        {
+            return await Task.FromResult(new ManageFormCommandResult { Id = "caseId" });
+        }
+
+        public async Task<ManageFormCommandResult> HandleSubmitNewGovForm(SubmitNewGovForm cmd)
+        {
+            return await Task.FromResult(new ManageFormCommandResult { Id = "caseId" });
         }
     }
 }
