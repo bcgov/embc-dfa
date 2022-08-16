@@ -10,12 +10,6 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <PackageReference Include="IdentityModel" Version="6.0.0" />
-        <PackageReference Include="Microsoft.OData.Client" Version="7.12.0" />
-        <PackageReference Include="Microsoft.OData.Core" Version="7.12.0" />
-        <PackageReference Include="Microsoft.OData.Edm" Version="7.12.0" />
-        <PackageReference Include="Microsoft.OData.Extensions.Client" Version="1.0.6" />
-        <PackageReference Include="Microsoft.Spatial" Version="7.12.0" />
         <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.16.1" />
         <PackageReference Include="Swashbuckle.AspNetCore" Version="6.3.1" />
     </ItemGroup>
@@ -29,6 +23,8 @@
     </ItemGroup>
 
     <ItemGroup>
+      <ProjectReference Include="..\EMBC.DFA.Dynamics\EMBC.DFA.Dynamics.csproj" />
       <ProjectReference Include="..\EMBC.DFA\EMBC.DFA.csproj" />
+      <ProjectReference Include="..\EMBC.Utilities\EMBC.Utilities.csproj" />
     </ItemGroup>
 </Project>

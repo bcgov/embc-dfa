@@ -1,4 +1,4 @@
-﻿using EMBC.DFA.Api.Dynamics;
+﻿using EMBC.DFA.Dynamics;
 using Microsoft.Extensions.DependencyInjection;
 using Shouldly;
 
