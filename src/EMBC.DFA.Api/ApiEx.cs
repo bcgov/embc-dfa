@@ -62,7 +62,7 @@ namespace EMBC.DFA.Api
         private Model(bool isValid)
         {
             IsValid = isValid;
-            Payload = default;
+            Payload = default!;
         }
 
         private Model(T payload)
@@ -71,7 +71,7 @@ namespace EMBC.DFA.Api
             IsValid = true;
         }
 
-        public readonly T? Payload;
+        public readonly T Payload;
         public readonly bool IsValid;
     }
 }

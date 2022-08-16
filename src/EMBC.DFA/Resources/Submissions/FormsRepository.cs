@@ -1,5 +1,8 @@
 ﻿using System;
 using System.Threading.Tasks;
+using EMBC.DFA.Dynamics;
+using EMBC.Utilities.Runtime;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace EMBC.DFA.Resources.Submissions
 {
@@ -20,19 +23,21 @@ namespace EMBC.DFA.Resources.Submissions
             _ => throw new NotImplementedException($"type {form.GetType().FullName}")
         });
 
-        private Task<string> Handle(SubmitGovFormCommand f)
+        private async Task<string> Handle(SubmitGovFormCommand f)
         {
-            throw new NotImplementedException();
+            var ctx = CallContext.Current.Services.GetRequiredService<IDfaContextFactory>().Create();
+            return await Task.FromResult("caseId");
         }
 
-        private Task<string> Handle(SubmitIndFormCommand f)
+        private async Task<string> Handle(SubmitIndFormCommand f)
         {
-            throw new NotImplementedException();
+            var ctx = CallContext.Current.Services.GetRequiredService<IDfaContextFactory>().Create();
+            return await Task.FromResult("caseId");
         }
 
         private async Task<string> Handle(SubmitSmbFormCommand f)
         {
-            return await Task.FromResult("caseId");
+            var ctx = CallContext.Current.Services.GetRequiredService<IDfaContextFactory>().Create();
 
             //throw new NotImplementedException();
 
@@ -46,6 +51,7 @@ namespace EMBC.DFA.Resources.Submissions
             //ctx.DetachAll();
 
             //return incident.incidentid.ToString();
+            return await Task.FromResult("caseId");
         }
     }
 }
