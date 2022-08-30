@@ -243,6 +243,7 @@
         <NavigationProperty Name="dfa_account_to_projectclaim" Type="Collection(mscrm.dfa_projectclaim)" Partner="dfa_SupplierId" />
         <NavigationProperty Name="dfa_localgovernment_organization_incident" Type="Collection(mscrm.incident)" Partner="dfa_LocalGoverningBodyId" />
         <NavigationProperty Name="dfa_account_incident_RelatedBusiness" Type="Collection(mscrm.incident)" Partner="dfa_RelatedBusiness" />
+        <NavigationProperty Name="dfa_account_dfa_additionalapplicant_Customer" Type="Collection(mscrm.dfa_additionalapplicant)" Partner="dfa_Customer_account" />
         <NavigationProperty Name="ownerid" Type="mscrm.principal" Nullable="false" Partner="owner_accounts">
           <ReferentialConstraint Property="_ownerid_value" ReferencedProperty="ownerid" />
         </NavigationProperty>
@@ -1770,6 +1771,18 @@
         <NavigationProperty Name="regardingobjectid_dfa_claimstatusreport" Type="mscrm.dfa_claimstatusreport" Nullable="false" Partner="dfa_claimstatusreport_AsyncOperations">
           <ReferentialConstraint Property="_regardingobjectid_value" ReferencedProperty="dfa_claimstatusreportid" />
         </NavigationProperty>
+        <NavigationProperty Name="regardingobjectid_dfa_cheque" Type="mscrm.dfa_cheque" Nullable="false" Partner="dfa_cheque_AsyncOperations">
+          <ReferentialConstraint Property="_regardingobjectid_value" ReferencedProperty="dfa_chequeid" />
+        </NavigationProperty>
+        <NavigationProperty Name="regardingobjectid_dfa_additionalapplicant" Type="mscrm.dfa_additionalapplicant" Nullable="false" Partner="dfa_additionalapplicant_AsyncOperations">
+          <ReferentialConstraint Property="_regardingobjectid_value" ReferencedProperty="dfa_additionalapplicantid" />
+        </NavigationProperty>
+        <NavigationProperty Name="regardingobjectid_dfa_appeal" Type="mscrm.dfa_appeal" Nullable="false" Partner="dfa_appeal_AsyncOperations">
+          <ReferentialConstraint Property="_regardingobjectid_value" ReferencedProperty="dfa_appealid" />
+        </NavigationProperty>
+        <NavigationProperty Name="regardingobjectid_dfa_projectstatusreport" Type="mscrm.dfa_projectstatusreport" Nullable="false" Partner="dfa_projectstatusreport_AsyncOperations">
+          <ReferentialConstraint Property="_regardingobjectid_value" ReferencedProperty="dfa_projectstatusreportid" />
+        </NavigationProperty>
         <NavigationProperty Name="regardingobjectid_report" Type="mscrm.report" Nullable="false" Partner="Report_AsyncOperations">
           <ReferentialConstraint Property="_regardingobjectid_value" ReferencedProperty="reportid" />
         </NavigationProperty>
@@ -1970,9 +1983,6 @@
         </NavigationProperty>
         <NavigationProperty Name="regardingobjectid_import" Type="mscrm.import" Nullable="false" Partner="Import_AsyncOperations">
           <ReferentialConstraint Property="_regardingobjectid_value" ReferencedProperty="importid" />
-        </NavigationProperty>
-        <NavigationProperty Name="regardingobjectid_dfa_cheque" Type="mscrm.dfa_cheque" Nullable="false" Partner="dfa_cheque_AsyncOperations">
-          <ReferentialConstraint Property="_regardingobjectid_value" ReferencedProperty="dfa_chequeid" />
         </NavigationProperty>
       </EntityType>
       <EntityType Name="attachment" BaseType="mscrm.crmbaseentity">
@@ -2982,6 +2992,18 @@
         <NavigationProperty Name="regardingobjectid_dfa_claimstatusreport" Type="mscrm.dfa_claimstatusreport" Nullable="false" Partner="dfa_claimstatusreport_BulkDeleteFailures">
           <ReferentialConstraint Property="_regardingobjectid_value" ReferencedProperty="dfa_claimstatusreportid" />
         </NavigationProperty>
+        <NavigationProperty Name="regardingobjectid_dfa_cheque" Type="mscrm.dfa_cheque" Nullable="false" Partner="dfa_cheque_BulkDeleteFailures">
+          <ReferentialConstraint Property="_regardingobjectid_value" ReferencedProperty="dfa_chequeid" />
+        </NavigationProperty>
+        <NavigationProperty Name="regardingobjectid_dfa_additionalapplicant" Type="mscrm.dfa_additionalapplicant" Nullable="false" Partner="dfa_additionalapplicant_BulkDeleteFailures">
+          <ReferentialConstraint Property="_regardingobjectid_value" ReferencedProperty="dfa_additionalapplicantid" />
+        </NavigationProperty>
+        <NavigationProperty Name="regardingobjectid_dfa_appeal" Type="mscrm.dfa_appeal" Nullable="false" Partner="dfa_appeal_BulkDeleteFailures">
+          <ReferentialConstraint Property="_regardingobjectid_value" ReferencedProperty="dfa_appealid" />
+        </NavigationProperty>
+        <NavigationProperty Name="regardingobjectid_dfa_projectstatusreport" Type="mscrm.dfa_projectstatusreport" Nullable="false" Partner="dfa_projectstatusreport_BulkDeleteFailures">
+          <ReferentialConstraint Property="_regardingobjectid_value" ReferencedProperty="dfa_projectstatusreportid" />
+        </NavigationProperty>
         <NavigationProperty Name="regardingobjectid_customeraddress" Type="mscrm.customeraddress" Nullable="false" Partner="CustomerAddress_BulkDeleteFailures">
           <ReferentialConstraint Property="_regardingobjectid_value" ReferencedProperty="customeraddressid" />
         </NavigationProperty>
@@ -3106,9 +3128,6 @@
         </NavigationProperty>
         <NavigationProperty Name="regardingobjectid_subject" Type="mscrm.subject" Nullable="false" Partner="Subject_BulkDeleteFailures">
           <ReferentialConstraint Property="_regardingobjectid_value" ReferencedProperty="subjectid" />
-        </NavigationProperty>
-        <NavigationProperty Name="regardingobjectid_dfa_cheque" Type="mscrm.dfa_cheque" Nullable="false" Partner="dfa_cheque_BulkDeleteFailures">
-          <ReferentialConstraint Property="_regardingobjectid_value" ReferencedProperty="dfa_chequeid" />
         </NavigationProperty>
       </EntityType>
       <EntityType Name="bulkdeleteoperation" BaseType="mscrm.crmbaseentity">
@@ -3462,6 +3481,10 @@
         <NavigationProperty Name="business_unit_dfa_projectclaim" Type="Collection(mscrm.dfa_projectclaim)" Partner="owningbusinessunit" />
         <NavigationProperty Name="business_unit_dfa_costpercapitabreakdown" Type="Collection(mscrm.dfa_costpercapitabreakdown)" Partner="owningbusinessunit" />
         <NavigationProperty Name="business_unit_dfa_buildingownerlandlord" Type="Collection(mscrm.dfa_buildingownerlandlord)" Partner="owningbusinessunit" />
+        <NavigationProperty Name="business_unit_dfa_cheque" Type="Collection(mscrm.dfa_cheque)" Partner="owningbusinessunit" />
+        <NavigationProperty Name="business_unit_dfa_additionalapplicant" Type="Collection(mscrm.dfa_additionalapplicant)" Partner="owningbusinessunit" />
+        <NavigationProperty Name="business_unit_dfa_appeal" Type="Collection(mscrm.dfa_appeal)" Partner="owningbusinessunit" />
+        <NavigationProperty Name="business_unit_dfa_projectstatusreport" Type="Collection(mscrm.dfa_projectstatusreport)" Partner="owningbusinessunit" />
         <NavigationProperty Name="BusinessUnit_SyncErrors" Type="Collection(mscrm.syncerror)" Partner="regardingobjectid_businessunit_syncerror" />
         <NavigationProperty Name="transactioncurrencyid" Type="mscrm.transactioncurrency" Nullable="false" Partner="TransactionCurrency_BusinessUnit">
           <ReferentialConstraint Property="_transactioncurrencyid_value" ReferencedProperty="transactioncurrencyid" />
@@ -3543,7 +3566,6 @@
           <ReferentialConstraint Property="_parentbusinessunitid_value" ReferencedProperty="businessunitid" />
         </NavigationProperty>
         <NavigationProperty Name="business_unit_parent_business_unit" Type="Collection(mscrm.businessunit)" Partner="parentbusinessunitid" />
-        <NavigationProperty Name="business_unit_dfa_cheque" Type="Collection(mscrm.dfa_cheque)" Partner="owningbusinessunit" />
       </EntityType>
       <EntityType Name="calendarrule" BaseType="mscrm.crmbaseentity">
         <Key>
@@ -5110,6 +5132,8 @@
         </NavigationProperty>
         <NavigationProperty Name="dfa_contact_incident" Type="Collection(mscrm.incident)" Partner="dfa_PrimaryContactId" />
         <NavigationProperty Name="dfa_alternatecontact_incident" Type="Collection(mscrm.incident)" Partner="dfa_AlternateContactId" />
+        <NavigationProperty Name="dfa_contact_dfa_additionalapplicant" Type="Collection(mscrm.dfa_additionalapplicant)" Partner="dfa_ContactId" />
+        <NavigationProperty Name="dfa_contact_dfa_additionalapplicant_Customer" Type="Collection(mscrm.dfa_additionalapplicant)" Partner="dfa_Customer_contact" />
         <NavigationProperty Name="contact_connections1" Type="Collection(mscrm.connection)" Partner="record1id_contact" />
         <NavigationProperty Name="Contact_Feedback" Type="Collection(mscrm.feedback)" Partner="ContactId" />
         <NavigationProperty Name="Contact_ProcessSessions" Type="Collection(mscrm.processsession)" Partner="regardingobjectid_contact" />
@@ -5739,6 +5763,151 @@
         <Property Name="requiredcomponentintroducedversion" Type="Edm.Double" />
         <Property Name="requiredcomponenttype" Type="Edm.Int32" />
       </EntityType>
+      <EntityType Name="dfa_additionalapplicant" BaseType="mscrm.crmbaseentity">
+        <Key>
+          <PropertyRef Name="dfa_additionalapplicantid" />
+        </Key>
+        <Property Name="dfa_name" Type="Edm.String" Unicode="false" />
+        <Property Name="_owningteam_value" Type="Edm.Guid" />
+        <Property Name="_dfa_caseid_value" Type="Edm.Guid" />
+        <Property Name="statuscode" Type="Edm.Int32" />
+        <Property Name="timezoneruleversionnumber" Type="Edm.Int32" />
+        <Property Name="versionnumber" Type="Edm.Int64" />
+        <Property Name="dfa_lastname" Type="Edm.String" Unicode="false" />
+        <Property Name="_modifiedonbehalfby_value" Type="Edm.Guid" />
+        <Property Name="createdon" Type="Edm.DateTimeOffset" />
+        <Property Name="_createdby_value" Type="Edm.Guid" />
+        <Property Name="dfa_firstname" Type="Edm.String" Unicode="false" />
+        <Property Name="_dfa_contactid_value" Type="Edm.Guid" />
+        <Property Name="dfa_organizationname" Type="Edm.String" Unicode="false" />
+        <Property Name="_ownerid_value" Type="Edm.Guid" />
+        <Property Name="overriddencreatedon" Type="Edm.DateTimeOffset" />
+        <Property Name="importsequencenumber" Type="Edm.Int32" />
+        <Property Name="_dfa_customer_value" Type="Edm.Guid" />
+        <Property Name="_modifiedby_value" Type="Edm.Guid" />
+        <Property Name="_createdonbehalfby_value" Type="Edm.Guid" />
+        <Property Name="dfa_phonenumber" Type="Edm.String" Unicode="false" />
+        <Property Name="statecode" Type="Edm.Int32" />
+        <Property Name="dfa_additionalapplicantid" Type="Edm.Guid" />
+        <Property Name="dfa_emailaddress" Type="Edm.String" Unicode="false" />
+        <Property Name="_owninguser_value" Type="Edm.Guid" />
+        <Property Name="dfa_applicanttype" Type="Edm.Int32" />
+        <Property Name="_owningbusinessunit_value" Type="Edm.Guid" />
+        <Property Name="modifiedon" Type="Edm.DateTimeOffset" />
+        <Property Name="utcconversiontimezonecode" Type="Edm.Int32" />
+        <NavigationProperty Name="createdby" Type="mscrm.systemuser" Nullable="false" Partner="lk_dfa_additionalapplicant_createdby">
+          <ReferentialConstraint Property="_createdby_value" ReferencedProperty="systemuserid" />
+        </NavigationProperty>
+        <NavigationProperty Name="createdonbehalfby" Type="mscrm.systemuser" Nullable="false" Partner="lk_dfa_additionalapplicant_createdonbehalfby">
+          <ReferentialConstraint Property="_createdonbehalfby_value" ReferencedProperty="systemuserid" />
+        </NavigationProperty>
+        <NavigationProperty Name="modifiedby" Type="mscrm.systemuser" Nullable="false" Partner="lk_dfa_additionalapplicant_modifiedby">
+          <ReferentialConstraint Property="_modifiedby_value" ReferencedProperty="systemuserid" />
+        </NavigationProperty>
+        <NavigationProperty Name="modifiedonbehalfby" Type="mscrm.systemuser" Nullable="false" Partner="lk_dfa_additionalapplicant_modifiedonbehalfby">
+          <ReferentialConstraint Property="_modifiedonbehalfby_value" ReferencedProperty="systemuserid" />
+        </NavigationProperty>
+        <NavigationProperty Name="owninguser" Type="mscrm.systemuser" Nullable="false" Partner="user_dfa_additionalapplicant">
+          <ReferentialConstraint Property="_owninguser_value" ReferencedProperty="systemuserid" />
+        </NavigationProperty>
+        <NavigationProperty Name="owningteam" Type="mscrm.team" Nullable="false" Partner="team_dfa_additionalapplicant">
+          <ReferentialConstraint Property="_owningteam_value" ReferencedProperty="teamid" />
+        </NavigationProperty>
+        <NavigationProperty Name="ownerid" Type="mscrm.principal" Nullable="false" Partner="owner_dfa_additionalapplicant">
+          <ReferentialConstraint Property="_ownerid_value" ReferencedProperty="ownerid" />
+        </NavigationProperty>
+        <NavigationProperty Name="owningbusinessunit" Type="mscrm.businessunit" Nullable="false" Partner="business_unit_dfa_additionalapplicant">
+          <ReferentialConstraint Property="_owningbusinessunit_value" ReferencedProperty="businessunitid" />
+        </NavigationProperty>
+        <NavigationProperty Name="dfa_additionalapplicant_SyncErrors" Type="Collection(mscrm.syncerror)" Partner="regardingobjectid_dfa_additionalapplicant" />
+        <NavigationProperty Name="dfa_additionalapplicant_DuplicateMatchingRecord" Type="Collection(mscrm.duplicaterecord)" Partner="duplicaterecordid_dfa_additionalapplicant" />
+        <NavigationProperty Name="dfa_additionalapplicant_DuplicateBaseRecord" Type="Collection(mscrm.duplicaterecord)" Partner="baserecordid_dfa_additionalapplicant" />
+        <NavigationProperty Name="dfa_additionalapplicant_AsyncOperations" Type="Collection(mscrm.asyncoperation)" Partner="regardingobjectid_dfa_additionalapplicant" />
+        <NavigationProperty Name="dfa_additionalapplicant_MailboxTrackingFolders" Type="Collection(mscrm.mailboxtrackingfolder)" Partner="regardingobjectid_dfa_additionalapplicant" />
+        <NavigationProperty Name="dfa_additionalapplicant_ProcessSession" Type="Collection(mscrm.processsession)" Partner="regardingobjectid_dfa_additionalapplicant" />
+        <NavigationProperty Name="dfa_additionalapplicant_BulkDeleteFailures" Type="Collection(mscrm.bulkdeletefailure)" Partner="regardingobjectid_dfa_additionalapplicant" />
+        <NavigationProperty Name="dfa_additionalapplicant_PrincipalObjectAttributeAccesses" Type="Collection(mscrm.principalobjectattributeaccess)" Partner="objectid_dfa_additionalapplicant" />
+        <NavigationProperty Name="dfa_ContactId" Type="mscrm.contact" Nullable="false" Partner="dfa_contact_dfa_additionalapplicant">
+          <ReferentialConstraint Property="_dfa_contactid_value" ReferencedProperty="contactid" />
+        </NavigationProperty>
+        <NavigationProperty Name="dfa_CaseId" Type="mscrm.incident" Nullable="false" Partner="dfa_incident_dfa_additionalapplicant">
+          <ReferentialConstraint Property="_dfa_caseid_value" ReferencedProperty="incidentid" />
+        </NavigationProperty>
+        <NavigationProperty Name="dfa_Customer_account" Type="mscrm.account" Nullable="false" Partner="dfa_account_dfa_additionalapplicant_Customer">
+          <ReferentialConstraint Property="_dfa_customer_value" ReferencedProperty="accountid" />
+        </NavigationProperty>
+        <NavigationProperty Name="dfa_Customer_contact" Type="mscrm.contact" Nullable="false" Partner="dfa_contact_dfa_additionalapplicant_Customer">
+          <ReferentialConstraint Property="_dfa_customer_value" ReferencedProperty="contactid" />
+        </NavigationProperty>
+      </EntityType>
+      <EntityType Name="dfa_appeal" BaseType="mscrm.crmbaseentity">
+        <Key>
+          <PropertyRef Name="dfa_appealid" />
+        </Key>
+        <Property Name="timezoneruleversionnumber" Type="Edm.Int32" />
+        <Property Name="dfa_reason" Type="Edm.String" Unicode="false" />
+        <Property Name="dfa_datereceived" Type="Edm.DateTimeOffset" />
+        <Property Name="_createdonbehalfby_value" Type="Edm.Guid" />
+        <Property Name="_createdby_value" Type="Edm.Guid" />
+        <Property Name="_dfa_caseid_value" Type="Edm.Guid" />
+        <Property Name="statuscode" Type="Edm.Int32" />
+        <Property Name="dfa_appealid" Type="Edm.Guid" />
+        <Property Name="_modifiedby_value" Type="Edm.Guid" />
+        <Property Name="overriddencreatedon" Type="Edm.DateTimeOffset" />
+        <Property Name="dfa_appealstatus" Type="Edm.Int32" />
+        <Property Name="dfa_appealtype" Type="Edm.Int32" />
+        <Property Name="modifiedon" Type="Edm.DateTimeOffset" />
+        <Property Name="utcconversiontimezonecode" Type="Edm.Int32" />
+        <Property Name="dfa_name" Type="Edm.String" Unicode="false" />
+        <Property Name="_dfa_projectid_value" Type="Edm.Guid" />
+        <Property Name="statecode" Type="Edm.Int32" />
+        <Property Name="_owninguser_value" Type="Edm.Guid" />
+        <Property Name="versionnumber" Type="Edm.Int64" />
+        <Property Name="createdon" Type="Edm.DateTimeOffset" />
+        <Property Name="importsequencenumber" Type="Edm.Int32" />
+        <Property Name="_owningbusinessunit_value" Type="Edm.Guid" />
+        <Property Name="_ownerid_value" Type="Edm.Guid" />
+        <Property Name="_owningteam_value" Type="Edm.Guid" />
+        <Property Name="_modifiedonbehalfby_value" Type="Edm.Guid" />
+        <NavigationProperty Name="createdby" Type="mscrm.systemuser" Nullable="false" Partner="lk_dfa_appeal_createdby">
+          <ReferentialConstraint Property="_createdby_value" ReferencedProperty="systemuserid" />
+        </NavigationProperty>
+        <NavigationProperty Name="createdonbehalfby" Type="mscrm.systemuser" Nullable="false" Partner="lk_dfa_appeal_createdonbehalfby">
+          <ReferentialConstraint Property="_createdonbehalfby_value" ReferencedProperty="systemuserid" />
+        </NavigationProperty>
+        <NavigationProperty Name="modifiedby" Type="mscrm.systemuser" Nullable="false" Partner="lk_dfa_appeal_modifiedby">
+          <ReferentialConstraint Property="_modifiedby_value" ReferencedProperty="systemuserid" />
+        </NavigationProperty>
+        <NavigationProperty Name="modifiedonbehalfby" Type="mscrm.systemuser" Nullable="false" Partner="lk_dfa_appeal_modifiedonbehalfby">
+          <ReferentialConstraint Property="_modifiedonbehalfby_value" ReferencedProperty="systemuserid" />
+        </NavigationProperty>
+        <NavigationProperty Name="owninguser" Type="mscrm.systemuser" Nullable="false" Partner="user_dfa_appeal">
+          <ReferentialConstraint Property="_owninguser_value" ReferencedProperty="systemuserid" />
+        </NavigationProperty>
+        <NavigationProperty Name="owningteam" Type="mscrm.team" Nullable="false" Partner="team_dfa_appeal">
+          <ReferentialConstraint Property="_owningteam_value" ReferencedProperty="teamid" />
+        </NavigationProperty>
+        <NavigationProperty Name="ownerid" Type="mscrm.principal" Nullable="false" Partner="owner_dfa_appeal">
+          <ReferentialConstraint Property="_ownerid_value" ReferencedProperty="ownerid" />
+        </NavigationProperty>
+        <NavigationProperty Name="owningbusinessunit" Type="mscrm.businessunit" Nullable="false" Partner="business_unit_dfa_appeal">
+          <ReferentialConstraint Property="_owningbusinessunit_value" ReferencedProperty="businessunitid" />
+        </NavigationProperty>
+        <NavigationProperty Name="dfa_appeal_SyncErrors" Type="Collection(mscrm.syncerror)" Partner="regardingobjectid_dfa_appeal" />
+        <NavigationProperty Name="dfa_appeal_DuplicateMatchingRecord" Type="Collection(mscrm.duplicaterecord)" Partner="duplicaterecordid_dfa_appeal" />
+        <NavigationProperty Name="dfa_appeal_DuplicateBaseRecord" Type="Collection(mscrm.duplicaterecord)" Partner="baserecordid_dfa_appeal" />
+        <NavigationProperty Name="dfa_appeal_AsyncOperations" Type="Collection(mscrm.asyncoperation)" Partner="regardingobjectid_dfa_appeal" />
+        <NavigationProperty Name="dfa_appeal_MailboxTrackingFolders" Type="Collection(mscrm.mailboxtrackingfolder)" Partner="regardingobjectid_dfa_appeal" />
+        <NavigationProperty Name="dfa_appeal_ProcessSession" Type="Collection(mscrm.processsession)" Partner="regardingobjectid_dfa_appeal" />
+        <NavigationProperty Name="dfa_appeal_BulkDeleteFailures" Type="Collection(mscrm.bulkdeletefailure)" Partner="regardingobjectid_dfa_appeal" />
+        <NavigationProperty Name="dfa_appeal_PrincipalObjectAttributeAccesses" Type="Collection(mscrm.principalobjectattributeaccess)" Partner="objectid_dfa_appeal" />
+        <NavigationProperty Name="dfa_CaseId" Type="mscrm.incident" Nullable="false" Partner="dfa_incident_dfa_appeal">
+          <ReferentialConstraint Property="_dfa_caseid_value" ReferencedProperty="incidentid" />
+        </NavigationProperty>
+        <NavigationProperty Name="dfa_ProjectId" Type="mscrm.dfa_project" Nullable="false" Partner="dfa_project_dfa_appeal">
+          <ReferentialConstraint Property="_dfa_projectid_value" ReferencedProperty="dfa_projectid" />
+        </NavigationProperty>
+      </EntityType>
       <EntityType Name="dfa_areacommunities" BaseType="mscrm.crmbaseentity">
         <Key>
           <PropertyRef Name="dfa_areacommunitiesid" />
@@ -5825,6 +5994,7 @@
         <Property Name="statuscode" Type="Edm.Int32" />
         <Property Name="_ownerid_value" Type="Edm.Guid" />
         <Property Name="dfa_street1" Type="Edm.String" Unicode="false" />
+        <Property Name="dfa_contactphone2" Type="Edm.String" Unicode="false" />
         <Property Name="versionnumber" Type="Edm.Int64" />
         <Property Name="dfa_country" Type="Edm.String" Unicode="false" />
         <Property Name="dfa_contactfirstname" Type="Edm.String" Unicode="false" />
@@ -6604,6 +6774,7 @@
         </NavigationProperty>
         <NavigationProperty Name="dfa_event_to_effectedregioncommunity" Type="Collection(mscrm.dfa_effectedregioncommunity)" Partner="dfa_EventId" />
         <NavigationProperty Name="dfa_event_to_effectedlocalgovernment" Type="Collection(mscrm.dfa_effectedlocalgovernment)" Partner="dfa_EventId" />
+        <NavigationProperty Name="dfa_event_dfa_projectstatusreport_EventId" Type="Collection(mscrm.dfa_projectstatusreport)" Partner="dfa_EventId" />
       </EntityType>
       <EntityType Name="dfa_localgovcaseintakeprocess" BaseType="mscrm.crmbaseentity">
         <Key>
@@ -6782,13 +6953,13 @@
         <Property Name="dfa_onetimedeductionamount_base" Type="Edm.Decimal" Scale="Variable" />
         <Property Name="dfa_actualinvoicetotal_base" Type="Edm.Decimal" Scale="Variable" />
         <Property Name="versionnumber" Type="Edm.Int64" />
-        <Property Name="dfa_dateofinvoice" Type="Edm.DateTimeOffset" />
         <Property Name="dfa_dateofwork" Type="Edm.DateTimeOffset" />
         <Property Name="dfa_recoveryplanapprovedamount" Type="Edm.Decimal" Scale="Variable" />
         <Property Name="dfa_locationofwork" Type="Edm.String" Unicode="false" />
         <Property Name="dfa_claimreceiveddate" Type="Edm.DateTimeOffset" />
         <Property Name="dfa_totaleligible_base" Type="Edm.Decimal" Scale="Variable" />
         <Property Name="dfa_grossgst_base" Type="Edm.Decimal" Scale="Variable" />
+        <Property Name="_dfa_projectstatusreportid_value" Type="Edm.Guid" />
         <Property Name="dfa_claimamount" Type="Edm.Decimal" Scale="Variable" />
         <Property Name="_owningteam_value" Type="Edm.Guid" />
         <Property Name="dfa_pst" Type="Edm.Decimal" Scale="Variable" />
@@ -6799,6 +6970,7 @@
         <Property Name="timezoneruleversionnumber" Type="Edm.Int32" />
         <Property Name="_owningbusinessunit_value" Type="Edm.Guid" />
         <Property Name="dfa_name" Type="Edm.String" Unicode="false" />
+        <Property Name="dfa_dateofinvoice" Type="Edm.DateTimeOffset" />
         <Property Name="utcconversiontimezonecode" Type="Edm.Int32" />
         <Property Name="dfa_netinvoicecost" Type="Edm.Decimal" Scale="Variable" />
         <Property Name="_dfa_caseid_value" Type="Edm.Guid" />
@@ -6861,6 +7033,9 @@
         <NavigationProperty Name="dfa_CaseId" Type="mscrm.incident" Nullable="false" Partner="dfa_incident_to_projectclaim">
           <ReferentialConstraint Property="_dfa_caseid_value" ReferencedProperty="incidentid" />
         </NavigationProperty>
+        <NavigationProperty Name="dfa_ProjectStatusReportId" Type="mscrm.dfa_projectstatusreport" Nullable="false" Partner="dfa_projectstatusreport_dfa_projectclaim_ProjectStatusReportId">
+          <ReferentialConstraint Property="_dfa_projectstatusreportid_value" ReferencedProperty="dfa_projectstatusreportid" />
+        </NavigationProperty>
       </EntityType>
       <EntityType Name="dfa_project" BaseType="mscrm.crmbaseentity">
         <Key>
@@ -6875,12 +7050,13 @@
         <Property Name="dfa_projecttype" Type="Edm.Int32" />
         <Property Name="dfa_descriptionofdamagedinfrastructure" Type="Edm.String" Unicode="false" />
         <Property Name="importsequencenumber" Type="Edm.Int32" />
+        <Property Name="dfa_descriptionofdamage" Type="Edm.String" Unicode="false" />
         <Property Name="dfa_sitelocation" Type="Edm.String" Unicode="false" />
         <Property Name="dfa_18monthdeadline" Type="Edm.DateTimeOffset" />
-        <Property Name="dfa_descriptionofdamage" Type="Edm.String" Unicode="false" />
+        <Property Name="dfa_latestrequestforinfo" Type="Edm.DateTimeOffset" />
         <Property Name="_createdby_value" Type="Edm.Guid" />
         <Property Name="utcconversiontimezonecode" Type="Edm.Int32" />
-        <Property Name="dfa_latestrequestforinfo" Type="Edm.DateTimeOffset" />
+        <Property Name="dfa_isbeingappealed" Type="Edm.Boolean" />
         <Property Name="_dfa_caseid_value" Type="Edm.Guid" />
         <Property Name="dfa_approvedcost" Type="Edm.Decimal" Scale="Variable" />
         <Property Name="_transactioncurrencyid_value" Type="Edm.Guid" />
@@ -6970,6 +7146,86 @@
         </NavigationProperty>
         <NavigationProperty Name="dfa_project_to_projectclaim" Type="Collection(mscrm.dfa_projectclaim)" Partner="dfa_RecoveryPlanId" />
         <NavigationProperty Name="dfa_dfa_project_dfa_claimstatusreport_Project" Type="Collection(mscrm.dfa_claimstatusreport)" Partner="dfa_Project" />
+        <NavigationProperty Name="dfa_project_dfa_appeal" Type="Collection(mscrm.dfa_appeal)" Partner="dfa_ProjectId" />
+        <NavigationProperty Name="dfa_project_dfa_projectstatusreport_ProjectId" Type="Collection(mscrm.dfa_projectstatusreport)" Partner="dfa_ProjectId" />
+      </EntityType>
+      <EntityType Name="dfa_projectstatusreport" BaseType="mscrm.crmbaseentity">
+        <Key>
+          <PropertyRef Name="dfa_projectstatusreportid" />
+        </Key>
+        <Property Name="dfa_amount" Type="Edm.Decimal" Scale="Variable" />
+        <Property Name="statuscode" Type="Edm.Int32" />
+        <Property Name="exchangerate" Type="Edm.Decimal" Scale="Variable" />
+        <Property Name="_createdonbehalfby_value" Type="Edm.Guid" />
+        <Property Name="_owningbusinessunit_value" Type="Edm.Guid" />
+        <Property Name="_modifiedby_value" Type="Edm.Guid" />
+        <Property Name="createdon" Type="Edm.DateTimeOffset" />
+        <Property Name="importsequencenumber" Type="Edm.Int32" />
+        <Property Name="_dfa_projectid_value" Type="Edm.Guid" />
+        <Property Name="_owninguser_value" Type="Edm.Guid" />
+        <Property Name="dfa_projectstatusreportid" Type="Edm.Guid" />
+        <Property Name="timezoneruleversionnumber" Type="Edm.Int32" />
+        <Property Name="dfa_claimpaiddate" Type="Edm.DateTimeOffset" />
+        <Property Name="dfa_amount_base" Type="Edm.Decimal" Scale="Variable" />
+        <Property Name="_transactioncurrencyid_value" Type="Edm.Guid" />
+        <Property Name="dfa_name" Type="Edm.String" Unicode="false" />
+        <Property Name="versionnumber" Type="Edm.Int64" />
+        <Property Name="statecode" Type="Edm.Int32" />
+        <Property Name="dfa_claimreceiveddate" Type="Edm.DateTimeOffset" />
+        <Property Name="_modifiedonbehalfby_value" Type="Edm.Guid" />
+        <Property Name="_ownerid_value" Type="Edm.Guid" />
+        <Property Name="_dfa_caseid_value" Type="Edm.Guid" />
+        <Property Name="_dfa_eventid_value" Type="Edm.Guid" />
+        <Property Name="utcconversiontimezonecode" Type="Edm.Int32" />
+        <Property Name="overriddencreatedon" Type="Edm.DateTimeOffset" />
+        <Property Name="modifiedon" Type="Edm.DateTimeOffset" />
+        <Property Name="_owningteam_value" Type="Edm.Guid" />
+        <Property Name="_createdby_value" Type="Edm.Guid" />
+        <NavigationProperty Name="createdby" Type="mscrm.systemuser" Nullable="false" Partner="lk_dfa_projectstatusreport_createdby">
+          <ReferentialConstraint Property="_createdby_value" ReferencedProperty="systemuserid" />
+        </NavigationProperty>
+        <NavigationProperty Name="createdonbehalfby" Type="mscrm.systemuser" Nullable="false" Partner="lk_dfa_projectstatusreport_createdonbehalfby">
+          <ReferentialConstraint Property="_createdonbehalfby_value" ReferencedProperty="systemuserid" />
+        </NavigationProperty>
+        <NavigationProperty Name="modifiedby" Type="mscrm.systemuser" Nullable="false" Partner="lk_dfa_projectstatusreport_modifiedby">
+          <ReferentialConstraint Property="_modifiedby_value" ReferencedProperty="systemuserid" />
+        </NavigationProperty>
+        <NavigationProperty Name="modifiedonbehalfby" Type="mscrm.systemuser" Nullable="false" Partner="lk_dfa_projectstatusreport_modifiedonbehalfby">
+          <ReferentialConstraint Property="_modifiedonbehalfby_value" ReferencedProperty="systemuserid" />
+        </NavigationProperty>
+        <NavigationProperty Name="owninguser" Type="mscrm.systemuser" Nullable="false" Partner="user_dfa_projectstatusreport">
+          <ReferentialConstraint Property="_owninguser_value" ReferencedProperty="systemuserid" />
+        </NavigationProperty>
+        <NavigationProperty Name="owningteam" Type="mscrm.team" Nullable="false" Partner="team_dfa_projectstatusreport">
+          <ReferentialConstraint Property="_owningteam_value" ReferencedProperty="teamid" />
+        </NavigationProperty>
+        <NavigationProperty Name="ownerid" Type="mscrm.principal" Nullable="false" Partner="owner_dfa_projectstatusreport">
+          <ReferentialConstraint Property="_ownerid_value" ReferencedProperty="ownerid" />
+        </NavigationProperty>
+        <NavigationProperty Name="owningbusinessunit" Type="mscrm.businessunit" Nullable="false" Partner="business_unit_dfa_projectstatusreport">
+          <ReferentialConstraint Property="_owningbusinessunit_value" ReferencedProperty="businessunitid" />
+        </NavigationProperty>
+        <NavigationProperty Name="dfa_projectstatusreport_SyncErrors" Type="Collection(mscrm.syncerror)" Partner="regardingobjectid_dfa_projectstatusreport" />
+        <NavigationProperty Name="dfa_projectstatusreport_DuplicateMatchingRecord" Type="Collection(mscrm.duplicaterecord)" Partner="duplicaterecordid_dfa_projectstatusreport" />
+        <NavigationProperty Name="dfa_projectstatusreport_DuplicateBaseRecord" Type="Collection(mscrm.duplicaterecord)" Partner="baserecordid_dfa_projectstatusreport" />
+        <NavigationProperty Name="dfa_projectstatusreport_AsyncOperations" Type="Collection(mscrm.asyncoperation)" Partner="regardingobjectid_dfa_projectstatusreport" />
+        <NavigationProperty Name="dfa_projectstatusreport_MailboxTrackingFolders" Type="Collection(mscrm.mailboxtrackingfolder)" Partner="regardingobjectid_dfa_projectstatusreport" />
+        <NavigationProperty Name="dfa_projectstatusreport_ProcessSession" Type="Collection(mscrm.processsession)" Partner="regardingobjectid_dfa_projectstatusreport" />
+        <NavigationProperty Name="dfa_projectstatusreport_BulkDeleteFailures" Type="Collection(mscrm.bulkdeletefailure)" Partner="regardingobjectid_dfa_projectstatusreport" />
+        <NavigationProperty Name="dfa_projectstatusreport_PrincipalObjectAttributeAccesses" Type="Collection(mscrm.principalobjectattributeaccess)" Partner="objectid_dfa_projectstatusreport" />
+        <NavigationProperty Name="dfa_CaseId" Type="mscrm.incident" Nullable="false" Partner="dfa_incident_dfa_projectstatusreport_CaseId">
+          <ReferentialConstraint Property="_dfa_caseid_value" ReferencedProperty="incidentid" />
+        </NavigationProperty>
+        <NavigationProperty Name="dfa_ProjectId" Type="mscrm.dfa_project" Nullable="false" Partner="dfa_project_dfa_projectstatusreport_ProjectId">
+          <ReferentialConstraint Property="_dfa_projectid_value" ReferencedProperty="dfa_projectid" />
+        </NavigationProperty>
+        <NavigationProperty Name="transactioncurrencyid" Type="mscrm.transactioncurrency" Nullable="false" Partner="TransactionCurrency_dfa_projectstatusreport">
+          <ReferentialConstraint Property="_transactioncurrencyid_value" ReferencedProperty="transactioncurrencyid" />
+        </NavigationProperty>
+        <NavigationProperty Name="dfa_EventId" Type="mscrm.dfa_event" Nullable="false" Partner="dfa_event_dfa_projectstatusreport_EventId">
+          <ReferentialConstraint Property="_dfa_eventid_value" ReferencedProperty="dfa_eventid" />
+        </NavigationProperty>
+        <NavigationProperty Name="dfa_projectstatusreport_dfa_projectclaim_ProjectStatusReportId" Type="Collection(mscrm.dfa_projectclaim)" Partner="dfa_ProjectStatusReportId" />
       </EntityType>
       <EntityType Name="dfa_regionaldistrict" BaseType="mscrm.crmbaseentity">
         <Key>
@@ -7564,6 +7820,30 @@
         <NavigationProperty Name="baserecordid_dfa_claimstatusreport" Type="mscrm.dfa_claimstatusreport" Nullable="false" Partner="dfa_claimstatusreport_DuplicateBaseRecord">
           <ReferentialConstraint Property="_baserecordid_value" ReferencedProperty="dfa_claimstatusreportid" />
         </NavigationProperty>
+        <NavigationProperty Name="duplicaterecordid_dfa_cheque" Type="mscrm.dfa_cheque" Nullable="false" Partner="dfa_cheque_DuplicateMatchingRecord">
+          <ReferentialConstraint Property="_duplicaterecordid_value" ReferencedProperty="dfa_chequeid" />
+        </NavigationProperty>
+        <NavigationProperty Name="baserecordid_dfa_cheque" Type="mscrm.dfa_cheque" Nullable="false" Partner="dfa_cheque_DuplicateBaseRecord">
+          <ReferentialConstraint Property="_baserecordid_value" ReferencedProperty="dfa_chequeid" />
+        </NavigationProperty>
+        <NavigationProperty Name="duplicaterecordid_dfa_additionalapplicant" Type="mscrm.dfa_additionalapplicant" Nullable="false" Partner="dfa_additionalapplicant_DuplicateMatchingRecord">
+          <ReferentialConstraint Property="_duplicaterecordid_value" ReferencedProperty="dfa_additionalapplicantid" />
+        </NavigationProperty>
+        <NavigationProperty Name="baserecordid_dfa_additionalapplicant" Type="mscrm.dfa_additionalapplicant" Nullable="false" Partner="dfa_additionalapplicant_DuplicateBaseRecord">
+          <ReferentialConstraint Property="_baserecordid_value" ReferencedProperty="dfa_additionalapplicantid" />
+        </NavigationProperty>
+        <NavigationProperty Name="duplicaterecordid_dfa_appeal" Type="mscrm.dfa_appeal" Nullable="false" Partner="dfa_appeal_DuplicateMatchingRecord">
+          <ReferentialConstraint Property="_duplicaterecordid_value" ReferencedProperty="dfa_appealid" />
+        </NavigationProperty>
+        <NavigationProperty Name="baserecordid_dfa_appeal" Type="mscrm.dfa_appeal" Nullable="false" Partner="dfa_appeal_DuplicateBaseRecord">
+          <ReferentialConstraint Property="_baserecordid_value" ReferencedProperty="dfa_appealid" />
+        </NavigationProperty>
+        <NavigationProperty Name="duplicaterecordid_dfa_projectstatusreport" Type="mscrm.dfa_projectstatusreport" Nullable="false" Partner="dfa_projectstatusreport_DuplicateMatchingRecord">
+          <ReferentialConstraint Property="_duplicaterecordid_value" ReferencedProperty="dfa_projectstatusreportid" />
+        </NavigationProperty>
+        <NavigationProperty Name="baserecordid_dfa_projectstatusreport" Type="mscrm.dfa_projectstatusreport" Nullable="false" Partner="dfa_projectstatusreport_DuplicateBaseRecord">
+          <ReferentialConstraint Property="_baserecordid_value" ReferencedProperty="dfa_projectstatusreportid" />
+        </NavigationProperty>
         <NavigationProperty Name="baserecordid_goalrollupquery" Type="mscrm.goalrollupquery" Nullable="false" Partner="GoalRollupQuery_DuplicateBaseRecord">
           <ReferentialConstraint Property="_baserecordid_value" ReferencedProperty="goalrollupqueryid" />
         </NavigationProperty>
@@ -7670,12 +7950,6 @@
           <ReferentialConstraint Property="_baserecordid_value" ReferencedProperty="emailserverprofileid" />
         </NavigationProperty>
         <NavigationProperty Name="duplicaterecordid_letter" Type="mscrm.letter" Nullable="false" Partner="Letter_DuplicateMatchingRecord" />
-        <NavigationProperty Name="duplicaterecordid_dfa_cheque" Type="mscrm.dfa_cheque" Nullable="false" Partner="dfa_cheque_DuplicateMatchingRecord">
-          <ReferentialConstraint Property="_duplicaterecordid_value" ReferencedProperty="dfa_chequeid" />
-        </NavigationProperty>
-        <NavigationProperty Name="baserecordid_dfa_cheque" Type="mscrm.dfa_cheque" Nullable="false" Partner="dfa_cheque_DuplicateBaseRecord">
-          <ReferentialConstraint Property="_baserecordid_value" ReferencedProperty="dfa_chequeid" />
-        </NavigationProperty>
       </EntityType>
       <EntityType Name="duplicaterulecondition" BaseType="mscrm.crmbaseentity">
         <Key>
@@ -9830,16 +10104,14 @@
           <PropertyRef Name="incidentid" />
         </Key>
         <Property Name="dfa_totalineligibleamount_date" Type="Edm.DateTimeOffset" />
-        <Property Name="dfa_inacapprovalrecd" Type="Edm.Boolean" />
-        <Property Name="dfa_onetimeonlygrantchequeamount" Type="Edm.Decimal" Scale="Variable" />
+        <Property Name="_dfa_buildingownerlandlord_value" Type="Edm.Guid" />
         <Property Name="numberofchildincidents" Type="Edm.Int32" />
-        <Property Name="dfa_alloccupantsidentified" Type="Edm.Boolean" />
         <Property Name="dfa_receivedcopyofrentalagreementorlease" Type="Edm.Boolean" />
-        <Property Name="firstresponsesent" Type="Edm.Boolean" />
+        <Property Name="dfa_acopyofarentalagreementorlease" Type="Edm.Boolean" />
+        <Property Name="_dfa_buildingownerlandlordid_value" Type="Edm.Guid" />
         <Property Name="dfa_datereportcompleted" Type="Edm.DateTimeOffset" />
         <Property Name="entityimage_timestamp" Type="Edm.Int64" />
         <Property Name="dfa_fieldmanagerassignment" Type="Edm.Boolean" />
-        <Property Name="_dfa_eventid_value" Type="Edm.Guid" />
         <Property Name="emailaddress" Type="Edm.String" Unicode="false" />
         <Property Name="dfa_alternatephonenumber" Type="Edm.String" Unicode="false" />
         <Property Name="_modifiedby_value" Type="Edm.Guid" />
@@ -9851,14 +10123,14 @@
         <Property Name="dfa_embcamount80_base" Type="Edm.Decimal" Scale="Variable" />
         <Property Name="dfa_manufacturedhome" Type="Edm.Boolean" />
         <Property Name="_slaid_value" Type="Edm.Guid" />
-        <Property Name="dfa_advancechequedaterequested" Type="Edm.DateTimeOffset" />
+        <Property Name="_firstresponsebykpiid_value" Type="Edm.Guid" />
         <Property Name="dfa_inaccomments" Type="Edm.String" Unicode="false" />
-        <Property Name="productserialnumber" Type="Edm.String" Unicode="false" />
+        <Property Name="dfa_indigenouscomments1" Type="Edm.String" Unicode="false" />
         <Property Name="dfa_mailingaddressstreet3" Type="Edm.String" Unicode="false" />
+        <Property Name="dfa_additionalapplicants" Type="Edm.String" Unicode="false" />
         <Property Name="dfa_embcamount80" Type="Edm.Decimal" Scale="Variable" />
         <Property Name="dfa_paymentletterready" Type="Edm.Boolean" />
-        <Property Name="followupby" Type="Edm.DateTimeOffset" />
-        <Property Name="incidentid" Type="Edm.Guid" />
+        <Property Name="dfa_claimstotalpayable80" Type="Edm.Decimal" Scale="Variable" />
         <Property Name="dfa_totalprovincialeligibleamount" Type="Edm.Decimal" Scale="Variable" />
         <Property Name="dfa_causeofdamagelossother" Type="Edm.String" Unicode="false" />
         <Property Name="dfa_eligibilitystatus" Type="Edm.Int32" />
@@ -9868,31 +10140,33 @@
         <Property Name="dfa_homeownergranteligibilityconfirmed" Type="Edm.Boolean" />
         <Property Name="entityimage_url" Type="Edm.String" Unicode="false" />
         <Property Name="dfa_letterofacknowledgement" Type="Edm.DateTimeOffset" />
-        <Property Name="servicestage" Type="Edm.Int32" />
-        <Property Name="dfa_firstclaimchequeamount_base" Type="Edm.Decimal" Scale="Variable" />
+        <Property Name="dfa_alloccupantsidentified" Type="Edm.Boolean" />
         <Property Name="resolvebyslastatus" Type="Edm.Int32" />
-        <Property Name="dfa_onetimeonlygrantchequedaterequested" Type="Edm.DateTimeOffset" />
+        <Property Name="severitycode" Type="Edm.Int32" />
+        <Property Name="dfa_bringforwarddate" Type="Edm.DateTimeOffset" />
         <Property Name="utcconversiontimezonecode" Type="Edm.Int32" />
         <Property Name="dfa_onfirstnationsreserve" Type="Edm.Boolean" />
-        <Property Name="dfa_appealoneligibilitydate" Type="Edm.DateTimeOffset" />
+        <Property Name="dfa_totalineligibleamount_base" Type="Edm.Decimal" Scale="Variable" />
+        <Property Name="_primarycontactid_value" Type="Edm.Guid" />
+        <Property Name="dfa_totalineligibleamount_state" Type="Edm.Int32" />
         <Property Name="dfa_listofdamageditemsassessed" Type="Edm.Boolean" />
-        <Property Name="dfa_advancechequeamount" Type="Edm.Decimal" Scale="Variable" />
+        <Property Name="dfa_proofofownership" Type="Edm.Boolean" />
+        <Property Name="description" Type="Edm.String" Unicode="false" />
+        <Property Name="incidentid" Type="Edm.Guid" />
         <Property Name="_accountid_value" Type="Edm.Guid" />
         <Property Name="_productid_value" Type="Edm.Guid" />
         <Property Name="customercontacted" Type="Edm.Boolean" />
         <Property Name="dfa_ineligibleamounttotal" Type="Edm.Decimal" Scale="Variable" />
-        <Property Name="dfa_appealchequedaterequested" Type="Edm.DateTimeOffset" />
+        <Property Name="firstresponsesent" Type="Edm.Boolean" />
         <Property Name="dfa_photos" Type="Edm.Boolean" />
-        <Property Name="dfa_appealonamountstatus" Type="Edm.Int32" />
         <Property Name="statecode" Type="Edm.Int32" />
         <Property Name="dfa_federalclaimamounttotal" Type="Edm.Decimal" Scale="Variable" />
         <Property Name="_customerid_value" Type="Edm.Guid" />
         <Property Name="responseby" Type="Edm.DateTimeOffset" />
         <Property Name="dfa_nameoffirstnationsreserve" Type="Edm.String" Unicode="false" />
         <Property Name="processid" Type="Edm.Guid" />
-        <Property Name="dfa_advancechequecomments" Type="Edm.String" Unicode="false" />
         <Property Name="_owningteam_value" Type="Edm.Guid" />
-        <Property Name="dfa_indigenouscomments1" Type="Edm.String" Unicode="false" />
+        <Property Name="dfa_secondaryapplicantsigneddate" Type="Edm.DateTimeOffset" />
         <Property Name="title" Type="Edm.String" Unicode="false" />
         <Property Name="_createdby_value" Type="Edm.Guid" />
         <Property Name="_modifiedbyexternalparty_value" Type="Edm.Guid" />
@@ -9905,30 +10179,25 @@
         <Property Name="_slainvokedid_value" Type="Edm.Guid" />
         <Property Name="dfa_damagedpropertyprovince" Type="Edm.String" Unicode="false" />
         <Property Name="dfa_pid" Type="Edm.String" Unicode="false" />
-        <Property Name="contractservicelevelcode" Type="Edm.Int32" />
-        <Property Name="dfa_totalineligibleamount_base" Type="Edm.Decimal" Scale="Variable" />
+        <Property Name="dfa_farmoperationderivesthatpersonsmajorincom" Type="Edm.Int32" />
         <Property Name="_owningbusinessunit_value" Type="Edm.Guid" />
+        <Property Name="dfa_employlessthan50employeesatanyonetime" Type="Edm.Int32" />
         <Property Name="dfa_rentalorleaseagreement" Type="Edm.Boolean" />
         <Property Name="dfa_totalfederalclaimamount_date" Type="Edm.DateTimeOffset" />
-        <Property Name="_createdbyexternalparty_value" Type="Edm.Guid" />
+        <Property Name="dfa_contentcalculationssheet" Type="Edm.Boolean" />
         <Property Name="dfa_balanceowing" Type="Edm.Decimal" Scale="Variable" />
         <Property Name="dfa_dateofapplicantsitevisit" Type="Edm.DateTimeOffset" />
         <Property Name="checkemail" Type="Edm.Boolean" />
         <Property Name="dfa_embcapprovedamount_base" Type="Edm.Decimal" Scale="Variable" />
         <Property Name="dfa_totalpaid" Type="Edm.Decimal" Scale="Variable" />
-        <Property Name="escalatedon" Type="Edm.DateTimeOffset" />
+        <Property Name="dfa_ineligibleapplicationreason" Type="Edm.Int32" />
         <Property Name="traversedpath" Type="Edm.String" Unicode="false" />
         <Property Name="_dfa_alternatecontactid_value" Type="Edm.Guid" />
-        <Property Name="_createdonbehalfby_value" Type="Edm.Guid" />
         <Property Name="dfa_coordinatorreviewrequired" Type="Edm.Boolean" />
         <Property Name="dfa_claimtype" Type="Edm.Int32" />
         <Property Name="followuptaskcreated" Type="Edm.Boolean" />
-        <Property Name="dfa_additionalclaimchequeamount" Type="Edm.Decimal" Scale="Variable" />
-        <Property Name="dfa_contentcalculationssheet" Type="Edm.Boolean" />
         <Property Name="dfa_totalprovincialeligibleamount_date" Type="Edm.DateTimeOffset" />
-        <Property Name="dfa_forhomesinthenameofabusinesscentralsec" Type="Edm.Boolean" />
         <Property Name="createdon" Type="Edm.DateTimeOffset" />
-        <Property Name="dfa_onetimeonlygrantchequeamount_base" Type="Edm.Decimal" Scale="Variable" />
         <Property Name="dfa_wereyouevacuatedduringtheevent" Type="Edm.Boolean" />
         <Property Name="dfa_dateapplicantcontacted" Type="Edm.DateTimeOffset" />
         <Property Name="dfa_forecastclaimamount_base" Type="Edm.Decimal" Scale="Variable" />
@@ -9936,45 +10205,42 @@
         <Property Name="_dfa_primarycontactid_value" Type="Edm.Guid" />
         <Property Name="dfa_areyounowresidingintheresidence" Type="Edm.Boolean" />
         <Property Name="dfa_recoveryofficerreviewrequired" Type="Edm.Boolean" />
-        <Property Name="dfa_mailingaddresscity" Type="Edm.String" Unicode="false" />
         <Property Name="billedserviceunits" Type="Edm.Int32" />
-        <Property Name="_dfa_buildingownerlandlordid_value" Type="Edm.Guid" />
         <Property Name="dfa_diagram" Type="Edm.Boolean" />
         <Property Name="versionnumber" Type="Edm.Int64" />
         <Property Name="dfa_federalclaimamounttotal_base" Type="Edm.Decimal" Scale="Variable" />
-        <Property Name="dfa_appealoneligibilitystatus" Type="Edm.Int32" />
+        <Property Name="servicestage" Type="Edm.Int32" />
         <Property Name="_dfa_assignedto_value" Type="Edm.Guid" />
         <Property Name="_socialprofileid_value" Type="Edm.Guid" />
-        <Property Name="_dfa_buildingownerlandlord_value" Type="Edm.Guid" />
         <Property Name="statuscode" Type="Edm.Int32" />
         <Property Name="dfa_forecastclaimamount" Type="Edm.Decimal" Scale="Variable" />
-        <Property Name="dfa_appealonotherpaymentdate" Type="Edm.DateTimeOffset" />
         <Property Name="dfa_datereturntotheresidence" Type="Edm.DateTimeOffset" />
         <Property Name="dfa_landtitledocumentormobilehomeregistryinfo" Type="Edm.Boolean" />
         <Property Name="_dfa_fieldmanager_value" Type="Edm.Guid" />
         <Property Name="_dfa_regionid_value" Type="Edm.Guid" />
         <Property Name="actualserviceunits" Type="Edm.Int32" />
         <Property Name="resolveby" Type="Edm.DateTimeOffset" />
-        <Property Name="dfa_firstclaimchequeamount" Type="Edm.Decimal" Scale="Variable" />
-        <Property Name="dfa_additionalclaimchequecomments" Type="Edm.String" Unicode="false" />
+        <Property Name="dfa_forhomesinthenameofabusinesscentralsec" Type="Edm.Boolean" />
         <Property Name="dfa_provincialeligibleamounttotal_base" Type="Edm.Decimal" Scale="Variable" />
         <Property Name="dfa_receiptsorinvoicespaidbyapplicant" Type="Edm.Boolean" />
         <Property Name="dfa_evaluationreportreceived" Type="Edm.Boolean" />
         <Property Name="dfa_applicationformsigned" Type="Edm.Boolean" />
         <Property Name="dfa_eligibleforbchomegrantonthisproperty" Type="Edm.Boolean" />
-        <Property Name="severitycode" Type="Edm.Int32" />
+        <Property Name="dfa_alistingofthedirectors" Type="Edm.Boolean" />
+        <Property Name="dfa_claimstotalpayable80_base" Type="Edm.Decimal" Scale="Variable" />
+        <Property Name="dfa_farmoperation" Type="Edm.Int32" />
         <Property Name="dfa_totalfederalclaimamount_base" Type="Edm.Decimal" Scale="Variable" />
         <Property Name="_ownerid_value" Type="Edm.Guid" />
         <Property Name="dfa_receivedrecoveryplan" Type="Edm.Boolean" />
         <Property Name="dfa_mailingaddressprovince" Type="Edm.String" Unicode="false" />
-        <Property Name="dfa_advancechequeamount_base" Type="Edm.Decimal" Scale="Variable" />
         <Property Name="dfa_provincialeligibleamounttotal" Type="Edm.Decimal" Scale="Variable" />
         <Property Name="dfa_issamemailingaddress" Type="Edm.Boolean" />
         <Property Name="dfa_datecasereceivedbyfm" Type="Edm.DateTimeOffset" />
-        <Property Name="dfa_appealchequeamount_base" Type="Edm.Decimal" Scale="Variable" />
+        <Property Name="_dfa_eventid_value" Type="Edm.Guid" />
         <Property Name="timezoneruleversionnumber" Type="Edm.Int32" />
         <Property Name="dfa_rentalleaseagreementorlandtitle" Type="Edm.Boolean" />
         <Property Name="dfa_mailingaddressstreet1" Type="Edm.String" Unicode="false" />
+        <Property Name="dfa_primaryapplicantsigned" Type="Edm.Int32" />
         <Property Name="_masterid_value" Type="Edm.Guid" />
         <Property Name="_dfa_localgoverningbodyid_value" Type="Edm.Guid" />
         <Property Name="dfa_applicanttype" Type="Edm.Int32" />
@@ -9985,18 +10251,19 @@
         <Property Name="_modifiedonbehalfby_value" Type="Edm.Guid" />
         <Property Name="dfa_legaldescription" Type="Edm.String" Unicode="false" />
         <Property Name="dfa_doyourlossestotalmorethan1000" Type="Edm.Boolean" />
-        <Property Name="dfa_totalineligibleamount_state" Type="Edm.Int32" />
         <Property Name="messagetypecode" Type="Edm.Int32" />
         <Property Name="prioritycode" Type="Edm.Int32" />
         <Property Name="dfa_datereceived" Type="Edm.DateTimeOffset" />
-        <Property Name="dfa_appealchequecomments" Type="Edm.String" Unicode="false" />
+        <Property Name="_createdbyexternalparty_value" Type="Edm.Guid" />
         <Property Name="dfa_dateofdamage" Type="Edm.DateTimeOffset" />
-        <Property Name="_firstresponsebykpiid_value" Type="Edm.Guid" />
+        <Property Name="dfa_mostrecentcompletecorporateincometaxretur" Type="Edm.Boolean" />
+        <Property Name="dfa_ownedandoperatedbya" Type="Edm.Int32" />
         <Property Name="dfa_indigenousreserveresidence" Type="Edm.Boolean" />
         <Property Name="dfa_mailingaddresspostalcode" Type="Edm.String" Unicode="false" />
-        <Property Name="dfa_appealonamountreason" Type="Edm.String" Unicode="false" />
+        <Property Name="dfa_totalineligibleamount" Type="Edm.Decimal" Scale="Variable" />
         <Property Name="dfa_fieldmanagerreviewrequired" Type="Edm.Boolean" />
         <Property Name="dfa_otherdamages" Type="Edm.String" Unicode="false" />
+        <Property Name="dfa_primaryapplicantprintname" Type="Edm.String" Unicode="false" />
         <Property Name="isdecrementing" Type="Edm.Boolean" />
         <Property Name="dfa_evaluatorsnotes" Type="Edm.Boolean" />
         <Property Name="dfa_totalpaid_base" Type="Edm.Decimal" Scale="Variable" />
@@ -10004,37 +10271,40 @@
         <Property Name="firstresponseslastatus" Type="Edm.Int32" />
         <Property Name="dfa_isthispropertyyourprimaryresidence" Type="Edm.Boolean" />
         <Property Name="_resolvebykpiid_value" Type="Edm.Guid" />
-        <Property Name="dfa_appealonotherpaymentreason" Type="Edm.String" Unicode="false" />
+        <Property Name="dfa_businessmanagedbyallownersondaytodaybasis" Type="Edm.Int32" />
         <Property Name="_transactioncurrencyid_value" Type="Edm.Guid" />
         <Property Name="dfa_bcsocietiesregistration" Type="Edm.Boolean" />
         <Property Name="dfa_dateevaluationfilereceived" Type="Edm.DateTimeOffset" />
-        <Property Name="dfa_appealonotherpaymentstatus" Type="Edm.Int32" />
+        <Property Name="dfa_applicationnumber" Type="Edm.String" Unicode="false" />
+        <Property Name="_parentcaseid_value" Type="Edm.Guid" />
         <Property Name="_contractid_value" Type="Edm.Guid" />
-        <Property Name="dfa_bringforwarddate" Type="Edm.DateTimeOffset" />
         <Property Name="dfa_suppliernumberrequested" Type="Edm.Boolean" />
         <Property Name="dfa_indigenousstatus" Type="Edm.Boolean" />
-        <Property Name="dfa_damagedpropertycity" Type="Edm.String" Unicode="false" />
         <Property Name="onholdtime" Type="Edm.Int32" />
-        <Property Name="dfa_firstclaimchequedaterequested" Type="Edm.DateTimeOffset" />
-        <Property Name="dfa_ineligibleapplicationreason" Type="Edm.Int32" />
+        <Property Name="dfa_claimstotalpayable" Type="Edm.Decimal" Scale="Variable" />
+        <Property Name="dfa_claimstotalpayable_base" Type="Edm.Decimal" Scale="Variable" />
         <Property Name="dfa_readyforinspection" Type="Edm.Boolean" />
+        <Property Name="followupby" Type="Edm.DateTimeOffset" />
+        <Property Name="modifiedon" Type="Edm.DateTimeOffset" />
         <Property Name="ticketnumber" Type="Edm.String" Unicode="false" />
+        <Property Name="dfa_writtenconfirmationofinsurancenotpurchase" Type="Edm.Boolean" />
         <Property Name="_dfa_effectedcommunityregionid_value" Type="Edm.Guid" />
         <Property Name="_entitlementid_value" Type="Edm.Guid" />
         <Property Name="_contactid_value" Type="Edm.Guid" />
-        <Property Name="modifiedon" Type="Edm.DateTimeOffset" />
-        <Property Name="dfa_additionalclaimchequedaterequested" Type="Edm.DateTimeOffset" />
+        <Property Name="_createdonbehalfby_value" Type="Edm.Guid" />
+        <Property Name="escalatedon" Type="Edm.DateTimeOffset" />
         <Property Name="dfa_centralsecuritiesregister" Type="Edm.Boolean" />
-        <Property Name="dfa_totalineligibleamount" Type="Edm.Decimal" Scale="Variable" />
+        <Property Name="dfa_secondaryapplicantsigned" Type="Edm.Int32" />
         <Property Name="isescalated" Type="Edm.Boolean" />
         <Property Name="dfa_adminreviewrequired" Type="Edm.Boolean" />
         <Property Name="dfa_datefileclosed" Type="Edm.DateTimeOffset" />
+        <Property Name="dfa_inacapprovalrecd" Type="Edm.Boolean" />
         <Property Name="lastonholdtime" Type="Edm.DateTimeOffset" />
         <Property Name="dfa_damagedpropertystreet2" Type="Edm.String" Unicode="false" />
         <Property Name="dfa_bringforwardcomments" Type="Edm.String" Unicode="false" />
         <Property Name="dfa_supplementaryproofofprincipalresidencyid" Type="Edm.Boolean" />
         <Property Name="dfa_causeofdamageloss" Type="Edm.Int32" />
-        <Property Name="_parentcaseid_value" Type="Edm.Guid" />
+        <Property Name="dfa_mostrecentlyfiledfinancialstatements" Type="Edm.Boolean" />
         <Property Name="dfa_damagedpropertystreet1" Type="Edm.String" Unicode="false" />
         <Property Name="dfa_balanceowing_base" Type="Edm.Decimal" Scale="Variable" />
         <Property Name="dfa_totalprovincialeligibleamount_base" Type="Edm.Decimal" Scale="Variable" />
@@ -10042,17 +10312,18 @@
         <Property Name="dfa_dateassignedtofm" Type="Edm.DateTimeOffset" />
         <Property Name="dfa_totalprovincialeligibleamount_state" Type="Edm.Int32" />
         <Property Name="dfa_damagedpropertystreet3" Type="Edm.String" Unicode="false" />
-        <Property Name="dfa_additionalclaimchequeamount_base" Type="Edm.Decimal" Scale="Variable" />
-        <Property Name="_primarycontactid_value" Type="Edm.Guid" />
+        <Property Name="productserialnumber" Type="Edm.String" Unicode="false" />
+        <Property Name="dfa_primaryapplicantsigneddate" Type="Edm.DateTimeOffset" />
+        <Property Name="dfa_haveinvoicesreceiptsforcleanuporrepairs" Type="Edm.Boolean" />
         <Property Name="casetypecode" Type="Edm.Int32" />
-        <Property Name="dfa_appealchequeamount" Type="Edm.Decimal" Scale="Variable" />
         <Property Name="incidentstagecode" Type="Edm.Int32" />
         <Property Name="importsequencenumber" Type="Edm.Int32" />
         <Property Name="caseorigincode" Type="Edm.Int32" />
+        <Property Name="dfa_organizationstructureandpurposestatemente" Type="Edm.Boolean" />
         <Property Name="_dfa_relatedbusiness_value" Type="Edm.Guid" />
         <Property Name="entityimage" Type="Edm.Binary" />
+        <Property Name="contractservicelevelcode" Type="Edm.Int32" />
         <Property Name="dfa_payableto" Type="Edm.String" Unicode="false" />
-        <Property Name="dfa_appealonamountdate" Type="Edm.DateTimeOffset" />
         <Property Name="overriddencreatedon" Type="Edm.DateTimeOffset" />
         <Property Name="influencescore" Type="Edm.Double" />
         <Property Name="dfa_others" Type="Edm.Boolean" />
@@ -10064,23 +10335,22 @@
         <Property Name="dfa_ineligibleamounttotal_base" Type="Edm.Decimal" Scale="Variable" />
         <Property Name="dfa_dateofdamageto" Type="Edm.DateTimeOffset" />
         <Property Name="dfa_dateassigned" Type="Edm.DateTimeOffset" />
-        <Property Name="dfa_claimsummarysheet" Type="Edm.Boolean" />
+        <Property Name="dfa_grossrevenues100002000000beforedisaster" Type="Edm.Int32" />
         <Property Name="_contractdetailid_value" Type="Edm.Guid" />
         <Property Name="customersatisfactioncode" Type="Edm.Int32" />
         <Property Name="_dfa_areacommunityid_value" Type="Edm.Guid" />
         <Property Name="dfa_bcassessmentrollreport" Type="Edm.Boolean" />
         <Property Name="exchangerate" Type="Edm.Decimal" Scale="Variable" />
-        <Property Name="dfa_onetimeonlygrantchequecomments" Type="Edm.String" Unicode="false" />
-        <Property Name="dfa_appealoneligibilityreason" Type="Edm.String" Unicode="false" />
+        <Property Name="dfa_orgregistrationproofunderbcsocietya" Type="Edm.Boolean" />
+        <Property Name="dfa_secondaryapplicantprintname" Type="Edm.String" Unicode="false" />
         <Property Name="_existingcase_value" Type="Edm.Guid" />
         <Property Name="dfa_insurancetemplatecompletedbyinsurerbroker" Type="Edm.Boolean" />
+        <Property Name="dfa_claimsummarysheet" Type="Edm.Boolean" />
         <Property Name="_dfa_areacommunity2id_value" Type="Edm.Guid" />
         <Property Name="dfa_covenants" Type="Edm.Boolean" />
-        <Property Name="description" Type="Edm.String" Unicode="false" />
         <Property Name="stageid" Type="Edm.Guid" />
         <Property Name="dfa_financialstatements" Type="Edm.Boolean" />
         <Property Name="dfa_damagedpropertypostalcode" Type="Edm.String" Unicode="false" />
-        <Property Name="dfa_firstclaimchequecomments" Type="Edm.String" Unicode="false" />
         <NavigationProperty Name="createdby" Type="mscrm.systemuser" Nullable="false" Partner="lk_incidentbase_createdby">
           <ReferentialConstraint Property="_createdby_value" ReferencedProperty="systemuserid" />
         </NavigationProperty>
@@ -10251,6 +10521,9 @@
           <ReferentialConstraint Property="_dfa_fieldmanager_value" ReferencedProperty="systemuserid" />
         </NavigationProperty>
         <NavigationProperty Name="dfa_incident_cheque" Type="Collection(mscrm.dfa_cheque)" Partner="dfa_CaseId" />
+        <NavigationProperty Name="dfa_incident_dfa_additionalapplicant" Type="Collection(mscrm.dfa_additionalapplicant)" Partner="dfa_CaseId" />
+        <NavigationProperty Name="dfa_incident_dfa_appeal" Type="Collection(mscrm.dfa_appeal)" Partner="dfa_CaseId" />
+        <NavigationProperty Name="dfa_incident_dfa_projectstatusreport_CaseId" Type="Collection(mscrm.dfa_projectstatusreport)" Partner="dfa_CaseId" />
       </EntityType>
       <EntityType Name="interactionforemail" BaseType="mscrm.crmbaseentity">
         <Key>
@@ -12318,6 +12591,18 @@
         <NavigationProperty Name="regardingobjectid_dfa_claimstatusreport" Type="mscrm.dfa_claimstatusreport" Nullable="false" Partner="dfa_claimstatusreport_MailboxTrackingFolders">
           <ReferentialConstraint Property="_regardingobjectid_value" ReferencedProperty="dfa_claimstatusreportid" />
         </NavigationProperty>
+        <NavigationProperty Name="regardingobjectid_dfa_cheque" Type="mscrm.dfa_cheque" Nullable="false" Partner="dfa_cheque_MailboxTrackingFolders">
+          <ReferentialConstraint Property="_regardingobjectid_value" ReferencedProperty="dfa_chequeid" />
+        </NavigationProperty>
+        <NavigationProperty Name="regardingobjectid_dfa_additionalapplicant" Type="mscrm.dfa_additionalapplicant" Nullable="false" Partner="dfa_additionalapplicant_MailboxTrackingFolders">
+          <ReferentialConstraint Property="_regardingobjectid_value" ReferencedProperty="dfa_additionalapplicantid" />
+        </NavigationProperty>
+        <NavigationProperty Name="regardingobjectid_dfa_appeal" Type="mscrm.dfa_appeal" Nullable="false" Partner="dfa_appeal_MailboxTrackingFolders">
+          <ReferentialConstraint Property="_regardingobjectid_value" ReferencedProperty="dfa_appealid" />
+        </NavigationProperty>
+        <NavigationProperty Name="regardingobjectid_dfa_projectstatusreport" Type="mscrm.dfa_projectstatusreport" Nullable="false" Partner="dfa_projectstatusreport_MailboxTrackingFolders">
+          <ReferentialConstraint Property="_regardingobjectid_value" ReferencedProperty="dfa_projectstatusreportid" />
+        </NavigationProperty>
         <NavigationProperty Name="modifiedonbehalfby" Type="mscrm.systemuser" Nullable="false" Partner="lk_mailboxtrackingfolder_modifiedonbehalfby">
           <ReferentialConstraint Property="_modifiedonbehalfby_value" ReferencedProperty="systemuserid" />
         </NavigationProperty>
@@ -12353,9 +12638,6 @@
         </NavigationProperty>
         <NavigationProperty Name="modifiedby" Type="mscrm.systemuser" Nullable="false" Partner="lk_mailboxtrackingfolder_modifiedby">
           <ReferentialConstraint Property="_modifiedby_value" ReferencedProperty="systemuserid" />
-        </NavigationProperty>
-        <NavigationProperty Name="regardingobjectid_dfa_cheque" Type="mscrm.dfa_cheque" Nullable="false" Partner="dfa_cheque_MailboxTrackingFolders">
-          <ReferentialConstraint Property="_regardingobjectid_value" ReferencedProperty="dfa_chequeid" />
         </NavigationProperty>
       </EntityType>
       <EntityType Name="mailmergetemplate" BaseType="mscrm.crmbaseentity">
@@ -14470,6 +14752,10 @@
         <NavigationProperty Name="owner_dfa_projectclaim" Type="Collection(mscrm.dfa_projectclaim)" Partner="ownerid" />
         <NavigationProperty Name="owner_dfa_costpercapitabreakdown" Type="Collection(mscrm.dfa_costpercapitabreakdown)" Partner="ownerid" />
         <NavigationProperty Name="owner_dfa_buildingownerlandlord" Type="Collection(mscrm.dfa_buildingownerlandlord)" Partner="ownerid" />
+        <NavigationProperty Name="owner_dfa_cheque" Type="Collection(mscrm.dfa_cheque)" Partner="ownerid" />
+        <NavigationProperty Name="owner_dfa_additionalapplicant" Type="Collection(mscrm.dfa_additionalapplicant)" Partner="ownerid" />
+        <NavigationProperty Name="owner_dfa_appeal" Type="Collection(mscrm.dfa_appeal)" Partner="ownerid" />
+        <NavigationProperty Name="owner_dfa_projectstatusreport" Type="Collection(mscrm.dfa_projectstatusreport)" Partner="ownerid" />
         <NavigationProperty Name="owner_personaldocumenttemplates" Type="Collection(mscrm.personaldocumenttemplate)" Partner="ownerid" />
         <NavigationProperty Name="owner_accounts" Type="Collection(mscrm.account)" Partner="ownerid" />
         <NavigationProperty Name="owner_goalrollupquery" Type="Collection(mscrm.goalrollupquery)" Partner="ownerid" />
@@ -14506,7 +14792,6 @@
         <NavigationProperty Name="owner_importfiles" Type="Collection(mscrm.importfile)" Partner="ownerid" />
         <NavigationProperty Name="owner_importlogs" Type="Collection(mscrm.importlog)" Partner="ownerid" />
         <NavigationProperty Name="owner_SyncError" Type="Collection(mscrm.syncerror)" Partner="ownerid" />
-        <NavigationProperty Name="owner_dfa_cheque" Type="Collection(mscrm.dfa_cheque)" Partner="ownerid" />
       </EntityType>
       <EntityType Name="personaldocumenttemplate" BaseType="mscrm.crmbaseentity">
         <Key>
@@ -15632,6 +15917,18 @@
         <NavigationProperty Name="objectid_dfa_claimstatusreport" Type="mscrm.dfa_claimstatusreport" Nullable="false" Partner="dfa_claimstatusreport_PrincipalObjectAttributeAccesses">
           <ReferentialConstraint Property="_objectid_value" ReferencedProperty="dfa_claimstatusreportid" />
         </NavigationProperty>
+        <NavigationProperty Name="objectid_dfa_cheque" Type="mscrm.dfa_cheque" Nullable="false" Partner="dfa_cheque_PrincipalObjectAttributeAccesses">
+          <ReferentialConstraint Property="_objectid_value" ReferencedProperty="dfa_chequeid" />
+        </NavigationProperty>
+        <NavigationProperty Name="objectid_dfa_additionalapplicant" Type="mscrm.dfa_additionalapplicant" Nullable="false" Partner="dfa_additionalapplicant_PrincipalObjectAttributeAccesses">
+          <ReferentialConstraint Property="_objectid_value" ReferencedProperty="dfa_additionalapplicantid" />
+        </NavigationProperty>
+        <NavigationProperty Name="objectid_dfa_appeal" Type="mscrm.dfa_appeal" Nullable="false" Partner="dfa_appeal_PrincipalObjectAttributeAccesses">
+          <ReferentialConstraint Property="_objectid_value" ReferencedProperty="dfa_appealid" />
+        </NavigationProperty>
+        <NavigationProperty Name="objectid_dfa_projectstatusreport" Type="mscrm.dfa_projectstatusreport" Nullable="false" Partner="dfa_projectstatusreport_PrincipalObjectAttributeAccesses">
+          <ReferentialConstraint Property="_objectid_value" ReferencedProperty="dfa_projectstatusreportid" />
+        </NavigationProperty>
         <NavigationProperty Name="objectid_letter" Type="mscrm.letter" Nullable="false" Partner="letter_principalobjectattributeaccess" />
         <NavigationProperty Name="objectid_reportcategory" Type="mscrm.reportcategory" Nullable="false" Partner="reportcategory_principalobjectattributeaccess">
           <ReferentialConstraint Property="_objectid_value" ReferencedProperty="reportcategoryid" />
@@ -15691,9 +15988,6 @@
           <ReferentialConstraint Property="_objectid_value" ReferencedProperty="goalid" />
         </NavigationProperty>
         <NavigationProperty Name="objectid_phonecall" Type="mscrm.phonecall" Nullable="false" Partner="phonecall_principalobjectattributeaccess" />
-        <NavigationProperty Name="objectid_dfa_cheque" Type="mscrm.dfa_cheque" Nullable="false" Partner="dfa_cheque_PrincipalObjectAttributeAccesses">
-          <ReferentialConstraint Property="_objectid_value" ReferencedProperty="dfa_chequeid" />
-        </NavigationProperty>
       </EntityType>
       <EntityType Name="privilege" BaseType="mscrm.crmbaseentity">
         <Key>
@@ -15996,6 +16290,18 @@
         <NavigationProperty Name="regardingobjectid_dfa_claimstatusreport" Type="mscrm.dfa_claimstatusreport" Nullable="false" Partner="dfa_claimstatusreport_ProcessSession">
           <ReferentialConstraint Property="_regardingobjectid_value" ReferencedProperty="dfa_claimstatusreportid" />
         </NavigationProperty>
+        <NavigationProperty Name="regardingobjectid_dfa_cheque" Type="mscrm.dfa_cheque" Nullable="false" Partner="dfa_cheque_ProcessSession">
+          <ReferentialConstraint Property="_regardingobjectid_value" ReferencedProperty="dfa_chequeid" />
+        </NavigationProperty>
+        <NavigationProperty Name="regardingobjectid_dfa_additionalapplicant" Type="mscrm.dfa_additionalapplicant" Nullable="false" Partner="dfa_additionalapplicant_ProcessSession">
+          <ReferentialConstraint Property="_regardingobjectid_value" ReferencedProperty="dfa_additionalapplicantid" />
+        </NavigationProperty>
+        <NavigationProperty Name="regardingobjectid_dfa_appeal" Type="mscrm.dfa_appeal" Nullable="false" Partner="dfa_appeal_ProcessSession">
+          <ReferentialConstraint Property="_regardingobjectid_value" ReferencedProperty="dfa_appealid" />
+        </NavigationProperty>
+        <NavigationProperty Name="regardingobjectid_dfa_projectstatusreport" Type="mscrm.dfa_projectstatusreport" Nullable="false" Partner="dfa_projectstatusreport_ProcessSession">
+          <ReferentialConstraint Property="_regardingobjectid_value" ReferencedProperty="dfa_projectstatusreportid" />
+        </NavigationProperty>
         <NavigationProperty Name="regardingobjectid_queue" Type="mscrm.queue" Nullable="false" Partner="Queue_ProcessSessions">
           <ReferentialConstraint Property="_regardingobjectid_value" ReferencedProperty="queueid" />
         </NavigationProperty>
@@ -16154,9 +16460,6 @@
         <NavigationProperty Name="regardingobjectid_recurringappointmentmaster" Type="mscrm.recurringappointmentmaster" Nullable="false" Partner="RecurringAppointmentMaster_ProcessSessions" />
         <NavigationProperty Name="completedby" Type="mscrm.systemuser" Nullable="false" Partner="lk_processsession_completedby">
           <ReferentialConstraint Property="_completedby_value" ReferencedProperty="systemuserid" />
-        </NavigationProperty>
-        <NavigationProperty Name="regardingobjectid_dfa_cheque" Type="mscrm.dfa_cheque" Nullable="false" Partner="dfa_cheque_ProcessSession">
-          <ReferentialConstraint Property="_regardingobjectid_value" ReferencedProperty="dfa_chequeid" />
         </NavigationProperty>
       </EntityType>
       <EntityType Name="processstage" BaseType="mscrm.crmbaseentity">
@@ -20477,6 +20780,18 @@
         <NavigationProperty Name="regardingobjectid_dfa_claimstatusreport" Type="mscrm.dfa_claimstatusreport" Nullable="false" Partner="dfa_claimstatusreport_SyncErrors">
           <ReferentialConstraint Property="_regardingobjectid_value" ReferencedProperty="dfa_claimstatusreportid" />
         </NavigationProperty>
+        <NavigationProperty Name="regardingobjectid_dfa_cheque" Type="mscrm.dfa_cheque" Nullable="false" Partner="dfa_cheque_SyncErrors">
+          <ReferentialConstraint Property="_regardingobjectid_value" ReferencedProperty="dfa_chequeid" />
+        </NavigationProperty>
+        <NavigationProperty Name="regardingobjectid_dfa_additionalapplicant" Type="mscrm.dfa_additionalapplicant" Nullable="false" Partner="dfa_additionalapplicant_SyncErrors">
+          <ReferentialConstraint Property="_regardingobjectid_value" ReferencedProperty="dfa_additionalapplicantid" />
+        </NavigationProperty>
+        <NavigationProperty Name="regardingobjectid_dfa_appeal" Type="mscrm.dfa_appeal" Nullable="false" Partner="dfa_appeal_SyncErrors">
+          <ReferentialConstraint Property="_regardingobjectid_value" ReferencedProperty="dfa_appealid" />
+        </NavigationProperty>
+        <NavigationProperty Name="regardingobjectid_dfa_projectstatusreport" Type="mscrm.dfa_projectstatusreport" Nullable="false" Partner="dfa_projectstatusreport_SyncErrors">
+          <ReferentialConstraint Property="_regardingobjectid_value" ReferencedProperty="dfa_projectstatusreportid" />
+        </NavigationProperty>
         <NavigationProperty Name="regardingobjectid_ExpiredProcess_syncerror" Type="mscrm.expiredprocess" Nullable="false" Partner="ExpiredProcess_SyncErrors">
           <ReferentialConstraint Property="_regardingobjectid_value" ReferencedProperty="businessprocessflowinstanceid" />
         </NavigationProperty>
@@ -20698,9 +21013,6 @@
         </NavigationProperty>
         <NavigationProperty Name="regardingobjectid_transactioncurrency_syncerror" Type="mscrm.transactioncurrency" Nullable="false" Partner="TransactionCurrency_SyncErrors">
           <ReferentialConstraint Property="_regardingobjectid_value" ReferencedProperty="transactioncurrencyid" />
-        </NavigationProperty>
-        <NavigationProperty Name="regardingobjectid_dfa_cheque" Type="mscrm.dfa_cheque" Nullable="false" Partner="dfa_cheque_SyncErrors">
-          <ReferentialConstraint Property="_regardingobjectid_value" ReferencedProperty="dfa_chequeid" />
         </NavigationProperty>
       </EntityType>
       <EntityType Name="systemform" BaseType="mscrm.crmbaseentity">
@@ -21426,6 +21738,26 @@
         <NavigationProperty Name="lk_dfa_claimstatusreport_modifiedonbehalfby" Type="Collection(mscrm.dfa_claimstatusreport)" Partner="modifiedonbehalfby" />
         <NavigationProperty Name="dfa_systemuser_incident_AssignedTo" Type="Collection(mscrm.incident)" Partner="dfa_AssignedTo" />
         <NavigationProperty Name="dfa_systemuser_incident_FieldManager" Type="Collection(mscrm.incident)" Partner="dfa_FieldManager" />
+        <NavigationProperty Name="lk_dfa_cheque_createdby" Type="Collection(mscrm.dfa_cheque)" Partner="createdby" />
+        <NavigationProperty Name="lk_dfa_cheque_createdonbehalfby" Type="Collection(mscrm.dfa_cheque)" Partner="createdonbehalfby" />
+        <NavigationProperty Name="lk_dfa_cheque_modifiedby" Type="Collection(mscrm.dfa_cheque)" Partner="modifiedby" />
+        <NavigationProperty Name="lk_dfa_cheque_modifiedonbehalfby" Type="Collection(mscrm.dfa_cheque)" Partner="modifiedonbehalfby" />
+        <NavigationProperty Name="user_dfa_cheque" Type="Collection(mscrm.dfa_cheque)" Partner="owninguser" />
+        <NavigationProperty Name="lk_dfa_additionalapplicant_createdby" Type="Collection(mscrm.dfa_additionalapplicant)" Partner="createdby" />
+        <NavigationProperty Name="lk_dfa_additionalapplicant_createdonbehalfby" Type="Collection(mscrm.dfa_additionalapplicant)" Partner="createdonbehalfby" />
+        <NavigationProperty Name="lk_dfa_additionalapplicant_modifiedby" Type="Collection(mscrm.dfa_additionalapplicant)" Partner="modifiedby" />
+        <NavigationProperty Name="lk_dfa_additionalapplicant_modifiedonbehalfby" Type="Collection(mscrm.dfa_additionalapplicant)" Partner="modifiedonbehalfby" />
+        <NavigationProperty Name="user_dfa_additionalapplicant" Type="Collection(mscrm.dfa_additionalapplicant)" Partner="owninguser" />
+        <NavigationProperty Name="lk_dfa_appeal_createdby" Type="Collection(mscrm.dfa_appeal)" Partner="createdby" />
+        <NavigationProperty Name="lk_dfa_appeal_createdonbehalfby" Type="Collection(mscrm.dfa_appeal)" Partner="createdonbehalfby" />
+        <NavigationProperty Name="lk_dfa_appeal_modifiedby" Type="Collection(mscrm.dfa_appeal)" Partner="modifiedby" />
+        <NavigationProperty Name="lk_dfa_appeal_modifiedonbehalfby" Type="Collection(mscrm.dfa_appeal)" Partner="modifiedonbehalfby" />
+        <NavigationProperty Name="user_dfa_appeal" Type="Collection(mscrm.dfa_appeal)" Partner="owninguser" />
+        <NavigationProperty Name="lk_dfa_projectstatusreport_createdby" Type="Collection(mscrm.dfa_projectstatusreport)" Partner="createdby" />
+        <NavigationProperty Name="lk_dfa_projectstatusreport_createdonbehalfby" Type="Collection(mscrm.dfa_projectstatusreport)" Partner="createdonbehalfby" />
+        <NavigationProperty Name="lk_dfa_projectstatusreport_modifiedby" Type="Collection(mscrm.dfa_projectstatusreport)" Partner="modifiedby" />
+        <NavigationProperty Name="lk_dfa_projectstatusreport_modifiedonbehalfby" Type="Collection(mscrm.dfa_projectstatusreport)" Partner="modifiedonbehalfby" />
+        <NavigationProperty Name="user_dfa_projectstatusreport" Type="Collection(mscrm.dfa_projectstatusreport)" Partner="owninguser" />
         <NavigationProperty Name="lk_slakpiinstancebase_createdonbehalfby" Type="Collection(mscrm.slakpiinstance)" Partner="createdonbehalfby" />
         <NavigationProperty Name="lk_mobileofflineprofileitemassocaition_modifiedonbehalfby" Type="Collection(mscrm.mobileofflineprofileitemassociation)" Partner="modifiedonbehalfby" />
         <NavigationProperty Name="lk_userqueryvisualizationbase_modifiedonbehalfby" Type="Collection(mscrm.userqueryvisualization)" Partner="modifiedonbehalfby" />
@@ -22009,11 +22341,6 @@
         <NavigationProperty Name="user_phonecall" Type="Collection(mscrm.phonecall)" Partner="owninguser_phonecall" />
         <NavigationProperty Name="user_appointment" Type="Collection(mscrm.appointment)" Partner="owninguser_appointment" />
         <NavigationProperty Name="lk_expiredprocess_createdonbehalfby" Type="Collection(mscrm.expiredprocess)" Partner="createdonbehalfbyname" />
-        <NavigationProperty Name="lk_dfa_cheque_createdby" Type="Collection(mscrm.dfa_cheque)" Partner="createdby" />
-        <NavigationProperty Name="lk_dfa_cheque_createdonbehalfby" Type="Collection(mscrm.dfa_cheque)" Partner="createdonbehalfby" />
-        <NavigationProperty Name="lk_dfa_cheque_modifiedby" Type="Collection(mscrm.dfa_cheque)" Partner="modifiedby" />
-        <NavigationProperty Name="lk_dfa_cheque_modifiedonbehalfby" Type="Collection(mscrm.dfa_cheque)" Partner="modifiedonbehalfby" />
-        <NavigationProperty Name="user_dfa_cheque" Type="Collection(mscrm.dfa_cheque)" Partner="owninguser" />
       </EntityType>
       <EntityType Name="systemusersyncmappingprofiles" BaseType="mscrm.crmbaseentity">
         <Key>
@@ -22229,6 +22556,10 @@
         <NavigationProperty Name="team_dfa_projectclaim" Type="Collection(mscrm.dfa_projectclaim)" Partner="owningteam" />
         <NavigationProperty Name="team_dfa_costpercapitabreakdown" Type="Collection(mscrm.dfa_costpercapitabreakdown)" Partner="owningteam" />
         <NavigationProperty Name="team_dfa_buildingownerlandlord" Type="Collection(mscrm.dfa_buildingownerlandlord)" Partner="owningteam" />
+        <NavigationProperty Name="team_dfa_cheque" Type="Collection(mscrm.dfa_cheque)" Partner="owningteam" />
+        <NavigationProperty Name="team_dfa_additionalapplicant" Type="Collection(mscrm.dfa_additionalapplicant)" Partner="owningteam" />
+        <NavigationProperty Name="team_dfa_appeal" Type="Collection(mscrm.dfa_appeal)" Partner="owningteam" />
+        <NavigationProperty Name="team_dfa_projectstatusreport" Type="Collection(mscrm.dfa_projectstatusreport)" Partner="owningteam" />
         <NavigationProperty Name="team_DuplicateRules" Type="Collection(mscrm.duplicaterule)" Partner="owningteam" />
         <NavigationProperty Name="team_Imports" Type="Collection(mscrm.import)" Partner="owningteam" />
         <NavigationProperty Name="OwningTeam_postfollows" Type="Collection(mscrm.postfollow)" Partner="owningteam" />
@@ -22305,7 +22636,6 @@
         </NavigationProperty>
         <NavigationProperty Name="Team_BulkDeleteFailures" Type="Collection(mscrm.bulkdeletefailure)" Partner="regardingobjectid_team" />
         <NavigationProperty Name="team_goal_goalowner" Type="Collection(mscrm.goal)" Partner="goalownerid_team" />
-        <NavigationProperty Name="team_dfa_cheque" Type="Collection(mscrm.dfa_cheque)" Partner="owningteam" />
       </EntityType>
       <EntityType Name="teamsyncattributemappingprofiles" BaseType="mscrm.crmbaseentity">
         <Key>
@@ -22819,6 +23149,8 @@
         <NavigationProperty Name="TransactionCurrency_dfa_projectclaim" Type="Collection(mscrm.dfa_projectclaim)" Partner="transactioncurrencyid" />
         <NavigationProperty Name="TransactionCurrency_dfa_costpercapitabreakdown" Type="Collection(mscrm.dfa_costpercapitabreakdown)" Partner="transactioncurrencyid" />
         <NavigationProperty Name="TransactionCurrency_dfa_claimstatusreport" Type="Collection(mscrm.dfa_claimstatusreport)" Partner="transactioncurrencyid" />
+        <NavigationProperty Name="TransactionCurrency_dfa_cheque" Type="Collection(mscrm.dfa_cheque)" Partner="transactioncurrencyid" />
+        <NavigationProperty Name="TransactionCurrency_dfa_projectstatusreport" Type="Collection(mscrm.dfa_projectstatusreport)" Partner="transactioncurrencyid" />
         <NavigationProperty Name="TransactionCurrency_Email" Type="Collection(mscrm.email)" Partner="transactioncurrencyid_email" />
         <NavigationProperty Name="TransactionCurrency_DuplicateBaseRecord" Type="Collection(mscrm.duplicaterecord)" Partner="baserecordid_transactioncurrency" />
         <NavigationProperty Name="TransactionCurrency_BusinessUnit" Type="Collection(mscrm.businessunit)" Partner="transactioncurrencyid" />
@@ -22890,7 +23222,6 @@
           <ReferentialConstraint Property="_createdby_value" ReferencedProperty="systemuserid" />
         </NavigationProperty>
         <NavigationProperty Name="TransactionCurrency_InteractionForEmail" Type="Collection(mscrm.interactionforemail)" Partner="transactioncurrencyid" />
-        <NavigationProperty Name="TransactionCurrency_dfa_cheque" Type="Collection(mscrm.dfa_cheque)" Partner="transactioncurrencyid" />
       </EntityType>
       <EntityType Name="transformationmapping" BaseType="mscrm.crmbaseentity">
         <Key>
@@ -28500,6 +28831,7 @@
           <NavigationPropertyBinding Path="dfa_account_to_projectclaim" Target="dfa_projectclaims" />
           <NavigationPropertyBinding Path="dfa_localgovernment_organization_incident" Target="incidents" />
           <NavigationPropertyBinding Path="dfa_account_incident_RelatedBusiness" Target="incidents" />
+          <NavigationPropertyBinding Path="dfa_account_dfa_additionalapplicant_Customer" Target="dfa_additionalapplicants" />
           <NavigationPropertyBinding Path="ownerid" Target="owners" />
           <NavigationPropertyBinding Path="Account_ActivityPointers" Target="activitypointers" />
           <NavigationPropertyBinding Path="Account_SyncErrors" Target="syncerrors" />
@@ -29013,6 +29345,10 @@
           <NavigationPropertyBinding Path="regardingobjectid_dfa_regionaldistrict" Target="dfa_regionaldistricts" />
           <NavigationPropertyBinding Path="regardingobjectid_dfa_buildingownerlandlord" Target="dfa_buildingownerlandlords" />
           <NavigationPropertyBinding Path="regardingobjectid_dfa_claimstatusreport" Target="dfa_claimstatusreports" />
+          <NavigationPropertyBinding Path="regardingobjectid_dfa_cheque" Target="dfa_cheques" />
+          <NavigationPropertyBinding Path="regardingobjectid_dfa_additionalapplicant" Target="dfa_additionalapplicants" />
+          <NavigationPropertyBinding Path="regardingobjectid_dfa_appeal" Target="dfa_appeals" />
+          <NavigationPropertyBinding Path="regardingobjectid_dfa_projectstatusreport" Target="dfa_projectstatusreports" />
           <NavigationPropertyBinding Path="regardingobjectid_report" Target="reports" />
           <NavigationPropertyBinding Path="AsyncOperation_Emails" Target="emails" />
           <NavigationPropertyBinding Path="regardingobjectid_recurringappointmentmaster" Target="recurringappointmentmasters" />
@@ -29090,7 +29426,6 @@
           <NavigationPropertyBinding Path="regardingobjectid_activitypointer" Target="activitypointers" />
           <NavigationPropertyBinding Path="owninguser" Target="systemusers" />
           <NavigationPropertyBinding Path="regardingobjectid_import" Target="imports" />
-          <NavigationPropertyBinding Path="regardingobjectid_dfa_cheque" Target="dfa_cheques" />
         </EntitySet>
         <EntitySet Name="attachments" EntityType="Microsoft.Dynamics.CRM.attachment">
           <NavigationPropertyBinding Path="Attachment_SyncErrors" Target="syncerrors" />
@@ -29433,6 +29768,10 @@
           <NavigationPropertyBinding Path="regardingobjectid_dfa_regionaldistrict" Target="dfa_regionaldistricts" />
           <NavigationPropertyBinding Path="regardingobjectid_dfa_buildingownerlandlord" Target="dfa_buildingownerlandlords" />
           <NavigationPropertyBinding Path="regardingobjectid_dfa_claimstatusreport" Target="dfa_claimstatusreports" />
+          <NavigationPropertyBinding Path="regardingobjectid_dfa_cheque" Target="dfa_cheques" />
+          <NavigationPropertyBinding Path="regardingobjectid_dfa_additionalapplicant" Target="dfa_additionalapplicants" />
+          <NavigationPropertyBinding Path="regardingobjectid_dfa_appeal" Target="dfa_appeals" />
+          <NavigationPropertyBinding Path="regardingobjectid_dfa_projectstatusreport" Target="dfa_projectstatusreports" />
           <NavigationPropertyBinding Path="regardingobjectid_customeraddress" Target="customeraddresses" />
           <NavigationPropertyBinding Path="regardingobjectid_annualfiscalcalendar" Target="annualfiscalcalendars" />
           <NavigationPropertyBinding Path="regardingobjectid_fax" Target="faxes" />
@@ -29480,7 +29819,6 @@
           <NavigationPropertyBinding Path="regardingobjectid_team" Target="teams" />
           <NavigationPropertyBinding Path="regardingobjectid_queueitem" Target="queueitems" />
           <NavigationPropertyBinding Path="regardingobjectid_subject" Target="subjects" />
-          <NavigationPropertyBinding Path="regardingobjectid_dfa_cheque" Target="dfa_cheques" />
         </EntitySet>
         <EntitySet Name="bulkdeleteoperations" EntityType="Microsoft.Dynamics.CRM.bulkdeleteoperation">
           <NavigationPropertyBinding Path="owningbusinessunit" Target="businessunits" />
@@ -29630,6 +29968,10 @@
           <NavigationPropertyBinding Path="business_unit_dfa_projectclaim" Target="dfa_projectclaims" />
           <NavigationPropertyBinding Path="business_unit_dfa_costpercapitabreakdown" Target="dfa_costpercapitabreakdowns" />
           <NavigationPropertyBinding Path="business_unit_dfa_buildingownerlandlord" Target="dfa_buildingownerlandlords" />
+          <NavigationPropertyBinding Path="business_unit_dfa_cheque" Target="dfa_cheques" />
+          <NavigationPropertyBinding Path="business_unit_dfa_additionalapplicant" Target="dfa_additionalapplicants" />
+          <NavigationPropertyBinding Path="business_unit_dfa_appeal" Target="dfa_appeals" />
+          <NavigationPropertyBinding Path="business_unit_dfa_projectstatusreport" Target="dfa_projectstatusreports" />
           <NavigationPropertyBinding Path="BusinessUnit_SyncErrors" Target="syncerrors" />
           <NavigationPropertyBinding Path="transactioncurrencyid" Target="transactioncurrencies" />
           <NavigationPropertyBinding Path="BulkDeleteOperation_BusinessUnit" Target="bulkdeleteoperations" />
@@ -29695,7 +30037,6 @@
           <NavigationPropertyBinding Path="BusinessUnit_ImportMaps" Target="importmaps" />
           <NavigationPropertyBinding Path="parentbusinessunitid" Target="businessunits" />
           <NavigationPropertyBinding Path="business_unit_parent_business_unit" Target="businessunits" />
-          <NavigationPropertyBinding Path="business_unit_dfa_cheque" Target="dfa_cheques" />
         </EntitySet>
         <EntitySet Name="calendarrules" EntityType="Microsoft.Dynamics.CRM.calendarrule">
           <NavigationPropertyBinding Path="serviceid" Target="services" />
@@ -30186,6 +30527,8 @@
           <NavigationPropertyBinding Path="dfa_AreaCommunityId" Target="dfa_areacommunitieses" />
           <NavigationPropertyBinding Path="dfa_contact_incident" Target="incidents" />
           <NavigationPropertyBinding Path="dfa_alternatecontact_incident" Target="incidents" />
+          <NavigationPropertyBinding Path="dfa_contact_dfa_additionalapplicant" Target="dfa_additionalapplicants" />
+          <NavigationPropertyBinding Path="dfa_contact_dfa_additionalapplicant_Customer" Target="dfa_additionalapplicants" />
           <NavigationPropertyBinding Path="contact_connections1" Target="connections" />
           <NavigationPropertyBinding Path="Contact_Feedback" Target="feedback" />
           <NavigationPropertyBinding Path="Contact_ProcessSessions" Target="processsessions" />
@@ -30365,6 +30708,48 @@
           <NavigationPropertyBinding Path="organizationid" Target="organizations" />
         </EntitySet>
         <EntitySet Name="dependencies" EntityType="Microsoft.Dynamics.CRM.dependency" />
+        <EntitySet Name="dfa_additionalapplicants" EntityType="Microsoft.Dynamics.CRM.dfa_additionalapplicant">
+          <NavigationPropertyBinding Path="createdby" Target="systemusers" />
+          <NavigationPropertyBinding Path="createdonbehalfby" Target="systemusers" />
+          <NavigationPropertyBinding Path="modifiedby" Target="systemusers" />
+          <NavigationPropertyBinding Path="modifiedonbehalfby" Target="systemusers" />
+          <NavigationPropertyBinding Path="owninguser" Target="systemusers" />
+          <NavigationPropertyBinding Path="owningteam" Target="teams" />
+          <NavigationPropertyBinding Path="ownerid" Target="owners" />
+          <NavigationPropertyBinding Path="owningbusinessunit" Target="businessunits" />
+          <NavigationPropertyBinding Path="dfa_additionalapplicant_SyncErrors" Target="syncerrors" />
+          <NavigationPropertyBinding Path="dfa_additionalapplicant_DuplicateMatchingRecord" Target="duplicaterecords" />
+          <NavigationPropertyBinding Path="dfa_additionalapplicant_DuplicateBaseRecord" Target="duplicaterecords" />
+          <NavigationPropertyBinding Path="dfa_additionalapplicant_AsyncOperations" Target="asyncoperations" />
+          <NavigationPropertyBinding Path="dfa_additionalapplicant_MailboxTrackingFolders" Target="mailboxtrackingfolders" />
+          <NavigationPropertyBinding Path="dfa_additionalapplicant_ProcessSession" Target="processsessions" />
+          <NavigationPropertyBinding Path="dfa_additionalapplicant_BulkDeleteFailures" Target="bulkdeletefailures" />
+          <NavigationPropertyBinding Path="dfa_additionalapplicant_PrincipalObjectAttributeAccesses" Target="principalobjectattributeaccessset" />
+          <NavigationPropertyBinding Path="dfa_ContactId" Target="contacts" />
+          <NavigationPropertyBinding Path="dfa_CaseId" Target="incidents" />
+          <NavigationPropertyBinding Path="dfa_Customer_account" Target="accounts" />
+          <NavigationPropertyBinding Path="dfa_Customer_contact" Target="contacts" />
+        </EntitySet>
+        <EntitySet Name="dfa_appeals" EntityType="Microsoft.Dynamics.CRM.dfa_appeal">
+          <NavigationPropertyBinding Path="createdby" Target="systemusers" />
+          <NavigationPropertyBinding Path="createdonbehalfby" Target="systemusers" />
+          <NavigationPropertyBinding Path="modifiedby" Target="systemusers" />
+          <NavigationPropertyBinding Path="modifiedonbehalfby" Target="systemusers" />
+          <NavigationPropertyBinding Path="owninguser" Target="systemusers" />
+          <NavigationPropertyBinding Path="owningteam" Target="teams" />
+          <NavigationPropertyBinding Path="ownerid" Target="owners" />
+          <NavigationPropertyBinding Path="owningbusinessunit" Target="businessunits" />
+          <NavigationPropertyBinding Path="dfa_appeal_SyncErrors" Target="syncerrors" />
+          <NavigationPropertyBinding Path="dfa_appeal_DuplicateMatchingRecord" Target="duplicaterecords" />
+          <NavigationPropertyBinding Path="dfa_appeal_DuplicateBaseRecord" Target="duplicaterecords" />
+          <NavigationPropertyBinding Path="dfa_appeal_AsyncOperations" Target="asyncoperations" />
+          <NavigationPropertyBinding Path="dfa_appeal_MailboxTrackingFolders" Target="mailboxtrackingfolders" />
+          <NavigationPropertyBinding Path="dfa_appeal_ProcessSession" Target="processsessions" />
+          <NavigationPropertyBinding Path="dfa_appeal_BulkDeleteFailures" Target="bulkdeletefailures" />
+          <NavigationPropertyBinding Path="dfa_appeal_PrincipalObjectAttributeAccesses" Target="principalobjectattributeaccessset" />
+          <NavigationPropertyBinding Path="dfa_CaseId" Target="incidents" />
+          <NavigationPropertyBinding Path="dfa_ProjectId" Target="dfa_projects" />
+        </EntitySet>
         <EntitySet Name="dfa_areacommunitieses" EntityType="Microsoft.Dynamics.CRM.dfa_areacommunities">
           <NavigationPropertyBinding Path="createdby" Target="systemusers" />
           <NavigationPropertyBinding Path="createdonbehalfby" Target="systemusers" />
@@ -30632,6 +31017,7 @@
           <NavigationPropertyBinding Path="transactioncurrencyid" Target="transactioncurrencies" />
           <NavigationPropertyBinding Path="dfa_event_to_effectedregioncommunity" Target="dfa_effectedregioncommunities" />
           <NavigationPropertyBinding Path="dfa_event_to_effectedlocalgovernment" Target="dfa_effectedlocalgovernments" />
+          <NavigationPropertyBinding Path="dfa_event_dfa_projectstatusreport_EventId" Target="dfa_projectstatusreports" />
         </EntitySet>
         <EntitySet Name="dfa_localgovcaseintakeprocesses" EntityType="Microsoft.Dynamics.CRM.dfa_localgovcaseintakeprocess">
           <NavigationPropertyBinding Path="createdby" Target="systemusers" />
@@ -30714,6 +31100,7 @@
           <NavigationPropertyBinding Path="transactioncurrencyid" Target="transactioncurrencies" />
           <NavigationPropertyBinding Path="dfa_SupplierId" Target="accounts" />
           <NavigationPropertyBinding Path="dfa_CaseId" Target="incidents" />
+          <NavigationPropertyBinding Path="dfa_ProjectStatusReportId" Target="dfa_projectstatusreports" />
         </EntitySet>
         <EntitySet Name="dfa_projects" EntityType="Microsoft.Dynamics.CRM.dfa_project">
           <NavigationPropertyBinding Path="createdby" Target="systemusers" />
@@ -30748,6 +31135,31 @@
           <NavigationPropertyBinding Path="dfa_CaseId" Target="incidents" />
           <NavigationPropertyBinding Path="dfa_project_to_projectclaim" Target="dfa_projectclaims" />
           <NavigationPropertyBinding Path="dfa_dfa_project_dfa_claimstatusreport_Project" Target="dfa_claimstatusreports" />
+          <NavigationPropertyBinding Path="dfa_project_dfa_appeal" Target="dfa_appeals" />
+          <NavigationPropertyBinding Path="dfa_project_dfa_projectstatusreport_ProjectId" Target="dfa_projectstatusreports" />
+        </EntitySet>
+        <EntitySet Name="dfa_projectstatusreports" EntityType="Microsoft.Dynamics.CRM.dfa_projectstatusreport">
+          <NavigationPropertyBinding Path="createdby" Target="systemusers" />
+          <NavigationPropertyBinding Path="createdonbehalfby" Target="systemusers" />
+          <NavigationPropertyBinding Path="modifiedby" Target="systemusers" />
+          <NavigationPropertyBinding Path="modifiedonbehalfby" Target="systemusers" />
+          <NavigationPropertyBinding Path="owninguser" Target="systemusers" />
+          <NavigationPropertyBinding Path="owningteam" Target="teams" />
+          <NavigationPropertyBinding Path="ownerid" Target="owners" />
+          <NavigationPropertyBinding Path="owningbusinessunit" Target="businessunits" />
+          <NavigationPropertyBinding Path="dfa_projectstatusreport_SyncErrors" Target="syncerrors" />
+          <NavigationPropertyBinding Path="dfa_projectstatusreport_DuplicateMatchingRecord" Target="duplicaterecords" />
+          <NavigationPropertyBinding Path="dfa_projectstatusreport_DuplicateBaseRecord" Target="duplicaterecords" />
+          <NavigationPropertyBinding Path="dfa_projectstatusreport_AsyncOperations" Target="asyncoperations" />
+          <NavigationPropertyBinding Path="dfa_projectstatusreport_MailboxTrackingFolders" Target="mailboxtrackingfolders" />
+          <NavigationPropertyBinding Path="dfa_projectstatusreport_ProcessSession" Target="processsessions" />
+          <NavigationPropertyBinding Path="dfa_projectstatusreport_BulkDeleteFailures" Target="bulkdeletefailures" />
+          <NavigationPropertyBinding Path="dfa_projectstatusreport_PrincipalObjectAttributeAccesses" Target="principalobjectattributeaccessset" />
+          <NavigationPropertyBinding Path="dfa_CaseId" Target="incidents" />
+          <NavigationPropertyBinding Path="dfa_ProjectId" Target="dfa_projects" />
+          <NavigationPropertyBinding Path="transactioncurrencyid" Target="transactioncurrencies" />
+          <NavigationPropertyBinding Path="dfa_EventId" Target="dfa_events" />
+          <NavigationPropertyBinding Path="dfa_projectstatusreport_dfa_projectclaim_ProjectStatusReportId" Target="dfa_projectclaims" />
         </EntitySet>
         <EntitySet Name="dfa_regionaldistricts" EntityType="Microsoft.Dynamics.CRM.dfa_regionaldistrict">
           <NavigationPropertyBinding Path="createdby" Target="systemusers" />
@@ -30934,6 +31346,14 @@
           <NavigationPropertyBinding Path="baserecordid_dfa_buildingownerlandlord" Target="dfa_buildingownerlandlords" />
           <NavigationPropertyBinding Path="duplicaterecordid_dfa_claimstatusreport" Target="dfa_claimstatusreports" />
           <NavigationPropertyBinding Path="baserecordid_dfa_claimstatusreport" Target="dfa_claimstatusreports" />
+          <NavigationPropertyBinding Path="duplicaterecordid_dfa_cheque" Target="dfa_cheques" />
+          <NavigationPropertyBinding Path="baserecordid_dfa_cheque" Target="dfa_cheques" />
+          <NavigationPropertyBinding Path="duplicaterecordid_dfa_additionalapplicant" Target="dfa_additionalapplicants" />
+          <NavigationPropertyBinding Path="baserecordid_dfa_additionalapplicant" Target="dfa_additionalapplicants" />
+          <NavigationPropertyBinding Path="duplicaterecordid_dfa_appeal" Target="dfa_appeals" />
+          <NavigationPropertyBinding Path="baserecordid_dfa_appeal" Target="dfa_appeals" />
+          <NavigationPropertyBinding Path="duplicaterecordid_dfa_projectstatusreport" Target="dfa_projectstatusreports" />
+          <NavigationPropertyBinding Path="baserecordid_dfa_projectstatusreport" Target="dfa_projectstatusreports" />
           <NavigationPropertyBinding Path="baserecordid_goalrollupquery" Target="goalrollupqueries" />
           <NavigationPropertyBinding Path="duplicaterecordid_publisher" Target="publishers" />
           <NavigationPropertyBinding Path="baserecordid_transactioncurrency" Target="transactioncurrencies" />
@@ -30980,8 +31400,6 @@
           <NavigationPropertyBinding Path="baserecordid_queue" Target="queues" />
           <NavigationPropertyBinding Path="baserecordid_emailserverprofile" Target="emailserverprofiles" />
           <NavigationPropertyBinding Path="duplicaterecordid_letter" Target="letters" />
-          <NavigationPropertyBinding Path="duplicaterecordid_dfa_cheque" Target="dfa_cheques" />
-          <NavigationPropertyBinding Path="baserecordid_dfa_cheque" Target="dfa_cheques" />
         </EntitySet>
         <EntitySet Name="duplicateruleconditions" EntityType="Microsoft.Dynamics.CRM.duplicaterulecondition">
           <NavigationPropertyBinding Path="DuplicateRuleCondition_SyncErrors" Target="syncerrors" />
@@ -31734,6 +32152,9 @@
           <NavigationPropertyBinding Path="dfa_AssignedTo" Target="systemusers" />
           <NavigationPropertyBinding Path="dfa_FieldManager" Target="systemusers" />
           <NavigationPropertyBinding Path="dfa_incident_cheque" Target="dfa_cheques" />
+          <NavigationPropertyBinding Path="dfa_incident_dfa_additionalapplicant" Target="dfa_additionalapplicants" />
+          <NavigationPropertyBinding Path="dfa_incident_dfa_appeal" Target="dfa_appeals" />
+          <NavigationPropertyBinding Path="dfa_incident_dfa_projectstatusreport_CaseId" Target="dfa_projectstatusreports" />
         </EntitySet>
         <EntitySet Name="interactionforemails" EntityType="Microsoft.Dynamics.CRM.interactionforemail">
           <NavigationPropertyBinding Path="createdbyname" Target="systemusers" />
@@ -32356,6 +32777,10 @@
           <NavigationPropertyBinding Path="regardingobjectid_dfa_regionaldistrict" Target="dfa_regionaldistricts" />
           <NavigationPropertyBinding Path="regardingobjectid_dfa_buildingownerlandlord" Target="dfa_buildingownerlandlords" />
           <NavigationPropertyBinding Path="regardingobjectid_dfa_claimstatusreport" Target="dfa_claimstatusreports" />
+          <NavigationPropertyBinding Path="regardingobjectid_dfa_cheque" Target="dfa_cheques" />
+          <NavigationPropertyBinding Path="regardingobjectid_dfa_additionalapplicant" Target="dfa_additionalapplicants" />
+          <NavigationPropertyBinding Path="regardingobjectid_dfa_appeal" Target="dfa_appeals" />
+          <NavigationPropertyBinding Path="regardingobjectid_dfa_projectstatusreport" Target="dfa_projectstatusreports" />
           <NavigationPropertyBinding Path="modifiedonbehalfby" Target="systemusers" />
           <NavigationPropertyBinding Path="ownerid" Target="owners" />
           <NavigationPropertyBinding Path="createdonbehalfby" Target="systemusers" />
@@ -32368,7 +32793,6 @@
           <NavigationPropertyBinding Path="mailboxid" Target="mailboxes" />
           <NavigationPropertyBinding Path="owningbusinessunit" Target="businessunits" />
           <NavigationPropertyBinding Path="modifiedby" Target="systemusers" />
-          <NavigationPropertyBinding Path="regardingobjectid_dfa_cheque" Target="dfa_cheques" />
         </EntitySet>
         <EntitySet Name="mailmergetemplates" EntityType="Microsoft.Dynamics.CRM.mailmergetemplate">
           <NavigationPropertyBinding Path="transactioncurrencyid" Target="transactioncurrencies" />
@@ -33285,6 +33709,10 @@
           <NavigationPropertyBinding Path="objectid_dfa_regionaldistrict" Target="dfa_regionaldistricts" />
           <NavigationPropertyBinding Path="objectid_dfa_buildingownerlandlord" Target="dfa_buildingownerlandlords" />
           <NavigationPropertyBinding Path="objectid_dfa_claimstatusreport" Target="dfa_claimstatusreports" />
+          <NavigationPropertyBinding Path="objectid_dfa_cheque" Target="dfa_cheques" />
+          <NavigationPropertyBinding Path="objectid_dfa_additionalapplicant" Target="dfa_additionalapplicants" />
+          <NavigationPropertyBinding Path="objectid_dfa_appeal" Target="dfa_appeals" />
+          <NavigationPropertyBinding Path="objectid_dfa_projectstatusreport" Target="dfa_projectstatusreports" />
           <NavigationPropertyBinding Path="objectid_letter" Target="letters" />
           <NavigationPropertyBinding Path="objectid_reportcategory" Target="reportcategories" />
           <NavigationPropertyBinding Path="objectid_sharepointdocumentlocation" Target="sharepointdocumentlocations" />
@@ -33310,7 +33738,6 @@
           <NavigationPropertyBinding Path="objectid_queueitem" Target="queueitems" />
           <NavigationPropertyBinding Path="objectid_goal" Target="goals" />
           <NavigationPropertyBinding Path="objectid_phonecall" Target="phonecalls" />
-          <NavigationPropertyBinding Path="objectid_dfa_cheque" Target="dfa_cheques" />
         </EntitySet>
         <EntitySet Name="privileges" EntityType="Microsoft.Dynamics.CRM.privilege">
           <NavigationPropertyBinding Path="roletemplateprivileges_association" Target="roletemplates" />
@@ -33400,6 +33827,10 @@
           <NavigationPropertyBinding Path="regardingobjectid_dfa_regionaldistrict" Target="dfa_regionaldistricts" />
           <NavigationPropertyBinding Path="regardingobjectid_dfa_buildingownerlandlord" Target="dfa_buildingownerlandlords" />
           <NavigationPropertyBinding Path="regardingobjectid_dfa_claimstatusreport" Target="dfa_claimstatusreports" />
+          <NavigationPropertyBinding Path="regardingobjectid_dfa_cheque" Target="dfa_cheques" />
+          <NavigationPropertyBinding Path="regardingobjectid_dfa_additionalapplicant" Target="dfa_additionalapplicants" />
+          <NavigationPropertyBinding Path="regardingobjectid_dfa_appeal" Target="dfa_appeals" />
+          <NavigationPropertyBinding Path="regardingobjectid_dfa_projectstatusreport" Target="dfa_projectstatusreports" />
           <NavigationPropertyBinding Path="regardingobjectid_queue" Target="queues" />
           <NavigationPropertyBinding Path="canceledby" Target="systemusers" />
           <NavigationPropertyBinding Path="regardingobjectid_contact" Target="contacts" />
@@ -33465,7 +33896,6 @@
           <NavigationPropertyBinding Path="regardingobjectid_mailbox" Target="mailboxes" />
           <NavigationPropertyBinding Path="regardingobjectid_recurringappointmentmaster" Target="recurringappointmentmasters" />
           <NavigationPropertyBinding Path="completedby" Target="systemusers" />
-          <NavigationPropertyBinding Path="regardingobjectid_dfa_cheque" Target="dfa_cheques" />
         </EntitySet>
         <EntitySet Name="processstages" EntityType="Microsoft.Dynamics.CRM.processstage">
           <NavigationPropertyBinding Path="processstage_knowledgearticle" Target="knowledgearticles" />
@@ -34769,6 +35199,10 @@
           <NavigationPropertyBinding Path="regardingobjectid_dfa_regionaldistrict" Target="dfa_regionaldistricts" />
           <NavigationPropertyBinding Path="regardingobjectid_dfa_buildingownerlandlord" Target="dfa_buildingownerlandlords" />
           <NavigationPropertyBinding Path="regardingobjectid_dfa_claimstatusreport" Target="dfa_claimstatusreports" />
+          <NavigationPropertyBinding Path="regardingobjectid_dfa_cheque" Target="dfa_cheques" />
+          <NavigationPropertyBinding Path="regardingobjectid_dfa_additionalapplicant" Target="dfa_additionalapplicants" />
+          <NavigationPropertyBinding Path="regardingobjectid_dfa_appeal" Target="dfa_appeals" />
+          <NavigationPropertyBinding Path="regardingobjectid_dfa_projectstatusreport" Target="dfa_projectstatusreports" />
           <NavigationPropertyBinding Path="regardingobjectid_ExpiredProcess_syncerror" Target="expiredprocesses" />
           <NavigationPropertyBinding Path="regardingobjectid_email_syncerror" Target="emails" />
           <NavigationPropertyBinding Path="regardingobjectid_systemuser" Target="systemusers" />
@@ -34849,7 +35283,6 @@
           <NavigationPropertyBinding Path="regardingobjectid_emailserverprofile_syncerror" Target="emailserverprofiles" />
           <NavigationPropertyBinding Path="regardingobjectid_goalrollupquery_syncerror" Target="goalrollupqueries" />
           <NavigationPropertyBinding Path="regardingobjectid_transactioncurrency_syncerror" Target="transactioncurrencies" />
-          <NavigationPropertyBinding Path="regardingobjectid_dfa_cheque" Target="dfa_cheques" />
         </EntitySet>
         <EntitySet Name="systemforms" EntityType="Microsoft.Dynamics.CRM.systemform">
           <NavigationPropertyBinding Path="SystemForm_AsyncOperations" Target="asyncoperations" />
@@ -35378,6 +35811,26 @@
           <NavigationPropertyBinding Path="lk_dfa_claimstatusreport_modifiedonbehalfby" Target="dfa_claimstatusreports" />
           <NavigationPropertyBinding Path="dfa_systemuser_incident_AssignedTo" Target="incidents" />
           <NavigationPropertyBinding Path="dfa_systemuser_incident_FieldManager" Target="incidents" />
+          <NavigationPropertyBinding Path="lk_dfa_cheque_createdby" Target="dfa_cheques" />
+          <NavigationPropertyBinding Path="lk_dfa_cheque_createdonbehalfby" Target="dfa_cheques" />
+          <NavigationPropertyBinding Path="lk_dfa_cheque_modifiedby" Target="dfa_cheques" />
+          <NavigationPropertyBinding Path="lk_dfa_cheque_modifiedonbehalfby" Target="dfa_cheques" />
+          <NavigationPropertyBinding Path="user_dfa_cheque" Target="dfa_cheques" />
+          <NavigationPropertyBinding Path="lk_dfa_additionalapplicant_createdby" Target="dfa_additionalapplicants" />
+          <NavigationPropertyBinding Path="lk_dfa_additionalapplicant_createdonbehalfby" Target="dfa_additionalapplicants" />
+          <NavigationPropertyBinding Path="lk_dfa_additionalapplicant_modifiedby" Target="dfa_additionalapplicants" />
+          <NavigationPropertyBinding Path="lk_dfa_additionalapplicant_modifiedonbehalfby" Target="dfa_additionalapplicants" />
+          <NavigationPropertyBinding Path="user_dfa_additionalapplicant" Target="dfa_additionalapplicants" />
+          <NavigationPropertyBinding Path="lk_dfa_appeal_createdby" Target="dfa_appeals" />
+          <NavigationPropertyBinding Path="lk_dfa_appeal_createdonbehalfby" Target="dfa_appeals" />
+          <NavigationPropertyBinding Path="lk_dfa_appeal_modifiedby" Target="dfa_appeals" />
+          <NavigationPropertyBinding Path="lk_dfa_appeal_modifiedonbehalfby" Target="dfa_appeals" />
+          <NavigationPropertyBinding Path="user_dfa_appeal" Target="dfa_appeals" />
+          <NavigationPropertyBinding Path="lk_dfa_projectstatusreport_createdby" Target="dfa_projectstatusreports" />
+          <NavigationPropertyBinding Path="lk_dfa_projectstatusreport_createdonbehalfby" Target="dfa_projectstatusreports" />
+          <NavigationPropertyBinding Path="lk_dfa_projectstatusreport_modifiedby" Target="dfa_projectstatusreports" />
+          <NavigationPropertyBinding Path="lk_dfa_projectstatusreport_modifiedonbehalfby" Target="dfa_projectstatusreports" />
+          <NavigationPropertyBinding Path="user_dfa_projectstatusreport" Target="dfa_projectstatusreports" />
           <NavigationPropertyBinding Path="lk_slakpiinstancebase_createdonbehalfby" Target="slakpiinstances" />
           <NavigationPropertyBinding Path="lk_mobileofflineprofileitemassocaition_modifiedonbehalfby" Target="mobileofflineprofileitemassociations" />
           <NavigationPropertyBinding Path="lk_userqueryvisualizationbase_modifiedonbehalfby" Target="userqueryvisualizations" />
@@ -35937,11 +36390,6 @@
           <NavigationPropertyBinding Path="user_phonecall" Target="phonecalls" />
           <NavigationPropertyBinding Path="user_appointment" Target="appointments" />
           <NavigationPropertyBinding Path="lk_expiredprocess_createdonbehalfby" Target="expiredprocesses" />
-          <NavigationPropertyBinding Path="lk_dfa_cheque_createdby" Target="dfa_cheques" />
-          <NavigationPropertyBinding Path="lk_dfa_cheque_createdonbehalfby" Target="dfa_cheques" />
-          <NavigationPropertyBinding Path="lk_dfa_cheque_modifiedby" Target="dfa_cheques" />
-          <NavigationPropertyBinding Path="lk_dfa_cheque_modifiedonbehalfby" Target="dfa_cheques" />
-          <NavigationPropertyBinding Path="user_dfa_cheque" Target="dfa_cheques" />
         </EntitySet>
         <EntitySet Name="systemusersyncmappingprofilescollection" EntityType="Microsoft.Dynamics.CRM.systemusersyncmappingprofiles" />
         <EntitySet Name="tasks" EntityType="Microsoft.Dynamics.CRM.task">
@@ -36076,6 +36524,10 @@
           <NavigationPropertyBinding Path="team_dfa_projectclaim" Target="dfa_projectclaims" />
           <NavigationPropertyBinding Path="team_dfa_costpercapitabreakdown" Target="dfa_costpercapitabreakdowns" />
           <NavigationPropertyBinding Path="team_dfa_buildingownerlandlord" Target="dfa_buildingownerlandlords" />
+          <NavigationPropertyBinding Path="team_dfa_cheque" Target="dfa_cheques" />
+          <NavigationPropertyBinding Path="team_dfa_additionalapplicant" Target="dfa_additionalapplicants" />
+          <NavigationPropertyBinding Path="team_dfa_appeal" Target="dfa_appeals" />
+          <NavigationPropertyBinding Path="team_dfa_projectstatusreport" Target="dfa_projectstatusreports" />
           <NavigationPropertyBinding Path="team_DuplicateRules" Target="duplicaterules" />
           <NavigationPropertyBinding Path="team_Imports" Target="imports" />
           <NavigationPropertyBinding Path="OwningTeam_postfollows" Target="postfollows" />
@@ -36132,7 +36584,6 @@
           <NavigationPropertyBinding Path="administratorid" Target="systemusers" />
           <NavigationPropertyBinding Path="Team_BulkDeleteFailures" Target="bulkdeletefailures" />
           <NavigationPropertyBinding Path="team_goal_goalowner" Target="goals" />
-          <NavigationPropertyBinding Path="team_dfa_cheque" Target="dfa_cheques" />
         </EntitySet>
         <EntitySet Name="teamsyncattributemappingprofilescollection" EntityType="Microsoft.Dynamics.CRM.teamsyncattributemappingprofiles" />
         <EntitySet Name="teamtemplates" EntityType="Microsoft.Dynamics.CRM.teamtemplate">
@@ -36291,6 +36742,8 @@
           <NavigationPropertyBinding Path="TransactionCurrency_dfa_projectclaim" Target="dfa_projectclaims" />
           <NavigationPropertyBinding Path="TransactionCurrency_dfa_costpercapitabreakdown" Target="dfa_costpercapitabreakdowns" />
           <NavigationPropertyBinding Path="TransactionCurrency_dfa_claimstatusreport" Target="dfa_claimstatusreports" />
+          <NavigationPropertyBinding Path="TransactionCurrency_dfa_cheque" Target="dfa_cheques" />
+          <NavigationPropertyBinding Path="TransactionCurrency_dfa_projectstatusreport" Target="dfa_projectstatusreports" />
           <NavigationPropertyBinding Path="TransactionCurrency_Email" Target="emails" />
           <NavigationPropertyBinding Path="TransactionCurrency_DuplicateBaseRecord" Target="duplicaterecords" />
           <NavigationPropertyBinding Path="TransactionCurrency_BusinessUnit" Target="businessunits" />
@@ -36352,7 +36805,6 @@
           <NavigationPropertyBinding Path="TransactionCurrency_SyncErrors" Target="syncerrors" />
           <NavigationPropertyBinding Path="createdby" Target="systemusers" />
           <NavigationPropertyBinding Path="TransactionCurrency_InteractionForEmail" Target="interactionforemails" />
-          <NavigationPropertyBinding Path="TransactionCurrency_dfa_cheque" Target="dfa_cheques" />
         </EntitySet>
         <EntitySet Name="transformationmappings" EntityType="Microsoft.Dynamics.CRM.transformationmapping">
           <NavigationPropertyBinding Path="TransformationParameterMapping_TransformationMapping" Target="transformationparametermappings" />
