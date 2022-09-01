@@ -61,7 +61,7 @@ namespace EMBC.Tests.Integration.DFA.Api
             });
 
             ManageFormCommandResult res = result.ResponseBody.ReadAsJson<ManageFormCommandResult>();
-            res.ShouldNotBeNull().Id.ShouldBe("caseId");
+            res.ShouldNotBeNull();
         }
 
         [Test]
@@ -162,7 +162,7 @@ namespace EMBC.Tests.Integration.DFA.Api
             });
 
             ManageFormCommandResult res = result.ResponseBody.ReadAsJson<ManageFormCommandResult>();
-            res.ShouldNotBeNull().Id.ShouldBe("caseId");
+            res.ShouldNotBeNull();
         }
 
         [Test]
@@ -278,7 +278,7 @@ namespace EMBC.Tests.Integration.DFA.Api
             });
 
             ManageFormCommandResult res = result.ResponseBody.ReadAsJson<ManageFormCommandResult>();
-            res.ShouldNotBeNull().Id.ShouldBe("caseId");
+            res.ShouldNotBeNull();
         }
     }
 
