@@ -84,4 +84,9 @@ app.MapPost("/forms/gov", async ctx =>
     await ctx.Response.WriteAsJsonAsync(new { id = submissionId });
 }).WithName("Local government Form");
 
+app.MapGet("/test", async ctx =>
+{
+    await ctx.Response.WriteAsJsonAsync(new { res = "success" });
+}).WithName("Test");
+
 app.Run();
