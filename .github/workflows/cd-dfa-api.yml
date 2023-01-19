@@ -1,0 +1,18 @@
+name: cd-dfa-api
+
+on:
+  push:
+    branches:
+      - master
+    paths:
+      - src/**
+      - .github/workflows/cd-dfa-api.yml
+
+jobs:
+  CD:
+    uses: ./.github/workflows/cd-workflow.yml
+    with:
+      DOCKER_CONTEXT: src
+      DOCKER_FILE: src/Dockerfile
+      DOCKER_IMAGE_NAME: dfa-api
+    secrets: inherit
