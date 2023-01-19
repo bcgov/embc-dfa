@@ -4,23 +4,12 @@ on:
   pull_request:
     types: [opened, reopened, edited, synchronize]
     paths:
-      - "src/**"
-      - ".github/workflows/ci-dfa-api.yml"
-
-env:
-  IMAGE_NAME: dfa-api
+      - src/**
+      - .github/workflows/ci-dfa-api.yml
 
 jobs:
-  build:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v3
-
-      - uses: docker/setup-buildx-action@v2
-        id: buildx
-        with:
-          install: true
-
-      - name: Build image
-        working-directory: ./src
-        run: tar -czh . | docker build --tag $IMAGE_NAME -
+  CI:
+    uses: ./.github/workflows/ci-workflow.yml
+    with:
+      DOCKER_CONTEXT: src
+      DOCKER_FILE: src/Dockerfile
