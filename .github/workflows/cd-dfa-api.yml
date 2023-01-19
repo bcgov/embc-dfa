@@ -3,7 +3,7 @@ name: cd-dfa-api
 on:
   push:
     branches:
-      - master
+      - main
     paths:
       - src/**
       - .github/workflows/cd-dfa-api.yml
