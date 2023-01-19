@@ -14,7 +14,9 @@ RUN dotnet tool install --tool-path /tools dotnet-counters
 RUN dotnet tool install --tool-path /tools dotnet-dump
 
 WORKDIR /src
+COPY ["EMBC.DFA/EMBC.DFA.csproj", "EMBC.DFA/"]
 COPY ["EMBC.DFA.Api/EMBC.DFA.Api.csproj", "EMBC.DFA.Api/"]
+COPY ["EMBC.DFA.Dynamics/EMBC.DFA.Dynamics.csproj", "EMBC.DFA.Dynamics/"]
 COPY ["EMBC.Utilities/EMBC.Utilities.csproj", "EMBC.Utilities/"]
 COPY ["EMBC.Tests.Integration.DFA.Api/EMBC.Tests.Integration.DFA.Api.csproj", "EMBC.Tests.Integration.DFA.Api/"]
 COPY ["EMBC.DFA.sln", ".editorconfig", "./"]
