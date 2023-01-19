@@ -9,20 +9,20 @@ namespace EMBC.Tests.Integration.DFA.Api
         [Test]
         public async Task GetSecurityToken()
         {
-            var host = Application.Host;
+            //var host = Application.Host;
 
-            var tokenProvider = host.Services.GetRequiredService<ISecurityTokenProvider>();
-            var token = await tokenProvider.AcquireToken();
-            Console.WriteLine("Authorization: Bearer " + token);
+            //var tokenProvider = host.Services.GetRequiredService<ISecurityTokenProvider>();
+            //var token = await tokenProvider.AcquireToken();
+            //Console.WriteLine("Authorization: Bearer " + token);
         }
 
         [Test]
         public async Task CanConnectToDynamics()
         {
-            var host = Application.Host;
+            //var host = Application.Host;
 
-            var factory = host.Services.GetRequiredService<IDfaContextFactory>();
-            var ctx = factory.Create();
+            //var factory = host.Services.GetRequiredService<IDfaContextFactory>();
+            //var ctx = factory.Create();
 
             //var results = await ctx.dfa_regions.GetAllPagesAsync();
             //results.ShouldNotBeEmpty();
