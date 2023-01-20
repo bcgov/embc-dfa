@@ -42,7 +42,7 @@ app.Use((ctx, next) =>
     headers.Append("ContextIdentifier", CallContext.Current.ContextIdentifier);
     return next(ctx);
 });
-app.MapHealthChecks("/hc");
+//app.MapHealthChecks("/hc");
 
 app.MapPost("/forms/smb", async ctx =>
 {
