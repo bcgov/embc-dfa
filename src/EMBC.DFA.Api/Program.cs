@@ -17,7 +17,8 @@ builder.Services.AddEndpointsApiExplorer()
     .AddIntakeManager()
     .AddSubmissionsRepository()
     .AddHealthChecks()
-    ;
+    .AddCheck($"ready hc", () => HealthCheckResult.Healthy("ready"), new[] { "ready" })
+    .AddCheck($"live hc", () => HealthCheckResult.Healthy("alive"), new[] { "alive" });
 
 var app = builder.Build();
 
@@ -42,9 +43,6 @@ app.Use((ctx, next) =>
     return next(ctx);
 });
 //app.MapHealthChecks("/hc");
-builder.Services.AddHealthChecks()
-                .AddCheck($"ready hc", () => HealthCheckResult.Healthy("ready"), new[] { "ready" })
-                .AddCheck($"live hc", () => HealthCheckResult.Healthy("alive"), new[] { "alive" });
 
 app.MapPost("/forms/smb", async ctx =>
 {
