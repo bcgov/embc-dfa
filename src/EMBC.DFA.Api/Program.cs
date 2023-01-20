@@ -5,6 +5,7 @@ using EMBC.DFA.Managers.Intake;
 using EMBC.DFA.Resources.Submissions;
 using EMBC.Utilities;
 using EMBC.Utilities.Runtime;
+using Microsoft.Extensions.Diagnostics.HealthChecks;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -16,7 +17,8 @@ builder.Services.AddEndpointsApiExplorer()
     .AddIntakeManager()
     .AddSubmissionsRepository()
     .AddHealthChecks()
-    ;
+    .AddCheck($"ready hc", () => HealthCheckResult.Healthy("ready"), new[] { "ready" })
+    .AddCheck($"live hc", () => HealthCheckResult.Healthy("alive"), new[] { "alive" });
 
 var app = builder.Build();
 
