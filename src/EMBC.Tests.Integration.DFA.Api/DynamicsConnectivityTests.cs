@@ -6,15 +6,15 @@ namespace EMBC.Tests.Integration.DFA.Api
 {
     public class DynamicsConnectivityTests
     {
-        [Test]
-        public async Task GetSecurityToken()
-        {
+        //[Test]
+        //public async Task GetSecurityToken()
+        //{
             //var host = Application.Host;
 
             //var tokenProvider = host.Services.GetRequiredService<ISecurityTokenProvider>();
             //var token = await tokenProvider.AcquireToken();
             //Console.WriteLine("Authorization: Bearer " + token);
-        }
+        //}
 
         [Test]
         public async Task CanConnectToDynamics()
