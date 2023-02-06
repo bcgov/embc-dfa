@@ -116,8 +116,8 @@ namespace EMBC.Tests.Integration.DFA.Api
                     province = "AB",
                     postalCode = "C2C2C2",
 
-                    dateOfDamage = DateTime.Now.AddDays(-2),
-                    dateOfDamage1 = DateTime.Now,
+                    dateOfDamage = DateTime.Now.AddDays(-2).ToString(),
+                    dateOfDamage1 = DateTime.Now.ToString(),
 
                     causeOfDamageLoss1 = "flooding",
                     pleaseSpecify = "too much water",
@@ -136,10 +136,10 @@ namespace EMBC.Tests.Integration.DFA.Api
 
                     signature1 = defaultSignature,
                     printName1 = "Signer Name",
-                    dateYyyyMDay1 = DateTime.Now,
+                    dateYyyyMDay1 = DateTime.Now.ToString(),
                     signature2 = defaultSignature,
                     printName2 = "Second Signer",
-                    dateYyyyMDay2 = DateTime.Now,
+                    dateYyyyMDay2 = DateTime.Now.ToString(),
 
                     cleanupLogDetails = new[] {
                         new CleanUpDetail
