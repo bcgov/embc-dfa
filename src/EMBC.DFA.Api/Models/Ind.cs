@@ -36,7 +36,8 @@
         public string contactTelephoneNumberS { get; set; }
         public string contactTelephoneNumberS1 { get; set; }
         public ManufacturedHome manufacturedHome { get; set; }
-        public DamageLoss causeOfDamageLoss { get; set; }
+        //public DamageLoss causeOfDamageLoss { get; set; }
+        public string causeOfDamageLoss1 { get; set; }
         public string pleaseSpecifyIfOthers { get; set; } //Other damage loss
         public string provideABriefDescriptionOfDamage { get; set; }
         public string yes { get; set; } //Do you have insurance coverage for the damage/loss that incurred?

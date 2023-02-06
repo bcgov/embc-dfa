@@ -25,7 +25,8 @@
         public string businessTelephoneNumber1 { get; set; } //alt business number
         public string cellularTelephoneNumber1 { get; set; } //alt cell number
         public string eMailAddress1 { get; set; } //alt email
-        public DamageLoss causeOfDamageLoss { get; set; }
+        //public DamageLoss causeOfDamageLoss { get; set; }
+        public string causeOfDamageLoss1 { get; set; }
         public string pleaseSpecifyIfOthers { get; set; } //Other damage loss
         public DateTime dateOfDamageLoss { get; set; } //From
         public DateTime dateOfDamageLoss1 { get; set; } //To

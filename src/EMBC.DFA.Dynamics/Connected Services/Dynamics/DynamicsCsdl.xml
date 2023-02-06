@@ -5971,6 +5971,7 @@
         <Property Name="_dfa_areacommunityid_value" Type="Edm.Guid" />
         <Property Name="dfa_alistingofthedirectors" Type="Edm.Boolean" />
         <Property Name="dfa_mailingaddressstreet1" Type="Edm.String" Unicode="false" />
+        <Property Name="dfa_mailingaddressprovince" Type="Edm.String" Unicode="false" />
         <Property Name="timezoneruleversionnumber" Type="Edm.Int32" />
         <Property Name="dfa_manufacturedhom" Type="Edm.Boolean" />
         <Property Name="_modifiedby_value" Type="Edm.Guid" />
@@ -5985,6 +5986,7 @@
         <Property Name="dfa_damagedpropertystreet2" Type="Edm.String" Unicode="false" />
         <Property Name="_owningbusinessunit_value" Type="Edm.Guid" />
         <Property Name="dfa_description" Type="Edm.String" Unicode="false" />
+        <Property Name="dfa_damagedpropertyprovince" Type="Edm.String" Unicode="false" />
         <Property Name="dfa_primaryapplicantprintname" Type="Edm.String" Unicode="false" />
         <Property Name="dfa_name" Type="Edm.String" Unicode="false" />
         <Property Name="dfa_appapplicationid" Type="Edm.Guid" />

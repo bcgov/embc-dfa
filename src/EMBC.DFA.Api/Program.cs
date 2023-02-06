@@ -46,19 +46,19 @@ app.MapHealthChecks("/hc/live", new HealthCheckOptions() { Predicate = check => 
 
 app.MapPost("/forms/smb", async ctx =>
 {
-    Console.WriteLine("Testing");
-    await ctx.Response.WriteAsJsonAsync(new { res = "success" });
+    //Console.WriteLine("Testing");
+    //await ctx.Response.WriteAsJsonAsync(new { res = "success" });
 
-    //var model = await ctx.Request.ReadJsonModelAsync<EMBC.DFA.Api.Models.SmbForm>();
-    //if (!model.IsValid)
-    //{
-    //    await ctx.Response.ValidationError("Invalid payload");
-    //    return;
-    //}
-    //var mgr = CallContext.Current.Services.GetRequiredService<IIntakeManager>();
-    //var submissionId = await mgr.Handle(new NewSmbFormSubmissionCommand { Form = EMBC.DFA.Api.Mappings.Map(model.Payload) });
-    //ctx.Response.StatusCode = (int)HttpStatusCode.Created;
-    //await ctx.Response.WriteAsJsonAsync(new { id = submissionId });
+    var model = await ctx.Request.ReadJsonModelAsync<EMBC.DFA.Api.Models.SmbForm>();
+    if (!model.IsValid)
+    {
+        await ctx.Response.ValidationError("Invalid payload");
+        return;
+    }
+    var mgr = CallContext.Current.Services.GetRequiredService<IIntakeManager>();
+    var submissionId = await mgr.Handle(new NewSmbFormSubmissionCommand { Form = EMBC.DFA.Api.Mappings.Map(model.Payload) });
+    ctx.Response.StatusCode = (int)HttpStatusCode.Created;
+    await ctx.Response.WriteAsJsonAsync(new { id = submissionId });
 }).WithName("SMB Form");
 
 app.MapPost("/forms/ind", async ctx =>
