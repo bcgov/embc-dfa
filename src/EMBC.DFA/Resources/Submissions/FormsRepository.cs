@@ -58,6 +58,7 @@ namespace EMBC.DFA.Resources.Submissions
         {
             var ctx = CallContext.Current.Services.GetRequiredService<IDfaContextFactory>().Create();
             var application = Mappings.Map(f.Form);
+            application.dfa_appapplicationid = Guid.NewGuid();
             ctx.AddTodfa_appapplications(application);
 
             var applicant = application.dfa_Applicant;

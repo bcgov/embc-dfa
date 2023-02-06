@@ -42,8 +42,8 @@
         public string province { get; set; } //Mailing addres
         public string postalCode { get; set; } //Mailing addres
 
-        public DateTime dateOfDamage { get; set; } //From
-        public DateTime dateOfDamage1 { get; set; } //To
+        public string dateOfDamage { get; set; } //From
+        public string dateOfDamage1 { get; set; } //To
 
         public string causeOfDamageLoss1 { get; set; } //Damage loss string
         public string pleaseSpecify { get; set; } //Other damage loss
@@ -62,10 +62,10 @@
 
         public string signature1 { get; set; }
         public string printName1 { get; set; }
-        public DateTime dateYyyyMDay1 { get; set; }
+        public string dateYyyyMDay1 { get; set; }
         public string signature2 { get; set; }
         public string printName2 { get; set; }
-        public DateTime? dateYyyyMDay2 { get; set; }
+        public string? dateYyyyMDay2 { get; set; }
 
         public CleanUpDetail[] cleanupLogDetails { get; set; }
 

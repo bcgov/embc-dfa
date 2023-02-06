@@ -50,8 +50,8 @@ namespace EMBC.DFA.Api
                     PostalCode = source.postalCode
                 },
 
-                DamageFrom = source.dateOfDamage,
-                DamageTo = source.dateOfDamage1,
+                DamageFrom = DateTime.Parse(source.dateOfDamage),
+                DamageTo = DateTime.Parse(source.dateOfDamage1),
 
                 DamageInfo = new DamageInfo
                 {
@@ -80,11 +80,11 @@ namespace EMBC.DFA.Api
 
                 Signature = source.signature1,
                 SignerName = source.printName1,
-                SignatureDate = source.dateYyyyMDay1,
+                SignatureDate = DateTime.Parse(source.dateYyyyMDay1),
 
                 OtherSignature = source.signature2,
                 OtherSignerName = source.printName2,
-                OtherSignatureDate = source.dateYyyyMDay2,
+                OtherSignatureDate = !string.IsNullOrEmpty(source.dateYyyyMDay2) ? DateTime.Parse(source.dateYyyyMDay2) : null,
 
                 CleanUpLogs = new List<CleanUpLog>(),
                 DamagedItems = new List<DamageItem>(),
