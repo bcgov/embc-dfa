@@ -10,35 +10,45 @@
     public class SmbFormData
     {
         public string pleaseSelectTheAppropriateOption { get; set; } //Applicant Type
+
         public string yes7 { get; set; } //Indigenous Status
         public string yes6 { get; set; } //On First Nations Reserve?
         public string? nameOfFirstNationsReserve { get; set; }
+        public string? comments { get; set; } //On First Nations Reserve Comments
+
         public string primaryContactNameLastFirst { get; set; } //Applicant First name
         public string primaryContactNameLastFirst3 { get; set; } //Applicant Last name
         public string primaryContactNameLastFirst4 { get; set; } //Applicant Initial
-        public DateTime dateOfDamage { get; set; } //From
-        public DateTime dateOfDamage1 { get; set; } //To
+        public string businessTelephoneNumber1 { get; set; } //Applicant Residence Telephone Number
+        public string cellularTelephoneNumber1 { get; set; } //Applicant Cell Number
+        public string eMailAddress2 { get; set; } //Applicant Email
+        public string alternatePhoneNumber1 { get; set; } //Applicant Alt Phone
+
         public string primaryContactNameLastFirst1 { get; set; } //Business, Farm or Organization Legal Name
         public string primaryContactNameLastFirst2 { get; set; } //Name of Contact Person
+
+        public SecondaryApplicant[] cleanupLogDetails1 { get; set; }
+        public AlternateContact[] otherContacts { get; set; }
+
         public string street1 { get; set; } //Damaged Property Address street 1
         public string street3 { get; set; } //Damaged Property Address Street 2
         public string cityTown1 { get; set; } //Damaged Property Address
         public string province1 { get; set; } //Damaged Property Address
         public string postalCode1 { get; set; } //Damaged Property Address
+
         public string mailingAddress { get; set; } //Mailing address street 1
         public string street2 { get; set; } //Mailing addres street 2
         public string cityTown { get; set; } //Mailing addres 
         public string province { get; set; } //Mailing addres
         public string postalCode { get; set; } //Mailing addres
-        public string businessTelephoneNumber { get; set; } //Residence Telephone Number
-        public string cellularTelephoneNumber { get; set; }
-        public string eMailAddress { get; set; }
-        public string eMailAddress1 { get; set; }
-        public string alternateContactNameWhereYouCanBeReachedIfApplicable { get; set; }
-        public string alternatePhoneNumber { get; set; }
-        public DamageLoss causeOfDamageLoss { get; set; }
+
+        public DateTime dateOfDamage { get; set; } //From
+        public DateTime dateOfDamage1 { get; set; } //To
+
+        public string causeOfDamageLoss1 { get; set; } //Damage loss string
         public string pleaseSpecify { get; set; } //Other damage loss
         public string provideABriefDescriptionOfDamage { get; set; }
+
         public string pleaseDecideToChooseAOrB { get; set; } //ApplicantType - Small Business or Farm Owner
         public bool yes8 { get; set; } //Written confirmation from your insurance broker/agent that you could not have purchased insurance to cover the loss to your small business, farm or charitable organization
         public bool yes9 { get; set; } //A copy of a rental agreement or lease, if applicable.
@@ -49,18 +59,18 @@
         public bool yes14 { get; set; } //A listing of the Directors, including their contact and address information
         public bool yes15 { get; set; } //Proof of the organization’s registration (must include registration date) under the BC Society Act
         public bool yes16 { get; set; } //A statement outlining the organization’s structure and purpose, and any other documentation supporting how the organization meets the eligibility criteria for Disaster Financial Assistance
+
         public string signature1 { get; set; }
         public string printName1 { get; set; }
         public DateTime dateYyyyMDay1 { get; set; }
         public string signature2 { get; set; }
         public string printName2 { get; set; }
-        public DateTime dateYyyyMDay2 { get; set; }
-        public string applicantFirstName2 { get; set; } //Appendix A Applicant First Name
-        public string applicantFirstName3 { get; set; } //Appendix A Applicant Last Name
+        public DateTime? dateYyyyMDay2 { get; set; }
+
         public CleanUpDetail[] cleanupLogDetails { get; set; }
-        public string applicantFirstName { get; set; } //Appendix B Applicant First Name
-        public string applicantFirstName1 { get; set; } //Appendix B Applicant Last Name
+
         public DamagedItem[] listByRoomItemsSubmittedForDamageAssessment { get; set; }
+
         public bool submit1 { get; set; }
 
         //Small Business Applicant only
@@ -74,12 +84,26 @@
         public string? yes5 { get; set; } //Is the farm operation the means by which the owner(s) derives the majority of that person’s income?
     }
 
-    public class DamageLoss
+    public class AlternateContact
     {
-        public bool flooding { get; set; }
-        public bool landslide { get; set; }
-        public bool windstorm { get; set; }
-        public bool other { get; set; }
+        public string alternateContactNameWhereYouCanBeReachedIfApplicable { get; set; }
+        public string eMailAddress1 { get; set; }
+        public string alternatePhoneNumber { get; set; }
+    }
+
+    public class SecondaryApplicant
+    {
+        public string applicantType { get; set; }
+        public string FirstNameofSecondary { get; set; }
+        public string LastNameofSecondary { get; set; }
+        public string emailAddress { get; set; }
+        public string phoneNumber { get; set; }
+
+        public string? hoursWorked { get; set; }
+        public string? dateYyyyMDay { get; set; }
+        public string? descriptionOfWork { get; set; }
+        public string? embcOfficeUseOnly { get; set; }
+        public string? nameOfFamilyMemberVolunteer { get; set; }
     }
 
     public class CleanUpDetail
@@ -87,14 +111,15 @@
         public int hoursWorked { get; set; }
         public DateTime dateYyyyMDay { get; set; }
         public string descriptionOfWork { get; set; }
-        public string embcOfficeUseOnly { get; set; }
         public string nameOfFamilyMemberVolunteer { get; set; }
+        public string? embcOfficeUseOnly { get; set; }
     }
 
     public class DamagedItem
     {
-        public string embcOfficeUseOnlyComments { get; set; }
         public string listByRoomItemsSubmittedForDamageAssessment1 { get; set; }
+        public string roomName { get; set; }
+        public string? embcOfficeUseOnlyComments { get; set; }
     }
 
     public class Metadata

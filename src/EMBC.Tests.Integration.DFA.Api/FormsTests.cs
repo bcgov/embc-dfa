@@ -36,13 +36,13 @@ namespace EMBC.Tests.Integration.DFA.Api
                     businessTelephoneNumber1 = "(779) 321-4567",
                     cellularTelephoneNumber1 = "(779) 123-4567",
                     eMailAddress1 = String.Empty,
-                    causeOfDamageLoss = new DamageLoss
-                    {
-                        flooding = true,
-                        landslide = false,
-                        windstorm = false,
-                        other = false
-                    },
+                    //causeOfDamageLoss = new DamageLoss
+                    //{
+                    //    flooding = true,
+                    //    landslide = false,
+                    //    windstorm = false,
+                    //    other = false
+                    //},
                     pleaseSpecifyIfOthers = String.Empty,
                     dateOfDamageLoss = DateTime.Now,
                     dateOfDamageLoss1 = DateTime.Now,
@@ -74,39 +74,56 @@ namespace EMBC.Tests.Integration.DFA.Api
                     pleaseSelectTheAppropriateOption = ApplicationTypes.SmallBusiness,
                     yes7 = "No",
                     yes6 = "No",
-                    primaryContactNameLastFirst = "John",
-                    primaryContactNameLastFirst3 = "Test",
+                    primaryContactNameLastFirst = "autotest-John",
+                    primaryContactNameLastFirst3 = "autotest-Test",
                     primaryContactNameLastFirst4 = "Q",
-                    dateOfDamage = DateTime.Now.AddDays(-2),
-                    dateOfDamage1 = DateTime.Now,
-                    primaryContactNameLastFirst1 = "Business Name",
-                    primaryContactNameLastFirst2 = "Mr Contact",
+                    businessTelephoneNumber1 = "(604) 111-1111",
+                    cellularTelephoneNumber1 = "(604) 222-2222",
+                    eMailAddress2 = "john@test.com",
+                    alternatePhoneNumber1 = "(778) 123-4567",
+                    primaryContactNameLastFirst1 = "autotest-Business Name",
+                    primaryContactNameLastFirst2 = "autotest-Mr Contact",
+
+                    cleanupLogDetails1 = new[] {
+                        new SecondaryApplicant
+                        {
+                            applicantType = SecondaryApplicantTypes.Organization,
+                            FirstNameofSecondary = "autotest-OrgName",
+                            LastNameofSecondary = "autotest-Org Last name",
+                            emailAddress = "org@test.com",
+                            phoneNumber = "(555) 123-4567"
+                        }
+                    },
+
+                    otherContacts = new[] {
+                        new AlternateContact
+                        {
+                            alternateContactNameWhereYouCanBeReachedIfApplicable = "autotest-alt contact name",
+                            eMailAddress1 = "alt@test.com",
+                            alternatePhoneNumber = "(778) 222-2222"
+                        }
+                    },
+
                     street1 = "123 Test St.",
                     street3 = String.Empty,
                     cityTown1 = "Langley",
                     province1 = "BC",
                     postalCode1 = "V2V2V2",
+
                     mailingAddress = "123 Mail St.",
                     street2 = String.Empty,
                     cityTown = "Calgary",
                     province = "AB",
                     postalCode = "C2C2C2",
-                    businessTelephoneNumber = "(778) 321-4567",
-                    cellularTelephoneNumber = "(778) 123-4567",
-                    eMailAddress = "test@test.com",
-                    eMailAddress1 = String.Empty,
-                    alternateContactNameWhereYouCanBeReachedIfApplicable = String.Empty,
-                    alternatePhoneNumber = String.Empty,
-                    causeOfDamageLoss = new DamageLoss
-                    {
-                        flooding = true,
-                        landslide = false,
-                        windstorm = false,
-                        other = false
-                    },
-                    pleaseSpecify = String.Empty,
-                    provideABriefDescriptionOfDamage = "Too much water",
-                    pleaseDecideToChooseAOrB = ApplicantTypes.SmallBusiness,
+
+                    dateOfDamage = DateTime.Now.AddDays(-2),
+                    dateOfDamage1 = DateTime.Now,
+
+                    causeOfDamageLoss1 = "flooding",
+                    pleaseSpecify = "too much water",
+                    provideABriefDescriptionOfDamage = "damage description",
+
+                    pleaseDecideToChooseAOrB = "a",
                     yes8 = true,
                     yes9 = true,
                     yes10 = true,
@@ -116,32 +133,33 @@ namespace EMBC.Tests.Integration.DFA.Api
                     yes14 = false,
                     yes15 = false,
                     yes16 = false,
+
                     signature1 = defaultSignature,
                     printName1 = "Signer Name",
                     dateYyyyMDay1 = DateTime.Now,
                     signature2 = defaultSignature,
                     printName2 = "Second Signer",
                     dateYyyyMDay2 = DateTime.Now,
-                    applicantFirstName2 = String.Empty,
-                    applicantFirstName3 = String.Empty,
+
                     cleanupLogDetails = new[] {
                         new CleanUpDetail
                         {
                             dateYyyyMDay = DateTime.Now,
-                            descriptionOfWork = "removing water",
+                            descriptionOfWork = "autotest-removing water",
                             hoursWorked = 25,
-                            nameOfFamilyMemberVolunteer = "Test Member"
+                            nameOfFamilyMemberVolunteer = "autotest-Test Member"
                         }
                     },
-                    applicantFirstName = String.Empty,
-                    applicantFirstName1 = String.Empty,
+
                     listByRoomItemsSubmittedForDamageAssessment = new[] {
                         new DamagedItem
                         {
+                            roomName = "autotest-Test Room",
                             listByRoomItemsSubmittedForDamageAssessment1 = "item1"
                         },
                         new DamagedItem
                         {
+                            roomName = "autotest-Test Room2",
                             listByRoomItemsSubmittedForDamageAssessment1 = "item2"
                         }
                     },
@@ -153,17 +171,17 @@ namespace EMBC.Tests.Integration.DFA.Api
                 metadata = new Metadata { }
             };
 
-            //var host = Application.Host;
+            var host = Application.Host;
 
-            //var result = await host.Scenario(s =>
-            //{
-            //    s.Post.Json(form).ToUrl("/forms/smb");
-            //    s.StatusCodeShouldBe((int)HttpStatusCode.Created);
-            //});
+            var result = await host.Scenario(s =>
+            {
+                s.Post.Json(form).ToUrl("/forms/smb");
+                s.StatusCodeShouldBe((int)HttpStatusCode.Created);
+            });
 
-            //ManageFormCommandResult res = result.ResponseBody.ReadAsJson<ManageFormCommandResult>();
-            //res.ShouldNotBeNull();
-            form.ShouldNotBeNull();
+            ManageFormCommandResult res = result.ResponseBody.ReadAsJson<ManageFormCommandResult>();
+            res.ShouldNotBeNull();
+            //form.ShouldNotBeNull();
         }
 
         [Test]
@@ -204,13 +222,13 @@ namespace EMBC.Tests.Integration.DFA.Api
                         no = false,
                         yes = true
                     },
-                    causeOfDamageLoss = new DamageLoss
-                    {
-                        flooding = true,
-                        landslide = false,
-                        windstorm = false,
-                        other = false
-                    },
+                    //causeOfDamageLoss = new DamageLoss
+                    //{
+                    //    flooding = true,
+                    //    landslide = false,
+                    //    windstorm = false,
+                    //    other = false
+                    //},
                     pleaseSpecifyIfOthers = String.Empty,
                     provideABriefDescriptionOfDamage = "Too much water",
                     yes = "no",
@@ -291,7 +309,12 @@ namespace EMBC.Tests.Integration.DFA.Api
         public const string CharitableOrganization = "charitableOrganization";
         public const string HomeOwner = "homeOwner";
         public const string ResidentialTenant = "residentialTenant";
+    }
 
+    public static class SecondaryApplicantTypes
+    {
+        public const string Contact = "contact";
+        public const string Organization = "organization";
     }
 
     public static class ApplicantTypes
