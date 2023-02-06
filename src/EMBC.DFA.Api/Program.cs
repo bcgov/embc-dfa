@@ -5,6 +5,7 @@ using EMBC.DFA.Managers.Intake;
 using EMBC.DFA.Resources.Submissions;
 using EMBC.Utilities;
 using EMBC.Utilities.Runtime;
+using Microsoft.AspNetCore.Diagnostics.HealthChecks;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -40,20 +41,24 @@ app.Use((ctx, next) =>
     headers.Append("ContextIdentifier", CallContext.Current.ContextIdentifier);
     return next(ctx);
 });
-app.MapHealthChecks("/hc");
+app.MapHealthChecks("/hc/ready", new HealthCheckOptions() { Predicate = check => check.Tags.Contains("ready") });
+app.MapHealthChecks("/hc/live", new HealthCheckOptions() { Predicate = check => check.Tags.Contains("alive") });
 
 app.MapPost("/forms/smb", async ctx =>
 {
-    var model = await ctx.Request.ReadJsonModelAsync<EMBC.DFA.Api.Models.SmbForm>();
-    if (!model.IsValid)
-    {
-        await ctx.Response.ValidationError("Invalid payload");
-        return;
-    }
-    var mgr = CallContext.Current.Services.GetRequiredService<IIntakeManager>();
-    var submissionId = await mgr.Handle(new NewSmbFormSubmissionCommand { Form = EMBC.DFA.Api.Mappings.Map(model.Payload) });
-    ctx.Response.StatusCode = (int)HttpStatusCode.Created;
-    await ctx.Response.WriteAsJsonAsync(new { id = submissionId });
+    Console.WriteLine("Testing");
+    await ctx.Response.WriteAsJsonAsync(new { res = "success" });
+
+    //var model = await ctx.Request.ReadJsonModelAsync<EMBC.DFA.Api.Models.SmbForm>();
+    //if (!model.IsValid)
+    //{
+    //    await ctx.Response.ValidationError("Invalid payload");
+    //    return;
+    //}
+    //var mgr = CallContext.Current.Services.GetRequiredService<IIntakeManager>();
+    //var submissionId = await mgr.Handle(new NewSmbFormSubmissionCommand { Form = EMBC.DFA.Api.Mappings.Map(model.Payload) });
+    //ctx.Response.StatusCode = (int)HttpStatusCode.Created;
+    //await ctx.Response.WriteAsJsonAsync(new { id = submissionId });
 }).WithName("SMB Form");
 
 app.MapPost("/forms/ind", async ctx =>
@@ -83,5 +88,11 @@ app.MapPost("/forms/gov", async ctx =>
     ctx.Response.StatusCode = (int)HttpStatusCode.Created;
     await ctx.Response.WriteAsJsonAsync(new { id = submissionId });
 }).WithName("Local government Form");
+
+app.MapGet("/test", async ctx =>
+{
+    Console.WriteLine("Testing");
+    await ctx.Response.WriteAsJsonAsync(new { res = "success" });
+}).WithName("Test");
 
 app.Run();

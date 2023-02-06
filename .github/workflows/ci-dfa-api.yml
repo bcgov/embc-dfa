@@ -1,0 +1,15 @@
+name: ci-dfa-api
+
+on:
+  pull_request:
+    types: [opened, reopened, edited, synchronize]
+    paths:
+      - src/**
+      - .github/workflows/ci-dfa-api.yml
+
+jobs:
+  CI:
+    uses: ./.github/workflows/ci-workflow.yml
+    with:
+      DOCKER_CONTEXT: src
+      DOCKER_FILE: src/Dockerfile

@@ -17,22 +17,22 @@ namespace EMBC.DFA.Resources.Submissions
                 dfa_onfirstnationsreserve = form.OnFirstNationReserve,
                 dfa_nameoffirstnationsreserve = form.NameOfFirstNationsReserve,
 
-                customerid_contact = Map(form.Applicant),
+                //customerid_contact = Map(form.Applicant),
                 emailaddress = form.Applicant.Email,
                 dfa_dateofdamage = form.DamageFrom,
                 dfa_dateofdamageto = form.DamageTo,
 
-                //BusinessLegalName
+                //dfa_RelatedBusiness = Map(form.BusinessLegalName),
                 //ContactName
 
                 dfa_damagedpropertystreet1 = form.DamagePropertyAddress != null ? form.DamagePropertyAddress.AddressLine1 : String.Empty,
                 dfa_damagedpropertystreet2 = form.DamagePropertyAddress != null ? form.DamagePropertyAddress.AddressLine2 : String.Empty,
-                dfa_damagedpropertycity = form.DamagePropertyAddress != null ? form.DamagePropertyAddress.City : String.Empty,
+                //dfa_AreaCommunityId = form.DamagePropertyAddress != null ? form.DamagePropertyAddress.City : String.Empty,
                 dfa_damagedpropertyprovince = form.DamagePropertyAddress != null ? form.DamagePropertyAddress.Province : String.Empty,
                 dfa_damagedpropertypostalcode = form.DamagePropertyAddress != null ? form.DamagePropertyAddress.PostalCode : String.Empty,
                 dfa_mailingaddressstreet1 = form.MailingAddress != null ? form.MailingAddress.AddressLine1 : String.Empty,
                 dfa_mailingaddressstreet2 = form.MailingAddress != null ? form.MailingAddress.AddressLine2 : String.Empty,
-                dfa_mailingaddresscity = form.MailingAddress != null ? form.MailingAddress.City : String.Empty,
+                //dfa_AreaCommunity2Id = form.MailingAddress != null ? form.MailingAddress.City : String.Empty,
                 dfa_mailingaddressprovince = form.MailingAddress != null ? form.MailingAddress.Province : String.Empty,
                 dfa_mailingaddresspostalcode = form.MailingAddress != null ? form.MailingAddress.PostalCode : String.Empty,
                 dfa_issamemailingaddress = form.MailingAddress != null && form.DamagePropertyAddress != null ?
@@ -91,12 +91,12 @@ namespace EMBC.DFA.Resources.Submissions
 
                 dfa_damagedpropertystreet1 = form.DamagePropertyAddress != null ? form.DamagePropertyAddress.AddressLine1 : String.Empty,
                 dfa_damagedpropertystreet2 = form.DamagePropertyAddress != null ? form.DamagePropertyAddress.AddressLine2 : String.Empty,
-                dfa_damagedpropertycity = form.DamagePropertyAddress != null ? form.DamagePropertyAddress.City : String.Empty,
+                //dfa_AreaCommunityId = form.DamagePropertyAddress != null ? form.DamagePropertyAddress.City : String.Empty,
                 dfa_damagedpropertyprovince = form.DamagePropertyAddress != null ? form.DamagePropertyAddress.Province : String.Empty,
                 dfa_damagedpropertypostalcode = form.DamagePropertyAddress != null ? form.DamagePropertyAddress.PostalCode : String.Empty,
                 dfa_mailingaddressstreet1 = form.MailingAddress != null ? form.MailingAddress.AddressLine1 : String.Empty,
                 dfa_mailingaddressstreet2 = form.MailingAddress != null ? form.MailingAddress.AddressLine2 : String.Empty,
-                dfa_mailingaddresscity = form.MailingAddress != null ? form.MailingAddress.City : String.Empty,
+                //dfa_AreaCommunity2Id = form.MailingAddress != null ? form.MailingAddress.City : String.Empty,
                 dfa_mailingaddressprovince = form.MailingAddress != null ? form.MailingAddress.Province : String.Empty,
                 dfa_mailingaddresspostalcode = form.MailingAddress != null ? form.MailingAddress.PostalCode : String.Empty,
                 dfa_issamemailingaddress = form.MailingAddress != null && form.DamagePropertyAddress != null ?
@@ -147,12 +147,12 @@ namespace EMBC.DFA.Resources.Submissions
 
                 dfa_damagedpropertystreet1 = form.MailingAddress != null ? form.MailingAddress.AddressLine1 : String.Empty,
                 dfa_damagedpropertystreet2 = form.MailingAddress != null ? form.MailingAddress.AddressLine2 : String.Empty,
-                dfa_damagedpropertycity = form.MailingAddress != null ? form.MailingAddress.City : String.Empty,
+                //dfa_AreaCommunityId = form.MailingAddress != null ? form.MailingAddress.City : String.Empty,
                 dfa_damagedpropertyprovince = form.MailingAddress != null ? form.MailingAddress.Province : String.Empty,
                 dfa_damagedpropertypostalcode = form.MailingAddress != null ? form.MailingAddress.PostalCode : String.Empty,
                 dfa_mailingaddressstreet1 = form.MailingAddress != null ? form.MailingAddress.AddressLine1 : String.Empty,
                 dfa_mailingaddressstreet2 = form.MailingAddress != null ? form.MailingAddress.AddressLine2 : String.Empty,
-                dfa_mailingaddresscity = form.MailingAddress != null ? form.MailingAddress.City : String.Empty,
+                //dfa_AreaCommunity2Id = form.MailingAddress != null ? form.MailingAddress.City : String.Empty,
                 dfa_mailingaddressprovince = form.MailingAddress != null ? form.MailingAddress.Province : String.Empty,
                 dfa_mailingaddresspostalcode = form.MailingAddress != null ? form.MailingAddress.PostalCode : String.Empty,
                 dfa_issamemailingaddress = true,
@@ -169,7 +169,7 @@ namespace EMBC.DFA.Resources.Submissions
             };
         }
 
-        private static contact Map(Applicant applicant)
+        public static contact Map(Applicant applicant)
         {
             return new contact
             {
@@ -179,7 +179,7 @@ namespace EMBC.DFA.Resources.Submissions
             };
         }
 
-        private static Collection<dfa_occupant> Map(Occupant[] occupants)
+        public static Collection<dfa_occupant> Map(Occupant[] occupants)
         {
             var ret = new Collection<dfa_occupant>();
             foreach (var oc in occupants)
@@ -189,7 +189,7 @@ namespace EMBC.DFA.Resources.Submissions
             return ret;
         }
 
-        private static dfa_occupant Map(Occupant occupant)
+        public static dfa_occupant Map(Occupant occupant)
         {
             return new dfa_occupant
             {
@@ -197,7 +197,7 @@ namespace EMBC.DFA.Resources.Submissions
             };
         }
 
-        private static Collection<dfa_cleanuplog> Map(CleanUpLog[] logs)
+        public static Collection<dfa_cleanuplog> Map(CleanUpLog[] logs)
         {
             var ret = new Collection<dfa_cleanuplog>();
             foreach (var log in logs)
@@ -207,7 +207,7 @@ namespace EMBC.DFA.Resources.Submissions
             return ret;
         }
 
-        private static dfa_cleanuplog Map(CleanUpLog log)
+        public static dfa_cleanuplog Map(CleanUpLog log)
         {
             return new dfa_cleanuplog
             {
@@ -218,7 +218,7 @@ namespace EMBC.DFA.Resources.Submissions
             };
         }
 
-        private static Collection<dfa_damageditem> Map(DamageItem[] items)
+        public static Collection<dfa_damageditem> Map(DamageItem[] items)
         {
             var ret = new Collection<dfa_damageditem>();
             foreach (var item in items)
@@ -228,7 +228,7 @@ namespace EMBC.DFA.Resources.Submissions
             return ret;
         }
 
-        private static dfa_damageditem Map(DamageItem item)
+        public static dfa_damageditem Map(DamageItem item)
         {
             return new dfa_damageditem
             {

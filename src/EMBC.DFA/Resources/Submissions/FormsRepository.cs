@@ -4,6 +4,7 @@ using EMBC.DFA.Dynamics;
 using EMBC.Utilities.Runtime;
 using Microsoft.Extensions.DependencyInjection;
 using EMBC.DFA.Dynamics.Microsoft.Dynamics.CRM;
+using System.Linq;
 
 namespace EMBC.DFA.Resources.Submissions
 {
@@ -20,41 +21,55 @@ namespace EMBC.DFA.Resources.Submissions
         private async Task<string> Handle(SubmitGovFormCommand f)
         {
             var ctx = CallContext.Current.Services.GetRequiredService<IDfaContextFactory>().Create();
+            var contact = Mappings.Map(f.Form.Applicant);
+            ctx.AddTocontacts(contact);
+            await ctx.SaveChangesAsync();
+            ctx.DetachAll();
 
+            var addedContact = ctx.contacts.Where(c => c.firstname == contact.firstname && c.lastname == contact.lastname).FirstOrDefault();
             var incident = Mappings.Map(f.Form);
-            incident.incidentid = Guid.NewGuid();
             ctx.AddToincidents(incident);
-            //await ctx.SaveChangesAsync();
-            //ctx.DetachAll();
+            ctx.SetLink(incident, nameof(incident.customerid_contact), addedContact);
+            await ctx.SaveChangesAsync();
+            ctx.DetachAll();
 
-            return await Task.FromResult("caseId");
+            return incident.incidentid.ToString();
         }
 
         private async Task<string> Handle(SubmitIndFormCommand f)
         {
             var ctx = CallContext.Current.Services.GetRequiredService<IDfaContextFactory>().Create();
+            var contact = Mappings.Map(f.Form.Applicant);
+            ctx.AddTocontacts(contact);
+            await ctx.SaveChangesAsync();
+            ctx.DetachAll();
 
+            var addedContact = ctx.contacts.Where(c => c.firstname == contact.firstname && c.lastname == contact.lastname).FirstOrDefault();
             var incident = Mappings.Map(f.Form);
-            incident.incidentid = Guid.NewGuid();
             ctx.AddToincidents(incident);
-            //await ctx.SaveChangesAsync();
-            //ctx.DetachAll();
+            ctx.SetLink(incident, nameof(incident.customerid_contact), addedContact);
+            await ctx.SaveChangesAsync();
+            ctx.DetachAll();
 
-            return await Task.FromResult("caseId");
+            return incident.incidentid.ToString();
         }
 
         private async Task<string> Handle(SubmitSmbFormCommand f)
         {
             var ctx = CallContext.Current.Services.GetRequiredService<IDfaContextFactory>().Create();
+            var contact = Mappings.Map(f.Form.Applicant);
+            ctx.AddTocontacts(contact);
+            await ctx.SaveChangesAsync();
+            ctx.DetachAll();
 
+            var addedContact = ctx.contacts.Where(c => c.firstname == contact.firstname && c.lastname == contact.lastname).FirstOrDefault();
             var incident = Mappings.Map(f.Form);
-            incident.incidentid = Guid.NewGuid();
             ctx.AddToincidents(incident);
-            //await ctx.SaveChangesAsync();
-            //ctx.DetachAll();
+            ctx.SetLink(incident, nameof(incident.customerid_contact), addedContact);
+            await ctx.SaveChangesAsync();
+            ctx.DetachAll();
 
-            //return incident.incidentid.ToString();
-            return await Task.FromResult("caseId");
+            return incident.incidentid.ToString();
         }
     }
 }
