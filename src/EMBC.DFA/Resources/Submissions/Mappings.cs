@@ -58,9 +58,10 @@ namespace EMBC.DFA.Resources.Submissions
 
                 dfa_primaryapplicantprintname = form.SignerName,
                 dfa_primaryapplicantsigneddate = form.SignatureDate,
-                //signature
+                entityimage = Convert.FromBase64String(form.Signature.Substring(form.Signature.IndexOf(',') + 1)),
                 dfa_secondaryapplicantprintname = form.OtherSignerName,
                 dfa_secondaryapplicantsigneddate = form.OtherSignatureDate,
+                //dfa_secondaryapplicantsignature = form.OtherSignature,
                 //signature
             };
 
