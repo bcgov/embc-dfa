@@ -5956,77 +5956,82 @@
         <Key>
           <PropertyRef Name="dfa_appapplicationid" />
         </Key>
-        <Property Name="dfa_organizationstructureandpurposestatemente" Type="Edm.Boolean" />
-        <Property Name="dfa_farmoperation" Type="Edm.String" Unicode="false" />
-        <Property Name="dfa_isthispropertyyourp" Type="Edm.Boolean" />
-        <Property Name="dfa_orgregistrationproofunderbcsocietya" Type="Edm.Boolean" />
-        <Property Name="dfa_causeofdamageloss" Type="Edm.String" Unicode="false" />
-        <Property Name="_dfa_applicant_value" Type="Edm.Guid" />
-        <Property Name="dfa_ownedandoperatedbya" Type="Edm.Boolean" />
-        <Property Name="dfa_wereyouevacuatedduringtheevent" Type="Edm.Boolean" />
-        <Property Name="dfa_dateofdamage" Type="Edm.DateTimeOffset" />
-        <Property Name="importsequencenumber" Type="Edm.Int32" />
-        <Property Name="dfa_proofofownership" Type="Edm.Boolean" />
-        <Property Name="dfa_damagedpropertystreet1" Type="Edm.String" Unicode="false" />
-        <Property Name="_dfa_areacommunityid_value" Type="Edm.Guid" />
-        <Property Name="dfa_alistingofthedirectors" Type="Edm.Boolean" />
         <Property Name="dfa_mailingaddressstreet1" Type="Edm.String" Unicode="false" />
-        <Property Name="dfa_mailingaddressprovince" Type="Edm.String" Unicode="false" />
-        <Property Name="timezoneruleversionnumber" Type="Edm.Int32" />
-        <Property Name="dfa_manufacturedhom" Type="Edm.Boolean" />
-        <Property Name="_modifiedby_value" Type="Edm.Guid" />
-        <Property Name="dfa_mostrecentcompletecorporateincometaxretur" Type="Edm.Boolean" />
-        <Property Name="overriddencreatedon" Type="Edm.DateTimeOffset" />
-        <Property Name="statecode" Type="Edm.Int32" />
-        <Property Name="dfa_eligibleforbchomegrantonthisproperty" Type="Edm.Boolean" />
-        <Property Name="statuscode" Type="Edm.Int32" />
-        <Property Name="dfa_selectsections" Type="Edm.Int32" />
-        <Property Name="dfa_doyouhaveinsurancecoverage" Type="Edm.Boolean" />
-        <Property Name="_owninguser_value" Type="Edm.Guid" />
-        <Property Name="dfa_damagedpropertystreet2" Type="Edm.String" Unicode="false" />
-        <Property Name="_owningbusinessunit_value" Type="Edm.Guid" />
-        <Property Name="dfa_description" Type="Edm.String" Unicode="false" />
-        <Property Name="dfa_damagedpropertyprovince" Type="Edm.String" Unicode="false" />
-        <Property Name="dfa_primaryapplicantprintname" Type="Edm.String" Unicode="false" />
-        <Property Name="dfa_name" Type="Edm.String" Unicode="false" />
-        <Property Name="dfa_appapplicationid" Type="Edm.Guid" />
-        <Property Name="dfa_damagedpropertypostalcode" Type="Edm.String" Unicode="false" />
-        <Property Name="dfa_secondaryapplicantsigneddate" Type="Edm.DateTimeOffset" />
-        <Property Name="_dfa_buildingownerlandlord_value" Type="Edm.Guid" />
-        <Property Name="modifiedon" Type="Edm.DateTimeOffset" />
-        <Property Name="dfa_mailingaddressstreet2" Type="Edm.String" Unicode="false" />
-        <Property Name="dfa_causeofdamagelos" Type="Edm.Int32" />
-        <Property Name="dfa_primaryapplicantsigneddate" Type="Edm.DateTimeOffset" />
-        <Property Name="_owningteam_value" Type="Edm.Guid" />
-        <Property Name="dfa_acopyofarentalagreementorlease" Type="Edm.Boolean" />
-        <Property Name="dfa_indigenousstatus" Type="Edm.Boolean" />
-        <Property Name="dfa_accountlegalname" Type="Edm.String" Unicode="false" />
-        <Property Name="dfa_comments" Type="Edm.String" Unicode="false" />
-        <Property Name="versionnumber" Type="Edm.Int64" />
-        <Property Name="dfa_doyourlossestotalmorethan1000" Type="Edm.Boolean" />
-        <Property Name="dfa_indigenousreserve" Type="Edm.Boolean" />
-        <Property Name="createdon" Type="Edm.DateTimeOffset" />
-        <Property Name="dfa_businessmanagedbyallownersondaytodaybasis" Type="Edm.Boolean" />
-        <Property Name="dfa_nameoffirstnationsr" Type="Edm.String" Unicode="false" />
-        <Property Name="_modifiedonbehalfby_value" Type="Edm.Guid" />
-        <Property Name="_createdonbehalfby_value" Type="Edm.Guid" />
-        <Property Name="_createdby_value" Type="Edm.Guid" />
         <Property Name="utcconversiontimezonecode" Type="Edm.Int32" />
-        <Property Name="dfa_applicanttype" Type="Edm.Int32" />
-        <Property Name="dfa_grossrevenues100002000000beforedisaster" Type="Edm.Boolean" />
+        <Property Name="_owningteam_value" Type="Edm.Guid" />
+        <Property Name="_createdonbehalfby_value" Type="Edm.Guid" />
+        <Property Name="dfa_damagedpropertyprovince" Type="Edm.String" Unicode="false" />
+        <Property Name="dfa_damagedpropertypostalcode" Type="Edm.String" Unicode="false" />
         <Property Name="dfa_haveinvoicesreceiptsforcleanuporrepairs" Type="Edm.Boolean" />
-        <Property Name="dfa_employlessthan50employeesatanyonetime" Type="Edm.Boolean" />
+        <Property Name="dfa_description" Type="Edm.String" Unicode="false" />
+        <Property Name="dfa_businessmanagedbyallownersondaytodaybasis" Type="Edm.Boolean" />
+        <Property Name="dfa_organizationstructureandpurposestatemente" Type="Edm.Boolean" />
+        <Property Name="dfa_causeofdamagelos" Type="Edm.Int32" />
+        <Property Name="_modifiedby_value" Type="Edm.Guid" />
+        <Property Name="dfa_doyourlossestotalmorethan1000" Type="Edm.Boolean" />
+        <Property Name="statecode" Type="Edm.Int32" />
+        <Property Name="versionnumber" Type="Edm.Int64" />
         <Property Name="dfa_secondaryapplicantprintname" Type="Edm.String" Unicode="false" />
-        <Property Name="dfa_primaryapplicantsigned" Type="Edm.Boolean" />
-        <Property Name="dfa_areyounowresidingintheresidence" Type="Edm.Boolean" />
-        <Property Name="dfa_mailingaddresspostalcode" Type="Edm.String" Unicode="false" />
-        <Property Name="_dfa_areacommunity2id_value" Type="Edm.Guid" />
-        <Property Name="dfa_writtenconfirmationofinsurancenotpurchase" Type="Edm.Boolean" />
-        <Property Name="dfa_farmoperationderivesthatpersonsmajorincom" Type="Edm.Boolean" />
+        <Property Name="dfa_mailingaddressprovince" Type="Edm.String" Unicode="false" />
+        <Property Name="overriddencreatedon" Type="Edm.DateTimeOffset" />
         <Property Name="dfa_dateofdamageto" Type="Edm.DateTimeOffset" />
+        <Property Name="modifiedon" Type="Edm.DateTimeOffset" />
+        <Property Name="_owningbusinessunit_value" Type="Edm.Guid" />
+        <Property Name="dfa_isthispropertyyourp" Type="Edm.Boolean" />
+        <Property Name="importsequencenumber" Type="Edm.Int32" />
+        <Property Name="dfa_secondaryapplicantsigneddate" Type="Edm.DateTimeOffset" />
+        <Property Name="dfa_writtenconfirmationofinsurancenotpurchase" Type="Edm.Boolean" />
+        <Property Name="_owninguser_value" Type="Edm.Guid" />
+        <Property Name="entityimage_timestamp" Type="Edm.Int64" />
+        <Property Name="dfa_ownedandoperatedbya" Type="Edm.Boolean" />
+        <Property Name="_createdby_value" Type="Edm.Guid" />
+        <Property Name="dfa_wereyouevacuatedduringtheevent" Type="Edm.Boolean" />
+        <Property Name="dfa_farmoperationderivesthatpersonsmajorincom" Type="Edm.Boolean" />
+        <Property Name="dfa_damagedpropertystreet2" Type="Edm.String" Unicode="false" />
+        <Property Name="dfa_farmoperation" Type="Edm.String" Unicode="false" />
+        <Property Name="dfa_secondaryapplicantsignature" Type="Edm.String" Unicode="false" />
+        <Property Name="dfa_mailingaddressstreet2" Type="Edm.String" Unicode="false" />
+        <Property Name="dfa_areyounowresidingintheresidence" Type="Edm.Boolean" />
+        <Property Name="dfa_doyouhaveinsurancecoverage" Type="Edm.Boolean" />
+        <Property Name="createdon" Type="Edm.DateTimeOffset" />
+        <Property Name="dfa_employlessthan50employeesatanyonetime" Type="Edm.Boolean" />
+        <Property Name="dfa_eligibleforbchomegrantonthisproperty" Type="Edm.Boolean" />
+        <Property Name="dfa_mailingaddresspostalcode" Type="Edm.String" Unicode="false" />
+        <Property Name="dfa_acopyofarentalagreementorlease" Type="Edm.Boolean" />
+        <Property Name="dfa_applicanttype" Type="Edm.Int32" />
+        <Property Name="dfa_indigenousstatus" Type="Edm.Boolean" />
+        <Property Name="dfa_grossrevenues100002000000beforedisaster" Type="Edm.Boolean" />
+        <Property Name="_dfa_buildingownerlandlord_value" Type="Edm.Guid" />
+        <Property Name="entityimage_url" Type="Edm.String" Unicode="false" />
+        <Property Name="dfa_dateofdamage" Type="Edm.DateTimeOffset" />
+        <Property Name="statuscode" Type="Edm.Int32" />
+        <Property Name="entityimage" Type="Edm.Binary" />
+        <Property Name="_dfa_areacommunity2id_value" Type="Edm.Guid" />
+        <Property Name="dfa_name" Type="Edm.String" Unicode="false" />
+        <Property Name="dfa_proofofownership" Type="Edm.Boolean" />
         <Property Name="dfa_secondaryapplicantsigned" Type="Edm.Boolean" />
+        <Property Name="dfa_orgregistrationproofunderbcsocietya" Type="Edm.Boolean" />
         <Property Name="_ownerid_value" Type="Edm.Guid" />
+        <Property Name="dfa_damagedpropertystreet1" Type="Edm.String" Unicode="false" />
+        <Property Name="entityimageid" Type="Edm.Guid" />
+        <Property Name="dfa_mostrecentcompletecorporateincometaxretur" Type="Edm.Boolean" />
+        <Property Name="dfa_primaryapplicantsigneddate" Type="Edm.DateTimeOffset" />
+        <Property Name="_modifiedonbehalfby_value" Type="Edm.Guid" />
+        <Property Name="dfa_appapplicationid" Type="Edm.Guid" />
+        <Property Name="dfa_primaryapplicantprintname" Type="Edm.String" Unicode="false" />
+        <Property Name="dfa_selectsections" Type="Edm.Int32" />
+        <Property Name="dfa_indigenousreserve" Type="Edm.Boolean" />
+        <Property Name="timezoneruleversionnumber" Type="Edm.Int32" />
         <Property Name="dfa_mostrecentlyfiledfinancialstatements" Type="Edm.Boolean" />
+        <Property Name="dfa_comments" Type="Edm.String" Unicode="false" />
+        <Property Name="dfa_nameoffirstnationsr" Type="Edm.String" Unicode="false" />
+        <Property Name="dfa_manufacturedhom" Type="Edm.Boolean" />
+        <Property Name="dfa_alistingofthedirectors" Type="Edm.Boolean" />
+        <Property Name="dfa_primaryapplicantsigned" Type="Edm.Boolean" />
+        <Property Name="dfa_causeofdamageloss" Type="Edm.String" Unicode="false" />
+        <Property Name="_dfa_areacommunityid_value" Type="Edm.Guid" />
+        <Property Name="_dfa_applicant_value" Type="Edm.Guid" />
+        <Property Name="dfa_accountlegalname" Type="Edm.String" Unicode="false" />
         <NavigationProperty Name="createdby" Type="mscrm.systemuser" Nullable="false" Partner="lk_dfa_appapplication_createdby">
           <ReferentialConstraint Property="_createdby_value" ReferencedProperty="systemuserid" />
         </NavigationProperty>

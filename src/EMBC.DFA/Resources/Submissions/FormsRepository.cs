@@ -65,7 +65,7 @@ namespace EMBC.DFA.Resources.Submissions
             applicant.dfa_appcontactid = Guid.NewGuid();
             ctx.AddTodfa_appcontacts(applicant);
             ctx.SetLink(application, nameof(dfa_appapplication.dfa_Applicant), applicant);
-            ctx.SetLink(application, nameof(dfa_appapplication.dfa_areacommunityid), ctx.LookupCommunityByName(f.Form.DamagePropertyAddress.City));
+            //ctx.SetLink(application, nameof(dfa_appapplication.dfa_areacommunityid), ctx.LookupCommunityByName(f.Form.DamagePropertyAddress.City));
 
             foreach (var secondary in application.dfa_dfa_appapplication_dfa_appsecondaryapplicant_AppApplicationId)
             {
