@@ -1,6 +1,6 @@
 ﻿{
   "ProviderId": "Microsoft.OData.ConnectedService",
-  "Version": "0.13.0.0",
+  "Version": "1.0.1.0",
   "GettingStartedDocument": {
     "Uri": "http://odata.github.io/odata.net/"
   },
@@ -27,7 +27,7 @@
     "MakeTypesInternal": false,
     "OpenGeneratedFilesInIDE": false,
     "GenerateMultipleFiles": false,
-    "CustomHttpHeaders": "Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsIng1dCI6Ims0Y3BkRmdybU0yMHJhcThYVVRxMVlpaXNISSJ9.eyJhdWQiOiJodHRwczovL2VtYmMtZGZhLmRldi5qYWcuZ292LmJjLmNhL2FwaS9kYXRhL3Y5LjAvIiwiaXNzIjoiaHR0cDovL3N0c3Rlc3QuZ292LmJjLmNhL2FkZnMvc2VydmljZXMvdHJ1c3QiLCJpYXQiOjE2NzU3MDgyNTgsImV4cCI6MTY3NTcxMTg1OCwidXBuIjoiZGZhYXBpZEBnb3YuYmMuY2EiLCJ1bmlxdWVfbmFtZSI6IklESVJcXERGQUFQSUQiLCJhcHB0eXBlIjoiQ29uZmlkZW50aWFsIiwiYXBwaWQiOiIzMmNlZGExMS1lMGUxLTQ2ZWUtOTliMC04M2FlMzY1MzIyMWQiLCJhdXRobWV0aG9kIjoidXJuOm9hc2lzOm5hbWVzOnRjOlNBTUw6Mi4wOmFjOmNsYXNzZXM6UGFzc3dvcmRQcm90ZWN0ZWRUcmFuc3BvcnQiLCJhdXRoX3RpbWUiOiIyMDIzLTAyLTA2VDE4OjMwOjU4LjQzOVoiLCJ2ZXIiOiIxLjAiLCJzY3AiOiJvcGVuaWQifQ.k76Yo5W7bkNLPJP4vHbOvGqq_D_k5nMASbw1eeskDiBSRLlDculWO8tJdtItz8vcYWOJVotsNkvEdKbKoPRhBh9bcMmL2ETvI-6NdqOU4-DbiInWdkHZKqyIRSM0LuuH1Ulcb2kuVKyGlaQOIG8NUxOVSmOyhx7T_CY-RzZZ1TrkD9H7XWXcONSNd_iodynAOg7U1rtm-B0hW5eBm_FguiSPt6haUcD8O5UTLysckSL49iOoTt3zNwWL9gbNeeQJrjQZHEouEwqFEQNNasETjdaiWkc83MQ1DuzBwv0UP7va8aMZCE5KLW6Q1A9pYEW22P5-686v0TYuGo1Q3ozz7Q",
+    "CustomHttpHeaders": null,
     "IncludeWebProxy": false,
     "WebProxyHost": null,
     "IncludeWebProxyNetworkCredentials": false,
@@ -36,7 +36,7 @@
     "WebProxyNetworkCredentialsPassword": null,
     "WebProxyNetworkCredentialsDomain": null,
     "IncludeCustomHeaders": true,
-    "StoreCustomHttpHeaders": true,
+    "StoreCustomHttpHeaders": false,
     "ExcludedSchemaTypes": []
   }
 }
