@@ -15,6 +15,7 @@ namespace EMBC.DFA.Managers.Intake
                 NewSmbFormSubmissionCommand c => await Handle(c),
                 NewGovFormSubmissionCommand c => await Handle(c),
                 NewIndFormSubmissionCommand c => await Handle(c),
+                TestCommand c => await Handle(c),
                 _ => throw new NotSupportedException($"{cmd.GetType().Name} is not supported")
             };
         }
@@ -43,6 +44,13 @@ namespace EMBC.DFA.Managers.Intake
             var submissionsRepository = CallContext.Current.Services.GetRequiredService<ISubmissionsRepository>();
             var caseId = await submissionsRepository.Manage(new SubmitIndFormCommand { Form = cmd.Form });
             return await Task.FromResult(caseId);
+        }
+
+        private async Task<string> Handle(TestCommand cmd)
+        {
+            var submissionsRepository = CallContext.Current.Services.GetRequiredService<ISubmissionsRepository>();
+            var res = await submissionsRepository.Query();
+            return await Task.FromResult(res);
         }
     }
 }

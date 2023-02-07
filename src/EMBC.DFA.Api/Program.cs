@@ -91,8 +91,10 @@ app.MapPost("/forms/gov", async ctx =>
 
 app.MapGet("/test", async ctx =>
 {
+    var mgr = CallContext.Current.Services.GetRequiredService<IIntakeManager>();
+    var test = await mgr.Handle(new TestCommand { });
     Console.WriteLine("Testing");
-    await ctx.Response.WriteAsJsonAsync(new { res = "success" });
+    await ctx.Response.WriteAsJsonAsync(new { res = test });
 }).WithName("Test");
 
 app.Run();
