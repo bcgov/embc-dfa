@@ -20,6 +20,11 @@ namespace EMBC.DFA.Managers.Intake
     public abstract class IntakeQueryResults
     { }
 
+    public class TestCommand : IntakeCommand
+    {
+    }
+
+
     public class NewSmbFormSubmissionCommand : IntakeCommand
     {
         public SmbForm Form { get; set; } = null!;

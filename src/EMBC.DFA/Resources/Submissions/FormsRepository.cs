@@ -18,6 +18,13 @@ namespace EMBC.DFA.Resources.Submissions
             _ => throw new NotImplementedException($"type {form.GetType().FullName}")
         });
 
+        public async Task<string> Query()
+        {
+            var ctx = CallContext.Current.Services.GetRequiredService<IDfaContextFactory>().Create();
+            var res = ctx.contacts.FirstOrDefault();
+            return await Task.FromResult(res.contactid.ToString());
+        }
+
         private async Task<string> Handle(SubmitGovFormCommand f)
         {
             var ctx = CallContext.Current.Services.GetRequiredService<IDfaContextFactory>().Create();
