@@ -28,4 +28,10 @@ namespace EMBC.DFA.Resources.Submissions
     {
         public GovForm Form { get; set; } = null!;
     }
+
+    public enum DFATwoOptions
+    {
+        Yes = 222710000,
+        No = 222710001
+    }
 }

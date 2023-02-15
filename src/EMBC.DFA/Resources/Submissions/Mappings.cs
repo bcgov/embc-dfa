@@ -38,13 +38,13 @@ namespace EMBC.DFA.Resources.Submissions
                 dfa_dateofdamage = form.DamageFrom,
                 dfa_dateofdamageto = form.DamageTo,
 
-                dfa_businessmanagedbyallownersondaytodaybasis = form.IsBusinessManaged,
+                dfa_businessmanagedbyallownersondaytodaybasis = (int?)(form.IsBusinessManaged.HasValue && form.IsBusinessManaged.Value ? DFATwoOptions.Yes : DFATwoOptions.No),
                 dfa_grossrevenues100002000000beforedisaster = form.AreRevenuesInRange,
-                dfa_employlessthan50employeesatanyonetime = form.EmployLessThanFifty,
+                dfa_employlessthan50employeesatanyonetime = (int?)(form.EmployLessThanFifty.HasValue && form.EmployLessThanFifty.Value ? DFATwoOptions.Yes : DFATwoOptions.No),
 
-                dfa_farmoperation = form.DevelopingOperaton.ToString(),
-                dfa_ownedandoperatedbya = form.FullTimeFarmer,
-                dfa_farmoperationderivesthatpersonsmajorincom = form.MajorityIncome,
+                dfa_farmoperation = (int?)(form.DevelopingOperaton.HasValue && form.DevelopingOperaton.Value ? DFATwoOptions.Yes : DFATwoOptions.No),
+                dfa_ownedandoperatedbya = (int?)(form.FullTimeFarmer.HasValue && form.FullTimeFarmer.Value ? DFATwoOptions.Yes : DFATwoOptions.No),
+                dfa_farmoperationderivesthatpersonsmajorincom = (int?)(form.MajorityIncome.HasValue && form.MajorityIncome.Value ? DFATwoOptions.Yes : DFATwoOptions.No),
 
                 dfa_writtenconfirmationofinsurancenotpurchase = form.CouldNotPurchaseInsurance,
                 dfa_acopyofarentalagreementorlease = form.HasRentalAgreement,
@@ -314,6 +314,7 @@ namespace EMBC.DFA.Resources.Submissions
             Landslide = 222710001,
             Windstorm = 222710002,
             Other = 222710003,
+            Wildfire = 222710004,
         }
     }
 }
