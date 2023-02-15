@@ -9,11 +9,11 @@ namespace EMBC.Tests.Integration.DFA.Api
         [Test]
         public async Task GetSecurityToken()
         {
-            //var host = Application.Host;
+            var host = Application.Host;
 
-            //var tokenProvider = host.Services.GetRequiredService<ISecurityTokenProvider>();
-            //var token = await tokenProvider.AcquireToken();
-            //Console.WriteLine("Authorization: Bearer " + token);
+            var tokenProvider = host.Services.GetRequiredService<ISecurityTokenProvider>();
+            var token = await tokenProvider.AcquireToken();
+            Console.WriteLine("Authorization: Bearer " + token);
         }
 
         [Test]
