@@ -91,6 +91,7 @@ namespace EMBC.DFA.Managers.Intake
 
         public List<CleanUpLog> CleanUpLogs { get; set; }
         public List<DamageItem> DamagedItems { get; set; }
+        public List<AttachmentData> Documents { get; set; }
     }
 
     public class IndForm
@@ -99,16 +100,18 @@ namespace EMBC.DFA.Managers.Intake
         public bool IndigenousStatus { get; set; }
         public bool OnFirstNationReserve { get; set; }
         public string? NameOfFirstNationsReserve { get; set; }
+        public string? FirstNationsComments { get; set; }
 
         public Applicant Applicant { get; set; }
+        public List<OtherApplicant> SecondaryApplicants { get; set; }
+        public List<AltContact> AltContacts { get; set; }
+
         public DateTime DamageFrom { get; set; }
         public DateTime DamageTo { get; set; }
 
-        public Address? DamagePropertyAddress { get; set; }
-        public Address? MailingAddress { get; set; }
+        public Address DamagePropertyAddress { get; set; }
+        public Address MailingAddress { get; set; }
 
-        public string? AlternateContact { get; set; }
-        public string? AlternatePhoneNumber { get; set; }
 
         public BuildingOwner BuildingOwner { get; set; }
 
@@ -121,10 +124,20 @@ namespace EMBC.DFA.Managers.Intake
         public bool WasEvacuated { get; set; }
         public DateTime? DateReturned { get; set; }
         public bool InResidence { get; set; }
+        public bool HasRentalAgreement { get; set; }
+        public bool HasReceipts { get; set; }
 
-        public Occupant[] Occupants { get; set; }
-        public CleanUpLog[] CleanUpLogs { get; set; }
-        public DamageItem[] DamagedItems { get; set; }
+        public string Signature { get; set; }
+        public string SignerName { get; set; }
+        public DateTime SignatureDate { get; set; }
+        public string OtherSignature { get; set; }
+        public string OtherSignerName { get; set; }
+        public DateTime? OtherSignatureDate { get; set; }
+
+        public List<Occupant> Occupants { get; set; }
+        public List<CleanUpLog> CleanUpLogs { get; set; }
+        public List<DamageItem> DamagedItems { get; set; }
+        public List<AttachmentData> Documents { get; set; }
 
         //Not seeing these fields anywhere in CRM
         //public string Signature { get; set; }
@@ -183,8 +196,8 @@ namespace EMBC.DFA.Managers.Intake
     public class BuildingOwner
     {
         public string? Name { get; set; }
-        public string? phone1 { get; set; }
-        public string? phone2 { get; set; }
+        public string? Phone { get; set; }
+        public string? Email { get; set; }
     }
 
     public class DamageInfo
@@ -199,6 +212,7 @@ namespace EMBC.DFA.Managers.Intake
     {
         public string FirstName { get; set; }
         public string LastName { get; set; }
+        public string Relationship { get; set; }
     }
 
     public class OtherApplicant
@@ -229,6 +243,13 @@ namespace EMBC.DFA.Managers.Intake
     {
         public string RoomName { get; set; }
         public string Description { get; set; }
+    }
+
+    public class AttachmentData
+    {
+        public string FileName { get; set; }
+        public string FileType { get; set; }
+        public string Url { get; set; }
     }
 
     public enum ApplicantType
