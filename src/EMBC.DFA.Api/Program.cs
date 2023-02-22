@@ -46,9 +46,6 @@ app.MapHealthChecks("/hc/live", new HealthCheckOptions() { Predicate = check => 
 
 app.MapPost("/forms/smb", async ctx =>
 {
-    //Console.WriteLine("Testing");
-    //await ctx.Response.WriteAsJsonAsync(new { res = "success" });
-
     var model = await ctx.Request.ReadJsonModelAsync<EMBC.DFA.Api.Models.SmbForm>();
     if (!model.IsValid)
     {

@@ -85,7 +85,7 @@ namespace EMBC.Tests.Integration.DFA.Api
                     primaryContactNameLastFirst2 = "autotest-Mr Contact",
 
                     cleanupLogDetails1 = new[] {
-                        new SecondaryApplicant
+                        new SMB_SecondaryApplicant
                         {
                             applicantType = SecondaryApplicantTypes.Organization,
                             FirstNameofSecondary = "autotest-OrgName",
@@ -197,8 +197,8 @@ namespace EMBC.Tests.Integration.DFA.Api
                     primaryContactNameLastFirst = "John",
                     primaryContactNameLastFirst1 = "Test",
                     primaryContactNameLastFirst2 = "Q",
-                    dateOfDamage = DateTime.Now.AddDays(-2),
-                    dateOfDamage1 = DateTime.Now,
+                    //dateOfDamage = DateTime.Now.AddDays(-2),
+                    //dateOfDamage1 = DateTime.Now,
                     street1 = "123 Test St.",
                     street3 = String.Empty,
                     cityTown1 = "Langley",
@@ -212,11 +212,11 @@ namespace EMBC.Tests.Integration.DFA.Api
                     businessTelephoneNumber = "(778) 321-4567",
                     cellularTelephoneNumber = "(778) 123-4567",
                     eMailAddress = "test@test.com",
-                    alternateContactNameWhereYouCanBeReachedIfApplicable = String.Empty,
-                    alternatePhoneNumber = String.Empty,
+                    //alternateContactNameWhereYouCanBeReachedIfApplicable = String.Empty,
+                    //alternatePhoneNumber = String.Empty,
                     provideRegisteredBuildingOwnerSAndOrLandlordSNameS = "Landlord",
                     contactTelephoneNumberS = "(604) 123-4567",
-                    contactTelephoneNumberS1 = "(604) 321-4567",
+                    //contactTelephoneNumberS1 = "(604) 321-4567",
                     manufacturedHome = new ManufacturedHome
                     {
                         no = false,
@@ -254,12 +254,10 @@ namespace EMBC.Tests.Integration.DFA.Api
                     ifYouHaveInvoicesReceiptsForCleanupOrRepairsPleaseHaveThemAvailableDuringTheSiteMeetingToHelpTheEvaluatorIdentifyEligibleCosts = true,
                     signature1 = defaultSignature,
                     printName1 = "Signer Name",
-                    dateYyyyMDay1 = DateTime.Now,
+                    dateYyyyMDay1 = DateTime.Now.ToString(),
                     signature2 = defaultSignature,
                     printName2 = "Second Signer",
-                    dateYyyyMDay2 = DateTime.Now,
-                    applicantFirstName = String.Empty,
-                    applicantFirstName1 = String.Empty,
+                    dateYyyyMDay2 = DateTime.Now.ToString(),
                     cleanupLogDetails = new[] {
                         new CleanUpDetail
                         {
@@ -269,8 +267,6 @@ namespace EMBC.Tests.Integration.DFA.Api
                             nameOfFamilyMemberVolunteer = "Test Member"
                         }
                     },
-                    applicantFirstName2 = String.Empty,
-                    applicantFirstName3 = String.Empty,
                     listByRoomItemsSubmittedForDamageAssessment = new[] {
                         new DamagedItem
                         {

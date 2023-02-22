@@ -27,7 +27,7 @@
         public string primaryContactNameLastFirst1 { get; set; } //Business, Farm or Organization Legal Name
         public string primaryContactNameLastFirst2 { get; set; } //Name of Contact Person
 
-        public SecondaryApplicant[] cleanupLogDetails1 { get; set; }
+        public SMB_SecondaryApplicant[] cleanupLogDetails1 { get; set; }
         public AlternateContact[] otherContacts { get; set; }
 
         public string street1 { get; set; } //Damaged Property Address street 1
@@ -70,6 +70,9 @@
         public CleanUpDetail[] cleanupLogDetails { get; set; }
 
         public DamagedItem[] listByRoomItemsSubmittedForDamageAssessment { get; set; }
+        public CHEF_Attachment[] completedInsuranceTemplate1 { get; set; }
+        public CHEF_Attachment[] leaseAgreementsIfApplicable { get; set; }
+        public CHEF_Attachment[] financialDocuments { get; set; }
 
         public bool submit1 { get; set; }
 
@@ -91,7 +94,7 @@
         public string alternatePhoneNumber { get; set; }
     }
 
-    public class SecondaryApplicant
+    public class SMB_SecondaryApplicant
     {
         public string applicantType { get; set; }
         public string FirstNameofSecondary { get; set; }

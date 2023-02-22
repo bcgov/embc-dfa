@@ -88,6 +88,7 @@ namespace EMBC.DFA.Api
 
                 CleanUpLogs = new List<CleanUpLog>(),
                 DamagedItems = new List<DamageItem>(),
+                Documents = new List<AttachmentData>(),
             };
 
             foreach (var otherApplicant in source.cleanupLogDetails1)
@@ -132,29 +133,63 @@ namespace EMBC.DFA.Api
                 });
             }
 
+            foreach (var attachment in source.completedInsuranceTemplate1)
+            {
+                ret.Documents.Add(new AttachmentData
+                {
+                    FileName = attachment.originalName,
+                    FileType = "Insurance Template",
+                    Url = attachment.url,
+                });
+            }
+
+            foreach (var attachment in source.leaseAgreementsIfApplicable)
+            {
+                ret.Documents.Add(new AttachmentData
+                {
+                    FileName = attachment.originalName,
+                    FileType = "Lease Agreement",
+                    Url = attachment.url,
+                });
+            }
+
+            foreach (var attachment in source.financialDocuments)
+            {
+                ret.Documents.Add(new AttachmentData
+                {
+                    FileName = attachment.originalName,
+                    FileType = "Financial Document",
+                    Url = attachment.url,
+                });
+            }
+
             return ret;
         }
 
         public static EMBC.DFA.Managers.Intake.IndForm Map(Models.IndForm payload)
         {
             var source = payload.data;
-            return new EMBC.DFA.Managers.Intake.IndForm
+            var ret = new EMBC.DFA.Managers.Intake.IndForm
             {
                 ApplicantType = (ApplicantType)Enum.Parse(typeof(ApplicantType), source.pleaseCheckAppropriateBox, true),
                 IndigenousStatus = source.yes7 == "yes",
                 OnFirstNationReserve = source.yes6 == "yes",
                 NameOfFirstNationsReserve = source.nameOfFirstNationsReserve,
+                FirstNationsComments = source.nameOfFirstNationsReserve,
+
                 Applicant = new Applicant
                 {
                     FirstName = source.primaryContactNameLastFirst,
                     LastName = source.primaryContactNameLastFirst1,
                     Initial = source.primaryContactNameLastFirst2,
-                    Email = source.eMailAddress,
-                    Phone = source.businessTelephoneNumber,
                     Mobile = source.cellularTelephoneNumber,
+                    Phone = source.businessTelephoneNumber,
+                    Email = source.eMailAddress,
+                    AlternatePhone = source.AlternatePhoneNumberofPrimarycontact,
                 },
-                DamageFrom = source.dateOfDamage,
-                DamageTo = source.dateOfDamage1,
+                SecondaryApplicants = new List<OtherApplicant>(),
+                AltContacts = new List<AltContact>(),
+
                 DamagePropertyAddress = new Address
                 {
                     AddressLine1 = source.street1,
@@ -163,6 +198,7 @@ namespace EMBC.DFA.Api
                     Province = source.province1,
                     PostalCode = source.postalCode1
                 },
+
                 MailingAddress = new Address
                 {
                     AddressLine1 = source.mailingAddress,
@@ -171,8 +207,16 @@ namespace EMBC.DFA.Api
                     Province = source.province,
                     PostalCode = source.postalCode
                 },
-                AlternateContact = source.alternateContactNameWhereYouCanBeReachedIfApplicable,
-                AlternatePhoneNumber = source.alternatePhoneNumber,
+                BuildingOwner = new BuildingOwner
+                {
+                    Name = source.provideRegisteredBuildingOwnerSAndOrLandlordSNameS,
+                    Phone = source.contactTelephoneNumberS,
+                    Email = source.emailOfLandlord
+                },
+
+                DamageFrom = source.dateOfDamageFrom,
+                DamageTo = source.dateOfDamageTo,
+
                 DamageInfo = new DamageInfo
                 {
                     ManufacturedHome = source.manufacturedHome.yes,
@@ -180,7 +224,6 @@ namespace EMBC.DFA.Api
                     OtherDescription = source.pleaseSpecifyIfOthers,
                     DamageDescription = source.provideABriefDescriptionOfDamage,
                 },
-                CleanUpLogs = Array.Empty<CleanUpLog>(),
                 HasInsurance = source.yes == "yes",
                 IsPrimaryResidence = source.yes1 == "yes",
                 EligibleForGrant = source.yes2 == "yes",
@@ -188,9 +231,107 @@ namespace EMBC.DFA.Api
                 WasEvacuated = source.yes4 == "yes",
                 InResidence = source.yes5 == "yes",
 
-                Occupants = Array.Empty<Managers.Intake.Occupant>(),
-                DamagedItems = Array.Empty<DamageItem>(),
+                Occupants = new List<Managers.Intake.Occupant>(),
+
+                HasRentalAgreement = source.aCopyOfARentalAgreementOrLeaseIfApplicableForResidentialTenantApplication,
+                HasReceipts = source.ifYouHaveInvoicesReceiptsForCleanupOrRepairsPleaseHaveThemAvailableDuringTheSiteMeetingToHelpTheEvaluatorIdentifyEligibleCosts,
+
+                Signature = source.signature1,
+                SignerName = source.printName1,
+                SignatureDate = DateTime.Parse(source.dateYyyyMDay1),
+
+                OtherSignature = source.signature2,
+                OtherSignerName = source.printName2,
+                OtherSignatureDate = !string.IsNullOrEmpty(source.dateYyyyMDay2) ? DateTime.Parse(source.dateYyyyMDay2) : null,
+
+                CleanUpLogs = new List<CleanUpLog>(),
+                DamagedItems = new List<DamageItem>(),
+                Documents = new List<AttachmentData>(),
             };
+
+            foreach (var otherApplicant in source.SecondaryApplicant)
+            {
+                ret.SecondaryApplicants.Add(new OtherApplicant
+                {
+                    ApplicantType = (SecondaryApplicantType)Enum.Parse(typeof(SecondaryApplicantType), otherApplicant.applicantType, true),
+                    FirstName = otherApplicant.FirstNameofsecondary,
+                    LastName = otherApplicant.lastName,
+                    Email = otherApplicant.emailAddress,
+                    Phone = otherApplicant.phoneNumber,
+                });
+            }
+
+            foreach (var contact in source.otherContacts)
+            {
+                ret.AltContacts.Add(new AltContact
+                {
+                    Name = contact.AlternateContactName,
+                    Email = contact.AlternateEmailAddress,
+                    Phone = contact.AlternateContactPhone,
+                });
+            }
+
+            foreach (var occupant in source.occupants)
+            {
+                ret.Occupants.Add(new Managers.Intake.Occupant
+                {
+                    FirstName = occupant.listTheNamesOfAllFullTimeOccupantsWhoResidedInTheHomeAtTheTimeOfTheEvent,
+                    LastName = occupant.listTheNamesOfAllFullTimeOccupantsWhoResidedInTheHomeAtTheTimeOfTheEvent1,
+                    Relationship = occupant.relationshipTitle
+                });
+            }
+
+            foreach (var log in source.cleanupLogDetails)
+            {
+                ret.CleanUpLogs.Add(new CleanUpLog
+                {
+                    HoursWorked = log.hoursWorked,
+                    Date = log.dateYyyyMDay,
+                    DescriptionOfWork = log.descriptionOfWork,
+                    ContactName = log.nameOfFamilyMemberVolunteer,
+                });
+            }
+
+            foreach (var roomInfo in source.listByRoomItemsSubmittedForDamageAssessment)
+            {
+                ret.DamagedItems.Add(new DamageItem
+                {
+                    RoomName = roomInfo.roomName,
+                    Description = roomInfo.listByRoomItemsSubmittedForDamageAssessment1,
+                });
+            }
+
+            foreach (var attachment in source.completedInsuranceTemplate)
+            {
+                ret.Documents.Add(new AttachmentData
+                {
+                    FileName = attachment.originalName,
+                    FileType = "Insurance Template",
+                    Url = attachment.url,
+                });
+            }
+
+            foreach (var attachment in source.governmentIssuedIdDlServiceCardBcId)
+            {
+                ret.Documents.Add(new AttachmentData
+                {
+                    FileName = attachment.originalName,
+                    FileType = "Government ID",
+                    Url = attachment.url,
+                });
+            }
+
+            foreach (var attachment in source.signedTenancyAgreementIfNoTenancyAgreementPleaseProvideTheLandlordContactInformationAndAPieceOfMailWithTheAddress)
+            {
+                ret.Documents.Add(new AttachmentData
+                {
+                    FileName = attachment.originalName,
+                    FileType = "Tenancy Agreement / Mail Indicating Address",
+                    Url = attachment.url,
+                });
+            }
+
+            return ret;
         }
 
         public static EMBC.DFA.Managers.Intake.GovForm Map(Models.GovForm payload)
