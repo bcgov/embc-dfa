@@ -4,8 +4,11 @@ using EMBC.DFA.Dynamics;
 using EMBC.DFA.Managers.Intake;
 using EMBC.DFA.Resources.Submissions;
 using EMBC.Utilities;
+using EMBC.DFA.Services;
 using EMBC.Utilities.Runtime;
 using Microsoft.AspNetCore.Diagnostics.HealthChecks;
+using Medallion.Threading;
+using Medallion.Threading.WaitHandles;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -15,6 +18,8 @@ builder.Services.AddEndpointsApiExplorer()
     .AddCache(string.Empty)
     .AddDfaDynamics(builder.Configuration)
     .AddIntakeManager()
+    .AddSingleton<IDistributedSemaphoreProvider>(new WaitHandleDistributedSynchronizationProvider())
+    .AddBackgroundTasks()
     .AddSubmissionsRepository()
     .AddHealthChecks()
     ;
