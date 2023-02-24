@@ -9,7 +9,7 @@ using EMBC.Utilities.Runtime;
 using Microsoft.AspNetCore.Diagnostics.HealthChecks;
 using Medallion.Threading;
 using Medallion.Threading.WaitHandles;
-using EMBC.DFA.Services.CHEFS;
+//using EMBC.DFA.Services.CHEFS;
 
 var builder = WebApplication.CreateBuilder(args);
 
