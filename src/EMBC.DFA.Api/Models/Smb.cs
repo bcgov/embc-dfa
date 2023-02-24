@@ -27,8 +27,8 @@
         public string primaryContactNameLastFirst1 { get; set; } //Business, Farm or Organization Legal Name
         public string primaryContactNameLastFirst2 { get; set; } //Name of Contact Person
 
-        public SMB_SecondaryApplicant[] cleanupLogDetails1 { get; set; }
-        public AlternateContact[] otherContacts { get; set; }
+        public SMB_SecondaryApplicant[] cleanupLogDetails1 { get; set; } = Array.Empty<SMB_SecondaryApplicant>();
+        public AlternateContact[] otherContacts { get; set; } = Array.Empty<AlternateContact>();
 
         public string street1 { get; set; } //Damaged Property Address street 1
         public string street3 { get; set; } //Damaged Property Address Street 2
@@ -67,12 +67,12 @@
         public string printName2 { get; set; }
         public string? dateYyyyMDay2 { get; set; }
 
-        public CleanUpDetail[] cleanupLogDetails { get; set; }
+        public CleanUpDetail[] cleanupLogDetails { get; set; } = Array.Empty<CleanUpDetail>();
 
-        public DamagedItem[] listByRoomItemsSubmittedForDamageAssessment { get; set; }
-        public CHEF_Attachment[] completedInsuranceTemplate1 { get; set; }
-        public CHEF_Attachment[] leaseAgreementsIfApplicable { get; set; }
-        public CHEF_Attachment[] financialDocuments { get; set; }
+        public DamagedItem[] listByRoomItemsSubmittedForDamageAssessment { get; set; } = Array.Empty<DamagedItem>();
+        public CHEF_Attachment[] completedInsuranceTemplate1 { get; set; } = Array.Empty<CHEF_Attachment>();
+        public CHEF_Attachment[] leaseAgreementsIfApplicable { get; set; } = Array.Empty<CHEF_Attachment>();
+        public CHEF_Attachment[] financialDocuments { get; set; } = Array.Empty<CHEF_Attachment>();
 
         public bool submit1 { get; set; }
 
