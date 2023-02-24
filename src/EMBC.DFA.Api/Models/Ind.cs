@@ -21,8 +21,8 @@
         public string eMailAddress { get; set; } //Applicant Email
         public string AlternatePhoneNumberofPrimarycontact { get; set; } //Applicant Alt Phone
 
-        public IND_SecondaryApplicant[] SecondaryApplicant { get; set; }
-        public IND_OtherContac[] otherContacts { get; set; }
+        public IND_SecondaryApplicant[] SecondaryApplicant { get; set; } = Array.Empty<IND_SecondaryApplicant>();
+        public IND_OtherContac[] otherContacts { get; set; } = Array.Empty<IND_OtherContac>();
 
         public string street1 { get; set; } //Damaged Property Address street 1
         public string street3 { get; set; } //Damaged Property Address Street 2
@@ -54,7 +54,7 @@
         public string yes4 { get; set; } //Were you evacuated during the event?
         public string yes5 { get; set; } //Are you now residing in the residence?
 
-        public Occupant[] occupants { get; set; }
+        public Occupant[] occupants { get; set; } = Array.Empty<Occupant>();
 
         public bool aCopyOfARentalAgreementOrLeaseIfApplicableForResidentialTenantApplication { get; set; }
         public bool ifYouHaveInvoicesReceiptsForCleanupOrRepairsPleaseHaveThemAvailableDuringTheSiteMeetingToHelpTheEvaluatorIdentifyEligibleCosts { get; set; }
@@ -67,11 +67,11 @@
         public string printName2 { get; set; }
         public string dateYyyyMDay2 { get; set; }
 
-        public CleanUpDetail[] cleanupLogDetails { get; set; }
-        public DamagedItem[] listByRoomItemsSubmittedForDamageAssessment { get; set; }
-        public CHEF_Attachment[] completedInsuranceTemplate { get; set; }
-        public CHEF_Attachment[] governmentIssuedIdDlServiceCardBcId { get; set; }
-        public CHEF_Attachment[] signedTenancyAgreementIfNoTenancyAgreementPleaseProvideTheLandlordContactInformationAndAPieceOfMailWithTheAddress { get; set; }
+        public CleanUpDetail[] cleanupLogDetails { get; set; } = Array.Empty<CleanUpDetail>();
+        public DamagedItem[] listByRoomItemsSubmittedForDamageAssessment { get; set; }  = Array.Empty<DamagedItem>();
+        public CHEF_Attachment[] completedInsuranceTemplate { get; set; } = Array.Empty<CHEF_Attachment>();
+        public CHEF_Attachment[] governmentIssuedIdDlServiceCardBcId { get; set; } = Array.Empty<CHEF_Attachment>();
+        public CHEF_Attachment[] signedTenancyAgreementIfNoTenancyAgreementPleaseProvideTheLandlordContactInformationAndAPieceOfMailWithTheAddress { get; set; } = Array.Empty<CHEF_Attachment>();
 
         public bool submit1 { get; set; }
         public string? nameOfFirstNationsReserve { get; set; }
