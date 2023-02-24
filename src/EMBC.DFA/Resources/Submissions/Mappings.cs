@@ -62,9 +62,11 @@ namespace EMBC.DFA.Resources.Submissions
                 dfa_orgregistrationproofunderbcsocietya = form.HasProofOfRegistration,
                 dfa_organizationstructureandpurposestatemente = form.HasEligibilityDocuments,
 
+                dfa_primaryapplicantsigned = (int?)(!string.IsNullOrEmpty(form.Signature) ? DFATwoOptions.Yes : DFATwoOptions.No),
                 dfa_primaryapplicantprintname = form.SignerName,
                 dfa_primaryapplicantsigneddate = form.SignatureDate,
                 entityimage = Convert.FromBase64String(form.Signature.Substring(form.Signature.IndexOf(',') + 1)),
+                dfa_secondaryapplicantsigned = (int?)(!string.IsNullOrEmpty(form.OtherSignature) ? DFATwoOptions.Yes : DFATwoOptions.No),
                 dfa_secondaryapplicantprintname = form.OtherSignerName,
                 dfa_secondaryapplicantsigneddate = form.OtherSignatureDate,
                 //dfa_secondaryapplicantsignature = form.OtherSignature,

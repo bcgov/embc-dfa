@@ -1,10 +1,12 @@
-﻿using System.Text.Json.Serialization;
+﻿using System;
+using System.Text.Json.Serialization;
 
-namespace EMBC.DFA.Api.Models
+namespace EMBC.DFA.Services.CHEFS
 {
     public class SmbForm
     {
 #pragma warning disable CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
+        public string? SubmissionId { get; set; }
         public SmbFormData data { get; set; }
         public Metadata metadata { get; set; }
     }
@@ -100,8 +102,7 @@ namespace EMBC.DFA.Api.Models
     {
         public string applicantType { get; set; }
         public string FirstNameofSecondary { get; set; }
-        public string FirstNameofSecondary1 { get; set; } //Secondary Applicant Last Name!!!!
-        public string? LastNameofSecondary { get; set; }
+        public string LastNameofSecondary { get; set; }
         public string emailAddress { get; set; }
         public string phoneNumber { get; set; }
 
@@ -115,8 +116,8 @@ namespace EMBC.DFA.Api.Models
     public class CleanUpDetail
     {
         [JsonNumberHandling(JsonNumberHandling.AllowReadingFromString)]
-        public int? hoursWorked { get; set; }
-        public string dateYyyyMDay { get; set; }
+        public int hoursWorked { get; set; }
+        public DateTime dateYyyyMDay { get; set; }
         public string descriptionOfWork { get; set; }
         public string nameOfFamilyMemberVolunteer { get; set; }
         public string? embcOfficeUseOnly { get; set; }

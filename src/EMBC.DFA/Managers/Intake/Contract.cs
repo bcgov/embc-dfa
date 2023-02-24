@@ -233,8 +233,8 @@ namespace EMBC.DFA.Managers.Intake
 
     public class CleanUpLog
     {
-        public int HoursWorked { get; set; }
-        public DateTime Date { get; set; }
+        public int? HoursWorked { get; set; }
+        public DateTime? Date { get; set; }
         public string DescriptionOfWork { get; set; }
         public string ContactName { get; set; }
     }

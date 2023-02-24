@@ -97,7 +97,7 @@ namespace EMBC.DFA.Api
                 {
                     ApplicantType = (SecondaryApplicantType)Enum.Parse(typeof(SecondaryApplicantType), otherApplicant.applicantType, true),
                     FirstName = otherApplicant.FirstNameofSecondary,
-                    LastName = otherApplicant.LastNameofSecondary,
+                    LastName = otherApplicant.FirstNameofSecondary1,
                     Email = otherApplicant.emailAddress,
                     Phone = otherApplicant.phoneNumber,
                 });
@@ -118,7 +118,7 @@ namespace EMBC.DFA.Api
                 ret.CleanUpLogs.Add(new CleanUpLog
                 {
                     HoursWorked = log.hoursWorked,
-                    Date = log.dateYyyyMDay,
+                    Date = !string.IsNullOrEmpty(log.dateYyyyMDay) ? DateTime.Parse(log.dateYyyyMDay) : null,
                     DescriptionOfWork = log.descriptionOfWork,
                     ContactName = log.nameOfFamilyMemberVolunteer,
                 });
@@ -286,7 +286,7 @@ namespace EMBC.DFA.Api
                 ret.CleanUpLogs.Add(new CleanUpLog
                 {
                     HoursWorked = log.hoursWorked,
-                    Date = log.dateYyyyMDay,
+                    Date = !string.IsNullOrEmpty(log.dateYyyyMDay) ? DateTime.Parse(log.dateYyyyMDay) : null,
                     DescriptionOfWork = log.descriptionOfWork,
                     ContactName = log.nameOfFamilyMemberVolunteer,
                 });
