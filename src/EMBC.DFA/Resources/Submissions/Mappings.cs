@@ -403,7 +403,7 @@ namespace EMBC.DFA.Resources.Submissions
         }
 
 
-        private enum ApplicantTypeOptionSet
+        public enum ApplicantTypeOptionSet
         {
             CharitableOrganization = 222710000,
             FarmOwner = 222710001,

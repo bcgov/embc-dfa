@@ -1,20 +1,23 @@
 ﻿using System;
 using System.Threading.Tasks;
 using EMBC.DFA.Dynamics;
-using EMBC.Utilities.Runtime;
-using Microsoft.Extensions.DependencyInjection;
 using EMBC.DFA.Dynamics.Microsoft.Dynamics.CRM;
 using System.Linq;
 using Microsoft.Extensions.Configuration;
+using System.Collections.Generic;
+using static EMBC.DFA.Resources.Submissions.Mappings;
+using System.Threading;
 
 namespace EMBC.DFA.Resources.Submissions
 {
     public class SubmissionsRepository : ISubmissionsRepository
     {
+        private readonly IDfaContextFactory dfaContextFactory;
         private readonly IConfiguration configuration;
 
-        public SubmissionsRepository(IConfiguration configuration)
+        public SubmissionsRepository(IDfaContextFactory dfaContextFactory, IConfiguration configuration)
         {
+            this.dfaContextFactory = dfaContextFactory;
             this.configuration = configuration;
         }
 
@@ -26,16 +29,17 @@ namespace EMBC.DFA.Resources.Submissions
             _ => throw new NotImplementedException($"type {form.GetType().FullName}")
         });
 
-        public async Task<string> Query()
+        public async Task<IEnumerable<string>> QuerySubmissionIdsByForm(FormType type)
         {
-            var ctx = CallContext.Current.Services.GetRequiredService<IDfaContextFactory>().Create();
-            var res = ctx.contacts.FirstOrDefault();
-            return await Task.FromResult(res.contactid.ToString());
+            var ct = new CancellationTokenSource().Token;
+            var ctx = dfaContextFactory.Create();
+            var query = ctx.dfa_appapplications.Where(app => app.dfa_applicanttype == (int)ApplicantTypeOptionSet.SmallBusinessOwner);
+            return (await query.GetAllPagesAsync(ct)).Select(app => app.dfa_appapplicationid.ToString());
         }
 
         private async Task<string> Handle(SubmitGovFormCommand f)
         {
-            var ctx = CallContext.Current.Services.GetRequiredService<IDfaContextFactory>().Create();
+            var ctx = dfaContextFactory.Create();
             var contact = Mappings.Map(f.Form.Applicant);
             //ctx.AddTocontacts(contact);
             await ctx.SaveChangesAsync();
@@ -53,7 +57,7 @@ namespace EMBC.DFA.Resources.Submissions
 
         private async Task<string> Handle(SubmitIndFormCommand f)
         {
-            var ctx = CallContext.Current.Services.GetRequiredService<IDfaContextFactory>().Create();
+            var ctx = dfaContextFactory.Create();
             var application = Mappings.Map(f.Form);
             application.dfa_appapplicationid = Guid.NewGuid();
             ctx.AddTodfa_appapplications(application);
@@ -78,7 +82,7 @@ namespace EMBC.DFA.Resources.Submissions
 
         private async Task<string> Handle(SubmitSmbFormCommand f)
         {
-            var ctx = CallContext.Current.Services.GetRequiredService<IDfaContextFactory>().Create();
+            var ctx = dfaContextFactory.Create();
             var application = Mappings.Map(f.Form);
             application.dfa_appapplicationid = Guid.NewGuid();
             ctx.AddTodfa_appapplications(application);

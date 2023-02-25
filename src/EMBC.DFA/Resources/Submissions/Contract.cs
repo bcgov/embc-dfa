@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using EMBC.DFA.Managers.Intake;
 
@@ -7,7 +8,7 @@ namespace EMBC.DFA.Resources.Submissions
     public interface ISubmissionsRepository
     {
         Task<string> Manage(Command form);
-        Task<string> Query();
+        Task<IEnumerable<string>> QuerySubmissionIdsByForm(FormType type);
     }
 
     public abstract class Command
@@ -27,6 +28,13 @@ namespace EMBC.DFA.Resources.Submissions
     public class SubmitGovFormCommand : Command
     {
         public GovForm Form { get; set; } = null!;
+    }
+
+    public enum FormType
+    {
+        SMB,
+        IND,
+        GOV
     }
 
     public enum DFATwoOptions
