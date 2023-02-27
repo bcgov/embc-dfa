@@ -111,7 +111,8 @@
 
     public class IND_OtherContac
     {
-        public string AlternateContactName { get; set; }
+        public string AlternateContactName { get; set; } //First Name
+        public string AlternateContactName1 { get; set; } //Last Name
         public string AlternateEmailAddress { get; set; }
         public string AlternateContactPhone { get; set; }
     }

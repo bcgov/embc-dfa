@@ -107,7 +107,8 @@ namespace EMBC.DFA.Api
             {
                 ret.AltContacts.Add(new AltContact
                 {
-                    Name = contact.alternateContactNameWhereYouCanBeReachedIfApplicable,
+                    FirstName = contact.alternateContactNameWhereYouCanBeReachedIfApplicable,
+                    LastName = contact.alternateContactNameWhereYouCanBeReachedIfApplicable1,
                     Email = contact.eMailAddress1,
                     Phone = contact.alternatePhoneNumber,
                 });
@@ -265,7 +266,8 @@ namespace EMBC.DFA.Api
             {
                 ret.AltContacts.Add(new AltContact
                 {
-                    Name = contact.AlternateContactName,
+                    FirstName = contact.AlternateContactName,
+                    LastName = contact.AlternateContactName1,
                     Email = contact.AlternateEmailAddress,
                     Phone = contact.AlternateContactPhone,
                 });

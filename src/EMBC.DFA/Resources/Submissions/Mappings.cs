@@ -92,7 +92,9 @@ namespace EMBC.DFA.Resources.Submissions
             {
                 ret.dfa_dfa_appapplication_dfa_appothercontact_AppApplicationId.Add(new dfa_appothercontact
                 {
-                    dfa_name = contact.Name,
+                    dfa_name = contact.FirstName + " " + contact.LastName,
+                    dfa_firstname = contact.FirstName,
+                    dfa_lastname = contact.LastName,
                     dfa_emailaddress = contact.Email,
                     dfa_phonenumber = contact.Phone
                 });
@@ -151,13 +153,13 @@ namespace EMBC.DFA.Resources.Submissions
 
                 dfa_damagedpropertystreet1 = form.DamagePropertyAddress.AddressLine1,
                 dfa_damagedpropertystreet2 = form.DamagePropertyAddress.AddressLine2,
-                //dfa_areacommunityid = get community from city name...,
+                dfa_damagedpropertycitytext = form.DamagePropertyAddress.City,
                 dfa_damagedpropertyprovince = form.DamagePropertyAddress.Province,
                 dfa_damagedpropertypostalcode = form.DamagePropertyAddress.PostalCode,
 
                 dfa_mailingaddressstreet1 = form.MailingAddress.AddressLine1,
                 dfa_mailingaddressstreet2 = form.MailingAddress.AddressLine2,
-                //dfa_areacommunity2id = form.MailingAddress.City, need to get community
+                dfa_mailingaddresscitytext = form.MailingAddress.City,
                 dfa_mailingaddressprovince = form.MailingAddress.Province,
                 dfa_mailingaddresspostalcode = form.MailingAddress.PostalCode,
 
@@ -214,7 +216,9 @@ namespace EMBC.DFA.Resources.Submissions
             {
                 ret.dfa_dfa_appapplication_dfa_appothercontact_AppApplicationId.Add(new dfa_appothercontact
                 {
-                    dfa_name = contact.Name,
+                    dfa_name = contact.FirstName + " " + contact.LastName,
+                    dfa_firstname = contact.FirstName,
+                    dfa_lastname = contact.LastName,
                     dfa_emailaddress = contact.Email,
                     dfa_phonenumber = contact.Phone
                 });

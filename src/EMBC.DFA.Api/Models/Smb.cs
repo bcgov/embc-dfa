@@ -91,7 +91,8 @@ namespace EMBC.DFA.Api.Models
 
     public class AlternateContact
     {
-        public string alternateContactNameWhereYouCanBeReachedIfApplicable { get; set; }
+        public string alternateContactNameWhereYouCanBeReachedIfApplicable { get; set; } //First Name
+        public string alternateContactNameWhereYouCanBeReachedIfApplicable1 { get; set; } //Last Name
         public string eMailAddress1 { get; set; }
         public string alternatePhoneNumber { get; set; }
     }

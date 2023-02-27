@@ -21,7 +21,7 @@ builder.Services.AddEndpointsApiExplorer()
     .AddIntakeManager()
     .AddSingleton<IDistributedSemaphoreProvider>(new WaitHandleDistributedSynchronizationProvider())
     .AddCHEFSAPIService()
-    .AddBackgroundTasks()
+    //.AddBackgroundTasks()
     .AddSubmissionsRepository()
     .AddHealthChecks()
     ;
