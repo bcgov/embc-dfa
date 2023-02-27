@@ -8,6 +8,13 @@ namespace EMBC.DFA.Managers.Intake
 {
     public class IntakeManager : IIntakeManager
     {
+        private readonly ISubmissionsRepository submissionsRepository;
+
+        public IntakeManager(ISubmissionsRepository submissionsRepository)
+        {
+            this.submissionsRepository = submissionsRepository;
+        }
+
         public async Task<string> Handle(IntakeCommand cmd)
         {
             return cmd switch
@@ -27,30 +34,20 @@ namespace EMBC.DFA.Managers.Intake
 
         private async Task<string> Handle(NewSmbFormSubmissionCommand cmd)
         {
-            var submissionsRepository = CallContext.Current.Services.GetRequiredService<ISubmissionsRepository>();
             var caseId = await submissionsRepository.Manage(new SubmitSmbFormCommand { Form = cmd.Form });
             return await Task.FromResult(caseId);
         }
 
         private async Task<string> Handle(NewGovFormSubmissionCommand cmd)
         {
-            var submissionsRepository = CallContext.Current.Services.GetRequiredService<ISubmissionsRepository>();
             var caseId = await submissionsRepository.Manage(new SubmitGovFormCommand { Form = cmd.Form });
             return await Task.FromResult(caseId);
         }
 
         private async Task<string> Handle(NewIndFormSubmissionCommand cmd)
         {
-            var submissionsRepository = CallContext.Current.Services.GetRequiredService<ISubmissionsRepository>();
             var caseId = await submissionsRepository.Manage(new SubmitIndFormCommand { Form = cmd.Form });
             return await Task.FromResult(caseId);
-        }
-
-        private async Task<string> Handle(TestCommand cmd)
-        {
-            var submissionsRepository = CallContext.Current.Services.GetRequiredService<ISubmissionsRepository>();
-            var res = await submissionsRepository.Query();
-            return await Task.FromResult(res);
         }
     }
 }

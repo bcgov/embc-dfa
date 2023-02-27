@@ -144,7 +144,7 @@ namespace EMBC.Tests.Integration.DFA.Api
                     cleanupLogDetails = new[] {
                         new CleanUpDetail
                         {
-                            dateYyyyMDay = DateTime.Now,
+                            dateYyyyMDay = DateTime.Now.ToString(),
                             descriptionOfWork = "autotest-removing water",
                             hoursWorked = 25,
                             nameOfFamilyMemberVolunteer = "autotest-Test Member"
@@ -261,7 +261,7 @@ namespace EMBC.Tests.Integration.DFA.Api
                     cleanupLogDetails = new[] {
                         new CleanUpDetail
                         {
-                            dateYyyyMDay = DateTime.Now,
+                            dateYyyyMDay = DateTime.Now.ToString(),
                             descriptionOfWork = "removing water",
                             hoursWorked = 25,
                             nameOfFamilyMemberVolunteer = "Test Member"

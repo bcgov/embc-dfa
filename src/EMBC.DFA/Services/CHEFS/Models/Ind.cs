@@ -1,8 +1,11 @@
-﻿namespace EMBC.DFA.Api.Models
+﻿using System;
+
+namespace EMBC.DFA.Services.CHEFS
 {
     public class IndForm
     {
 #pragma warning disable CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
+        public string? SubmissionId { get; set; }
         public IndFormData data { get; set; }
         public Metadata metadata { get; set; }
     }
@@ -68,7 +71,7 @@
         public string dateYyyyMDay2 { get; set; }
 
         public CleanUpDetail[] cleanupLogDetails { get; set; } = Array.Empty<CleanUpDetail>();
-        public DamagedItem[] listByRoomItemsSubmittedForDamageAssessment { get; set; }  = Array.Empty<DamagedItem>();
+        public DamagedItem[] listByRoomItemsSubmittedForDamageAssessment { get; set; } = Array.Empty<DamagedItem>();
         public CHEF_Attachment[] completedInsuranceTemplate { get; set; } = Array.Empty<CHEF_Attachment>();
         public CHEF_Attachment[] governmentIssuedIdDlServiceCardBcId { get; set; } = Array.Empty<CHEF_Attachment>();
         public CHEF_Attachment[] signedTenancyAgreementIfNoTenancyAgreementPleaseProvideTheLandlordContactInformationAndAPieceOfMailWithTheAddress { get; set; } = Array.Empty<CHEF_Attachment>();
@@ -111,8 +114,7 @@
 
     public class IND_OtherContac
     {
-        public string AlternateContactName { get; set; } //First Name
-        public string AlternateContactName1 { get; set; } //Last Name
+        public string AlternateContactName { get; set; }
         public string AlternateEmailAddress { get; set; }
         public string AlternateContactPhone { get; set; }
     }

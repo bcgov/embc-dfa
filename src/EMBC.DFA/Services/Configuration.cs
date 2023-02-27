@@ -1,4 +1,5 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.DependencyInjection.Extensions;
 
 namespace EMBC.DFA.Services
 {
@@ -6,7 +7,7 @@ namespace EMBC.DFA.Services
     {
         public static IServiceCollection AddBackgroundTasks(this IServiceCollection services)
         {
-            services.AddTransient<SmbBackgroundTask>();
+            services.TryAddTransient<SmbBackgroundTask>();
             services.AddHostedService<BackgroundTask<SmbBackgroundTask>>();
             return services;
         }

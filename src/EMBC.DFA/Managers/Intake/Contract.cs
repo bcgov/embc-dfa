@@ -226,15 +226,16 @@ namespace EMBC.DFA.Managers.Intake
 
     public class AltContact
     {
-        public string Name { get; set; }
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
         public string Email { get; set; }
         public string Phone { get; set; }
     }
 
     public class CleanUpLog
     {
-        public int HoursWorked { get; set; }
-        public DateTime Date { get; set; }
+        public int? HoursWorked { get; set; }
+        public DateTime? Date { get; set; }
         public string DescriptionOfWork { get; set; }
         public string ContactName { get; set; }
     }
