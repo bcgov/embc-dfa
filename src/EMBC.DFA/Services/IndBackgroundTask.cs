@@ -33,7 +33,7 @@ namespace EMBC.DFA.Services
         public async Task ExecuteAsync(CancellationToken cancellationToken)
         {
             var submissions = await _chefsAPI.GetIndSubmissions();
-            var existingConfirmationIds = await _submissionsRepository.QueryConfirmationIdsByForm(FormType.IND);
+            var existingConfirmationIds = (await _submissionsRepository.QueryConfirmationIdsByForm(FormType.IND)).ToList();
             var newSubmissions = submissions.Where(s => !existingConfirmationIds.Any(id => !string.IsNullOrEmpty(id) && id.Equals(s.ConfirmationId, StringComparison.OrdinalIgnoreCase))).ToList();
             foreach (var submission in newSubmissions)
             {
