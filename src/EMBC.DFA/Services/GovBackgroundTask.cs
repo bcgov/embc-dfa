@@ -19,7 +19,7 @@ namespace EMBC.DFA.Services
 
         public int DegreeOfParallelism => 1;
 
-        public TimeSpan InitialDelay => TimeSpan.FromSeconds(5);
+        public TimeSpan InitialDelay => TimeSpan.FromSeconds(30);
 
         public TimeSpan InactivityTimeout => TimeSpan.FromMinutes(5);
 
