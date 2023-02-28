@@ -14,8 +14,8 @@ namespace EMBC.DFA.Services
         private readonly ISubmissionsRepository _submissionsRepository;
         private readonly IIntakeManager _intakeManager;
 
-        public string Schedule => "0 5-59/15 * * * *";
-        //public string Schedule => "20 * * * * *"; //every minute on second 20
+        //public string Schedule => "0 5-59/15 * * * *";
+        public string Schedule => "20 * * * * *"; //every minute on second 20
 
         public int DegreeOfParallelism => 1;
 
@@ -33,7 +33,7 @@ namespace EMBC.DFA.Services
         public async Task ExecuteAsync(CancellationToken cancellationToken)
         {
             var submissions = await _chefsAPI.GetIndSubmissions();
-            var existingConfirmationIds = await _submissionsRepository.QueryConfirmationIdsByForm(FormType.IND);
+            var existingConfirmationIds = (await _submissionsRepository.QueryConfirmationIdsByForm(FormType.IND)).ToList();
             var newSubmissions = submissions.Where(s => !existingConfirmationIds.Any(id => !string.IsNullOrEmpty(id) && id.Equals(s.ConfirmationId, StringComparison.OrdinalIgnoreCase))).ToList();
             foreach (var submission in newSubmissions)
             {
