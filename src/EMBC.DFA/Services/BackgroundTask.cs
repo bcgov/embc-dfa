@@ -105,7 +105,7 @@ namespace EMBC.DFA.Services
                     }
                     catch (Exception e)
                     {
-                        Console.WriteLine("unhandled error in background job");
+                        Console.WriteLine("unhandled error in background job: {0}", e.Message);
                     }
                     finally
                     {
