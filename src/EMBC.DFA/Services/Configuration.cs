@@ -43,9 +43,6 @@ namespace EMBC.DFA.Services
                 services.AddSingleton<IDistributedSemaphoreProvider>(new WaitHandleDistributedSynchronizationProvider());
             }
 
-
-            services.AddSingleton<IDistributedSemaphoreProvider>(new WaitHandleDistributedSynchronizationProvider());
-
             services.TryAddTransient<SmbBackgroundTask>();
             services.AddHostedService<BackgroundTask<SmbBackgroundTask>>();
 
