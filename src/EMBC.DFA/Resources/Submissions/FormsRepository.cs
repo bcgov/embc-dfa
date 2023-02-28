@@ -29,12 +29,41 @@ namespace EMBC.DFA.Resources.Submissions
             _ => throw new NotImplementedException($"type {form.GetType().FullName}")
         });
 
-        public async Task<IEnumerable<string>> QuerySubmissionIdsByForm(FormType type)
+        public async Task<IEnumerable<string>> QueryConfirmationIdsByForm(FormType type)
         {
             var ct = new CancellationTokenSource().Token;
             var ctx = dfaContextFactory.Create();
-            var query = ctx.dfa_appapplications.Where(app => app.dfa_applicanttype == (int)ApplicantTypeOptionSet.SmallBusinessOwner);
-            return (await query.GetAllPagesAsync(ct)).Select(app => app.dfa_appapplicationid.ToString());
+            var query = ctx.dfa_appapplications.AsQueryable();
+            switch (type)
+            {
+                case FormType.SMB:
+                    {
+                        query = query.Where(app => app.dfa_applicanttype == (int)ApplicantTypeOptionSet.SmallBusinessOwner ||
+                        app.dfa_applicanttype == (int)ApplicantTypeOptionSet.FarmOwner ||
+                        app.dfa_applicanttype == (int)ApplicantTypeOptionSet.CharitableOrganization);
+                        break;
+                    }
+                case FormType.IND:
+                    {
+                        query = query.Where(app => app.dfa_applicanttype == (int)ApplicantTypeOptionSet.HomeOwner ||
+                        app.dfa_applicanttype == (int)ApplicantTypeOptionSet.ResidentialTenant);
+                        break;
+                    }
+                case FormType.GOV:
+                    {
+                        query = query.Where(app => app.dfa_applicanttype == (int)ApplicantTypeOptionSet.GovernmentBody);
+                        break;
+                    }
+                default:
+                    {
+                        //SMB - should not happen!
+                        query = query.Where(app => app.dfa_applicanttype == (int)ApplicantTypeOptionSet.SmallBusinessOwner ||
+                        app.dfa_applicanttype == (int)ApplicantTypeOptionSet.FarmOwner ||
+                        app.dfa_applicanttype == (int)ApplicantTypeOptionSet.CharitableOrganization);
+                        break;
+                    }
+            }
+            return (await query.GetAllPagesAsync(ct)).Select(app => app.dfa_chefconfirmationnumber);
         }
 
         private async Task<string> Handle(SubmitGovFormCommand f)
@@ -160,7 +189,7 @@ namespace EMBC.DFA.Resources.Submissions
 
         private void AddDocuments(DfaContext ctx, dfa_appapplication application)
         {
-            var chefApiBaseUri = configuration.GetValue<string>("CHEFS_API_BASE_URI", string.Empty);
+            var chefApiBaseUri = configuration.GetValue<string>("CHEFS_API_BASE_URI", string.Empty) + "/app/user/view?s=";
             foreach (var doc in application.dfa_appapplication_dfa_appdocumentlocations_ApplicationId)
             {
                 doc.dfa_url = chefApiBaseUri + doc.dfa_url;

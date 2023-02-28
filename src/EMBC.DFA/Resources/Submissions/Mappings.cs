@@ -12,6 +12,7 @@ namespace EMBC.DFA.Resources.Submissions
         {
             var ret = new dfa_appapplication
             {
+                dfa_chefconfirmationnumber = form.CHEFConfirmationId,
                 dfa_applicanttype = (int?)Enum.Parse<ApplicantTypeOptionSet>(form.ApplicantType.ToString()),
                 dfa_indigenousstatus = form.IndigenousStatus,
                 dfa_indigenousreserve = form.OnFirstNationReserve,
@@ -129,7 +130,7 @@ namespace EMBC.DFA.Resources.Submissions
                 {
                     dfa_name = doc.FileName,
                     dfa_documenttype = doc.FileType,
-                    dfa_url = doc.Url,
+                    dfa_url = doc.CHEFSubmissionId,
                 });
             }
 
@@ -140,6 +141,7 @@ namespace EMBC.DFA.Resources.Submissions
         {
             var ret = new dfa_appapplication
             {
+                dfa_chefconfirmationnumber = form.CHEFConfirmationId,
                 dfa_applicanttype = (int?)Enum.Parse<ApplicantTypeOptionSet>(form.ApplicantType.ToString()),
                 dfa_indigenousstatus = form.IndigenousStatus,
                 dfa_indigenousreserve = form.OnFirstNationReserve,
@@ -266,7 +268,7 @@ namespace EMBC.DFA.Resources.Submissions
                 {
                     dfa_name = doc.FileName,
                     dfa_documenttype = doc.FileType,
-                    dfa_url = doc.Url,
+                    dfa_url = doc.CHEFSubmissionId,
                 });
             }
 
@@ -277,6 +279,7 @@ namespace EMBC.DFA.Resources.Submissions
         {
             return new incident
             {
+                //dfa_chefconfirmationnumber = form.CHEFConfirmationId,
                 dfa_applicanttype = (int?)Enum.Parse<ApplicantTypeOptionSet>(form.ApplicantType.ToString()),
                 //GovLegalName
                 //Date

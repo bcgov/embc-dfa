@@ -21,7 +21,7 @@ builder.Services.AddEndpointsApiExplorer()
     .AddIntakeManager()
     .AddSingleton<IDistributedSemaphoreProvider>(new WaitHandleDistributedSynchronizationProvider())
     .AddCHEFSAPIService()
-    //.AddBackgroundTasks()
+    .AddBackgroundTasks()
     .AddSubmissionsRepository()
     .AddHealthChecks()
     ;
@@ -52,54 +52,46 @@ app.Use((ctx, next) =>
 app.MapHealthChecks("/hc/ready", new HealthCheckOptions() { Predicate = check => check.Tags.Contains("ready") });
 app.MapHealthChecks("/hc/live", new HealthCheckOptions() { Predicate = check => check.Tags.Contains("alive") });
 
-app.MapPost("/forms/smb", async ctx =>
-{
-    var model = await ctx.Request.ReadJsonModelAsync<EMBC.DFA.Api.Models.SmbForm>();
-    if (!model.IsValid)
-    {
-        await ctx.Response.ValidationError("Invalid payload");
-        return;
-    }
-    var mgr = CallContext.Current.Services.GetRequiredService<IIntakeManager>();
-    var submissionId = await mgr.Handle(new NewSmbFormSubmissionCommand { Form = EMBC.DFA.Api.Mappings.Map(model.Payload) });
-    ctx.Response.StatusCode = (int)HttpStatusCode.Created;
-    await ctx.Response.WriteAsJsonAsync(new { id = submissionId });
-}).WithName("SMB Form");
+//app.MapPost("/forms/smb", async ctx =>
+//{
+//    var model = await ctx.Request.ReadJsonModelAsync<EMBC.DFA.Api.Models.SmbForm>();
+//    if (!model.IsValid)
+//    {
+//        await ctx.Response.ValidationError("Invalid payload");
+//        return;
+//    }
+//    var mgr = CallContext.Current.Services.GetRequiredService<IIntakeManager>();
+//    var submissionId = await mgr.Handle(new NewSmbFormSubmissionCommand { Form = EMBC.DFA.Api.Mappings.Map(model.Payload) });
+//    ctx.Response.StatusCode = (int)HttpStatusCode.Created;
+//    await ctx.Response.WriteAsJsonAsync(new { id = submissionId });
+//}).WithName("SMB Form");
 
-app.MapPost("/forms/ind", async ctx =>
-{
-    var model = await ctx.Request.ReadJsonModelAsync<EMBC.DFA.Api.Models.IndForm>();
-    if (!model.IsValid)
-    {
-        await ctx.Response.ValidationError("Invalid payload");
-        return;
-    }
-    var mgr = CallContext.Current.Services.GetRequiredService<IIntakeManager>();
-    var submissionId = await mgr.Handle(new NewIndFormSubmissionCommand { Form = EMBC.DFA.Api.Mappings.Map(model.Payload) });
-    ctx.Response.StatusCode = (int)HttpStatusCode.Created;
-    await ctx.Response.WriteAsJsonAsync(new { id = submissionId });
-}).WithName("Individual Form");
+//app.MapPost("/forms/ind", async ctx =>
+//{
+//    var model = await ctx.Request.ReadJsonModelAsync<EMBC.DFA.Api.Models.IndForm>();
+//    if (!model.IsValid)
+//    {
+//        await ctx.Response.ValidationError("Invalid payload");
+//        return;
+//    }
+//    var mgr = CallContext.Current.Services.GetRequiredService<IIntakeManager>();
+//    var submissionId = await mgr.Handle(new NewIndFormSubmissionCommand { Form = EMBC.DFA.Api.Mappings.Map(model.Payload) });
+//    ctx.Response.StatusCode = (int)HttpStatusCode.Created;
+//    await ctx.Response.WriteAsJsonAsync(new { id = submissionId });
+//}).WithName("Individual Form");
 
-app.MapPost("/forms/gov", async ctx =>
-{
-    var model = await ctx.Request.ReadJsonModelAsync<EMBC.DFA.Api.Models.GovForm>();
-    if (!model.IsValid)
-    {
-        await ctx.Response.ValidationError("Invalid payload");
-        return;
-    }
-    var mgr = CallContext.Current.Services.GetRequiredService<IIntakeManager>();
-    var submissionId = await mgr.Handle(new NewGovFormSubmissionCommand { Form = EMBC.DFA.Api.Mappings.Map(model.Payload) });
-    ctx.Response.StatusCode = (int)HttpStatusCode.Created;
-    await ctx.Response.WriteAsJsonAsync(new { id = submissionId });
-}).WithName("Local government Form");
-
-app.MapGet("/test", async ctx =>
-{
-    var mgr = CallContext.Current.Services.GetRequiredService<IIntakeManager>();
-    var test = await mgr.Handle(new TestCommand { });
-    Console.WriteLine("Testing");
-    await ctx.Response.WriteAsJsonAsync(new { res = test });
-}).WithName("Test");
+//app.MapPost("/forms/gov", async ctx =>
+//{
+//    var model = await ctx.Request.ReadJsonModelAsync<EMBC.DFA.Api.Models.GovForm>();
+//    if (!model.IsValid)
+//    {
+//        await ctx.Response.ValidationError("Invalid payload");
+//        return;
+//    }
+//    var mgr = CallContext.Current.Services.GetRequiredService<IIntakeManager>();
+//    var submissionId = await mgr.Handle(new NewGovFormSubmissionCommand { Form = EMBC.DFA.Api.Mappings.Map(model.Payload) });
+//    ctx.Response.StatusCode = (int)HttpStatusCode.Created;
+//    await ctx.Response.WriteAsJsonAsync(new { id = submissionId });
+//}).WithName("Local government Form");
 
 app.Run();

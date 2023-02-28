@@ -17,21 +17,21 @@ namespace EMBC.DFA.Services.CHEFS
 
     public class CHEFIndResponse
     {
-        public string Id { get; set; }
-        public string FormVersionId { get; set; }
-        public string ConfirmationId { get; set; }
-        public string Draft { get; set; }
-        public string Deleted { get; set; }
-        public IndForm Submission { get; set; }
+        public string id { get; set; }
+        public string formVersionId { get; set; }
+        public string confirmationId { get; set; }
+        public bool draft { get; set; }
+        public bool deleted { get; set; }
+        public IndForm submission { get; set; }
     }
 
     public class CHEFGovResponse
     {
-        public string Id { get; set; }
-        public string FormVersionId { get; set; }
-        public string ConfirmationId { get; set; }
-        public string Draft { get; set; }
-        public string Deleted { get; set; }
-        public GovForm Submission { get; set; }
+        public string id { get; set; }
+        public string formVersionId { get; set; }
+        public string confirmationId { get; set; }
+        public bool draft { get; set; }
+        public bool deleted { get; set; }
+        public GovForm submission { get; set; }
     }
 }

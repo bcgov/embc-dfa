@@ -8,7 +8,7 @@ namespace EMBC.DFA.Resources.Submissions
     public interface ISubmissionsRepository
     {
         Task<string> Manage(Command form);
-        Task<IEnumerable<string>> QuerySubmissionIdsByForm(FormType type);
+        Task<IEnumerable<string>> QueryConfirmationIdsByForm(FormType type);
     }
 
     public abstract class Command
