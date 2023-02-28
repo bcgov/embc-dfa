@@ -81,12 +81,10 @@ namespace EMBC.DFA.Services
 
                     try
                     {
-                        Console.WriteLine("try get handle");
                         // get a lock
                         handle = await semaphore.TryAcquireAsync(TimeSpan.FromSeconds(5), stoppingToken);
 
                         // wait in the lock
-                        Console.WriteLine("wait");
                         await Task.Delay(nextExecutionDelay, stoppingToken);
                         if (handle == null)
                         {

@@ -12,6 +12,10 @@
       <PackageReference Include="Cronos" Version="0.7.1" />
       <PackageReference Include="DistributedLock.Redis" Version="1.0.2" />
       <PackageReference Include="DistributedLock.WaitHandles" Version="1.0.1" />
+      <PackageReference Include="OpenTelemetry.Instrumentation.StackExchangeRedis" Version="1.0.0-rc9.5" />
+      <PackageReference Include="Microsoft.AspNetCore.DataProtection.StackExchangeRedis" Version="6.0.*" />
+      <PackageReference Include="Microsoft.Extensions.Caching.StackExchangeRedis" Version="6.0.*" />
+      <PackageReference Include="StackExchange.Redis" Version="2.6.66" />
   </ItemGroup>
 
   <ItemGroup>
