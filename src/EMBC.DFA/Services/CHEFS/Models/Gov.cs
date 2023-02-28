@@ -6,6 +6,7 @@ namespace EMBC.DFA.Services.CHEFS
     {
 #pragma warning disable CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
         public string? SubmissionId { get; set; }
+        public string? ConfirmationId { get; set; }
         public GovFormData data { get; set; }
         public Metadata metadata { get; set; }
     }

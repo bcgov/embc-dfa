@@ -37,6 +37,7 @@ namespace EMBC.DFA.Services.CHEFS
                 foreach (var res in result)
                 {
                     res.submission.SubmissionId = res.id;
+                    res.submission.ConfirmationId = res.confirmationId;
                 }
             }
             var ret = result.Select(s => s.submission);
@@ -52,10 +53,11 @@ namespace EMBC.DFA.Services.CHEFS
             {
                 foreach (var res in result)
                 {
-                    res.Submission.SubmissionId = res.Id;
+                    res.submission.SubmissionId = res.id;
+                    res.submission.ConfirmationId = res.confirmationId;
                 }
             }
-            var ret = result.Select(s => s.Submission);
+            var ret = result.Select(s => s.submission);
             return ret;
         }
 
@@ -68,10 +70,11 @@ namespace EMBC.DFA.Services.CHEFS
             {
                 foreach (var res in result)
                 {
-                    res.Submission.SubmissionId = res.Id;
+                    res.submission.SubmissionId = res.id;
+                    res.submission.ConfirmationId = res.confirmationId;
                 }
             }
-            var ret = result.Select(s => s.Submission);
+            var ret = result.Select(s => s.submission);
             return ret;
         }
 

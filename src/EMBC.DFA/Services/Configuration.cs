@@ -9,6 +9,13 @@ namespace EMBC.DFA.Services
         {
             services.TryAddTransient<SmbBackgroundTask>();
             services.AddHostedService<BackgroundTask<SmbBackgroundTask>>();
+
+            services.TryAddTransient<IndBackgroundTask>();
+            services.AddHostedService<BackgroundTask<IndBackgroundTask>>();
+
+            //services.TryAddTransient<GovBackgroundTask>();
+            //services.AddHostedService<BackgroundTask<GovBackgroundTask>>();
+
             return services;
         }
     }

@@ -43,6 +43,7 @@ namespace EMBC.DFA.Managers.Intake
 #pragma warning disable CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
     public class SmbForm
     {
+        public string CHEFConfirmationId { get; set; }
         public ApplicantType ApplicantType { get; set; }
         public bool IndigenousStatus { get; set; }
         public bool OnFirstNationReserve { get; set; }
@@ -96,6 +97,7 @@ namespace EMBC.DFA.Managers.Intake
 
     public class IndForm
     {
+        public string CHEFConfirmationId { get; set; }
         public ApplicantType ApplicantType { get; set; }
         public bool IndigenousStatus { get; set; }
         public bool OnFirstNationReserve { get; set; }
@@ -155,6 +157,7 @@ namespace EMBC.DFA.Managers.Intake
 
     public class GovForm
     {
+        public string CHEFConfirmationId { get; set; }
         public ApplicantType ApplicantType { get; set; }
         public string GovLegalName { get; set; }
         public DateTime Date { get; set; }
@@ -251,6 +254,7 @@ namespace EMBC.DFA.Managers.Intake
         public string FileName { get; set; }
         public string FileType { get; set; }
         public string Url { get; set; }
+        public string CHEFSubmissionId { get; set; }
     }
 
     public enum ApplicantType

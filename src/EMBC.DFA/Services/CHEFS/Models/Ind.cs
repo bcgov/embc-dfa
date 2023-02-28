@@ -6,6 +6,7 @@ namespace EMBC.DFA.Services.CHEFS
     {
 #pragma warning disable CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
         public string? SubmissionId { get; set; }
+        public string? ConfirmationId { get; set; }
         public IndFormData data { get; set; }
         public Metadata metadata { get; set; }
     }
@@ -114,7 +115,8 @@ namespace EMBC.DFA.Services.CHEFS
 
     public class IND_OtherContac
     {
-        public string AlternateContactName { get; set; }
+        public string AlternateContactName { get; set; } //First Name
+        public string AlternateContactName1 { get; set; } //Last Name
         public string AlternateEmailAddress { get; set; }
         public string AlternateContactPhone { get; set; }
     }
