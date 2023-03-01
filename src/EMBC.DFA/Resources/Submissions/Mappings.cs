@@ -168,6 +168,7 @@ namespace EMBC.DFA.Resources.Submissions
                 dfa_dfa_appapplication_dfa_appsecondaryapplicant_AppApplicationId = new Collection<dfa_appsecondaryapplicant>(),
                 dfa_dfa_appapplication_dfa_appothercontact_AppApplicationId = new Collection<dfa_appothercontact>(),
 
+                dfa_accountlegalname = form.BuildingOwner.Name,
                 dfa_BuildingOwnerLandlord = Map(form.BuildingOwner),
 
                 dfa_manufacturedhom = form.DamageInfo.ManufacturedHome,
@@ -275,42 +276,48 @@ namespace EMBC.DFA.Resources.Submissions
             return ret;
         }
 
-        public static incident Map(GovForm form)
+        public static dfa_appapplication Map(GovForm form)
         {
-            return new incident
+            var ret = new dfa_appapplication
             {
-                //dfa_chefconfirmationnumber = form.CHEFConfirmationId,
+                dfa_chefconfirmationnumber = form.CHEFConfirmationId,
                 dfa_applicanttype = (int?)Enum.Parse<ApplicantTypeOptionSet>(form.ApplicantType.ToString()),
-                //GovLegalName
-                //Date
+                dfa_governmentbodylegalname = form.GovLegalName,
+                dfa_datereceived = form.Date,
 
-                //customerid_contact = Map(form.Applicant),
-                emailaddress = form.Applicant.Email,
-                //BusinessLegalName
-                //ContactName
+                dfa_Applicant = Map(form.Applicant),
 
-                dfa_damagedpropertystreet1 = form.MailingAddress != null ? form.MailingAddress.AddressLine1 : String.Empty,
-                dfa_damagedpropertystreet2 = form.MailingAddress != null ? form.MailingAddress.AddressLine2 : String.Empty,
-                //dfa_AreaCommunityId = form.MailingAddress != null ? form.MailingAddress.City : String.Empty,
-                dfa_damagedpropertyprovince = form.MailingAddress != null ? form.MailingAddress.Province : String.Empty,
-                dfa_damagedpropertypostalcode = form.MailingAddress != null ? form.MailingAddress.PostalCode : String.Empty,
-                dfa_mailingaddressstreet1 = form.MailingAddress != null ? form.MailingAddress.AddressLine1 : String.Empty,
-                dfa_mailingaddressstreet2 = form.MailingAddress != null ? form.MailingAddress.AddressLine2 : String.Empty,
-                //dfa_AreaCommunity2Id = form.MailingAddress != null ? form.MailingAddress.City : String.Empty,
-                dfa_mailingaddressprovince = form.MailingAddress != null ? form.MailingAddress.Province : String.Empty,
-                dfa_mailingaddresspostalcode = form.MailingAddress != null ? form.MailingAddress.PostalCode : String.Empty,
-                dfa_issamemailingaddress = true,
+                dfa_mailingaddressstreet1 = form.MailingAddress.AddressLine1,
+                dfa_mailingaddressstreet2 = form.MailingAddress.AddressLine2,
+                dfa_mailingaddresscitytext = form.MailingAddress.City,
+                dfa_mailingaddressprovince = form.MailingAddress.Province,
+                dfa_mailingaddresspostalcode = form.MailingAddress.PostalCode,
 
-                dfa_alternatephonenumber = form.AlternatePhoneNumber,
-                //AlternateCellNumber
+                dfa_dfa_appapplication_dfa_appsecondaryapplicant_AppApplicationId = new Collection<dfa_appsecondaryapplicant>(),
 
+
+                dfa_causeofdamagelos = (int?)Enum.Parse<DamageTypeOptionSet>(form.DamageInfo.DamageType, true),
                 dfa_dateofdamage = form.DamageFrom,
                 dfa_dateofdamageto = form.DamageTo,
-
-                dfa_causeofdamageloss = (int?)Enum.Parse<DamageTypeOptionSet>(form.DamageInfo.DamageType.ToString()),
-                dfa_causeofdamagelossother = form.DamageInfo.OtherDescription,
-                description = form.DamageInfo.DamageDescription,
+                dfa_causeofdamageloss = form.DamageInfo.OtherDescription,
+                dfa_description = form.DamageInfo.DamageDescription,
+                dfa_toreceivesupportaccessingdamage = (int?)(form.WouldLikeToReceiveSupport ? DFATwoOptions.Yes : DFATwoOptions.No),
             };
+
+            foreach (var applicant in form.SecondaryApplicants)
+            {
+                ret.dfa_dfa_appapplication_dfa_appsecondaryapplicant_AppApplicationId.Add(new dfa_appsecondaryapplicant
+                {
+                    dfa_applicanttype = (int?)Enum.Parse<SecondaryApplicantTypeOptionSet>(applicant.ApplicantType.ToString()),
+                    dfa_firstname = applicant.FirstName,
+                    dfa_lastname = applicant.LastName,
+                    dfa_title = applicant.Title,
+                    dfa_emailaddress = applicant.Email,
+                    dfa_phonenumber = applicant.Phone
+                });
+            }
+
+            return ret;
         }
 
         public static dfa_appcontact Map(Applicant applicant)
@@ -319,7 +326,8 @@ namespace EMBC.DFA.Resources.Submissions
             {
                 dfa_firstname = applicant.FirstName,
                 dfa_lastname = applicant.LastName,
-                dfa_initial = applicant.Title,
+                dfa_initial = applicant.Initial,
+                dfa_title = applicant.Title,
                 dfa_residencetelephonenumber = applicant.Phone,
                 dfa_cellphonenumber = applicant.Mobile,
                 dfa_emailaddress = applicant.Email,

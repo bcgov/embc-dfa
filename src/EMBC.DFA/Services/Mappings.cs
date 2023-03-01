@@ -348,21 +348,22 @@ namespace EMBC.DFA.Services
         public static EMBC.DFA.Managers.Intake.GovForm Map(EMBC.DFA.Services.CHEFS.GovForm payload)
         {
             var source = payload.data;
-            return new EMBC.DFA.Managers.Intake.GovForm
+            var ret =  new EMBC.DFA.Managers.Intake.GovForm
             {
                 CHEFConfirmationId = payload.ConfirmationId ?? string.Empty,
+                GovLegalName = source.indigenousGoverningBodyAndLocalGovernmentApplicationForDisasterFinancialAssistanceDfa1,
+                Date = source.date,
                 ApplicantType = ApplicantType.GovernmentBody,
                 Applicant = new Applicant
                 {
                     FirstName = source.primaryContactNameLastFirst,
                     LastName = source.primaryContactNameLastFirst1,
                     Title = source.title,
-                    Email = source.eMailAddress,
-                    Phone = source.businessTelephoneNumber,
-                    Mobile = source.cellularTelephoneNumber,
+                    Email = source.eMailAddress2,
+                    Phone = source.businessTelephoneNumber2,
+                    Mobile = source.cellularTelephoneNumber2,
+                    AlternatePhone = source.businessTelephoneNumber1,
                 },
-                DamageFrom = source.dateOfDamageLoss,
-                DamageTo = source.dateOfDamageLoss1,
                 MailingAddress = new Address
                 {
                     AddressLine1 = source.mailingAddress,
@@ -371,15 +372,33 @@ namespace EMBC.DFA.Services
                     Province = source.province,
                     PostalCode = source.postalCode
                 },
-                AlternatePhoneNumber = source.businessTelephoneNumber1,
-                AlternateCellNumber = source.cellularTelephoneNumber1,
+                SecondaryApplicants = new List<OtherApplicant>(),
+
+                DamageFrom = source.dateOfDamageLoss,
+                DamageTo = source.dateOfDamageLoss1,
                 DamageInfo = new DamageInfo
                 {
-                    DamageType = source.causeOfDamageLoss1,
-                    OtherDescription = source.pleaseSpecifyIfOthers,
+                    DamageType = source.flooding,
+                    OtherDescription = source.pleaseSpecifyIfSelectedOthers,
                     DamageDescription = source.provideABriefDescriptionOfDamage,
-                }
+                },
+                WouldLikeToReceiveSupport = source.ifThereWasOpportunityToReceiveGuidanceAndSupportInAssessingYourDamagedInfrastructureWouldYouLikeToReceiveThisSupport == "yes"
             };
+
+            foreach (var altContact in source.alternateContacts)
+            {
+                ret.SecondaryApplicants.Add(new OtherApplicant
+                {
+                    ApplicantType = (SecondaryApplicantType)Enum.Parse(typeof(SecondaryApplicantType), altContact.applicantType, true),
+                    FirstName = altContact.FirstnameOfAdditionalContact,
+                    LastName = altContact.lastNameOfContact,
+                    Title = altContact.title,
+                    Email = altContact.eMailAddress1,
+                    Phone = altContact.cellularTelephoneNumber1,
+                });
+            }
+
+            return ret;
         }
     }
 }

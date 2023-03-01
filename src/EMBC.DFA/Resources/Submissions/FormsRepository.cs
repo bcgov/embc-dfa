@@ -23,9 +23,9 @@ namespace EMBC.DFA.Resources.Submissions
 
         public async Task<string> Manage(Command form) => await (form switch
         {
-            SubmitGovFormCommand f => Handle(f),
-            SubmitIndFormCommand f => Handle(f),
             SubmitSmbFormCommand f => Handle(f),
+            SubmitIndFormCommand f => Handle(f),
+            SubmitGovFormCommand f => Handle(f),
             _ => throw new NotImplementedException($"type {form.GetType().FullName}")
         });
 
@@ -69,19 +69,21 @@ namespace EMBC.DFA.Resources.Submissions
         private async Task<string> Handle(SubmitGovFormCommand f)
         {
             var ctx = dfaContextFactory.Create();
-            var contact = Mappings.Map(f.Form.Applicant);
-            //ctx.AddTocontacts(contact);
+            var application = Mappings.Map(f.Form);
+            application.dfa_appapplicationid = Guid.NewGuid();
+            ctx.AddTodfa_appapplications(application);
+
+            var applicant = application.dfa_Applicant;
+            applicant.dfa_appcontactid = Guid.NewGuid();
+            ctx.AddTodfa_appcontacts(applicant);
+            ctx.SetLink(application, nameof(dfa_appapplication.dfa_Applicant), applicant);
+
+            AddOtherContacts(ctx, application);
+
             await ctx.SaveChangesAsync();
             ctx.DetachAll();
 
-            //var addedContact = ctx.contacts.Where(c => c.firstname == contact.firstname && c.lastname == contact.lastname).FirstOrDefault();
-            var incident = Mappings.Map(f.Form);
-            ctx.AddToincidents(incident);
-            //ctx.SetLink(incident, nameof(incident.customerid_contact), addedContact);
-            await ctx.SaveChangesAsync();
-            ctx.DetachAll();
-
-            return incident.incidentid.ToString();
+            return application.dfa_appapplicationid.ToString();
         }
 
         private async Task<string> Handle(SubmitIndFormCommand f)
@@ -95,6 +97,11 @@ namespace EMBC.DFA.Resources.Submissions
             applicant.dfa_appcontactid = Guid.NewGuid();
             ctx.AddTodfa_appcontacts(applicant);
             ctx.SetLink(application, nameof(dfa_appapplication.dfa_Applicant), applicant);
+
+            var buildingOwner = application.dfa_BuildingOwnerLandlord;
+            buildingOwner.dfa_appbuildingownerlandlordid = Guid.NewGuid();
+            ctx.AddTodfa_appbuildingownerlandlords(buildingOwner);
+            ctx.SetLink(application, nameof(dfa_appapplication.dfa_BuildingOwnerLandlord), buildingOwner);
 
             AddSecondaryApplicants(ctx, application);
             AddOtherContacts(ctx, application);
