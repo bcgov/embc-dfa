@@ -34,4 +34,15 @@ namespace EMBC.DFA.Services.CHEFS
         public bool deleted { get; set; }
         public GovForm submission { get; set; }
     }
+
+    public class CHEFVersionResponse
+    {
+        public string id { get; set; }
+        public IEnumerable<CHEFVersionInfo> versions { get; set; }
+    }
+
+    public class CHEFVersionInfo
+    {
+        public string id { get; set; }
+    }
 }

@@ -102,7 +102,7 @@ namespace EMBC.DFA.Services.CHEFS
 
     public class SMB_SecondaryApplicant
     {
-        public string applicantType { get; set; }
+        public string? applicantType { get; set; }
         public string FirstNameofSecondary { get; set; }
         public string FirstNameofSecondary1 { get; set; } //Secondary Applicant Last Name!!!!
         public string? LastNameofSecondary { get; set; }

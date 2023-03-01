@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using EMBC.DFA.Dynamics.Microsoft.Dynamics.CRM;
@@ -10,7 +11,7 @@ namespace EMBC.DFA.Resources.Submissions
     {
         public static dfa_appapplication Map(SmbForm form)
         {
-            var ret = new dfa_appapplication
+            return new dfa_appapplication
             {
                 dfa_chefconfirmationnumber = form.CHEFConfirmationId,
                 dfa_applicanttype = (int?)Enum.Parse<ApplicantTypeOptionSet>(form.ApplicantType.ToString()),
@@ -42,8 +43,8 @@ namespace EMBC.DFA.Resources.Submissions
                 dfa_accountlegalname = form.Applicant.BusinessLegalName,
 
                 dfa_Applicant = Map(form.Applicant),
-                dfa_dfa_appapplication_dfa_appsecondaryapplicant_AppApplicationId = new Collection<dfa_appsecondaryapplicant>(),
-                dfa_dfa_appapplication_dfa_appothercontact_AppApplicationId = new Collection<dfa_appothercontact>(),
+                dfa_dfa_appapplication_dfa_appsecondaryapplicant_AppApplicationId = Map(form.SecondaryApplicants),
+                dfa_dfa_appapplication_dfa_appothercontact_AppApplicationId = Map(form.AltContacts),
 
                 dfa_businessmanagedbyallownersondaytodaybasis = (int?)(form.IsBusinessManaged.HasValue && form.IsBusinessManaged.Value ? DFATwoOptions.Yes : DFATwoOptions.No),
                 dfa_grossrevenues100002000000beforedisaster = (int?)(form.AreRevenuesInRange.HasValue && form.AreRevenuesInRange.Value ? DFATwoOptions.Yes : DFATwoOptions.No),
@@ -72,74 +73,15 @@ namespace EMBC.DFA.Resources.Submissions
                 dfa_secondaryapplicantsigneddate = form.OtherSignatureDate,
                 //dfa_secondaryapplicantsignature = form.OtherSignature,
                 //signature
-                dfa_dfa_appapplication_dfa_appcleanuplog_ApplicationId = new Collection<dfa_appcleanuplog>(),
-                dfa_dfa_appapplication_dfa_appdamageditem_ApplicationId = new Collection<dfa_appdamageditem>(),
-                dfa_appapplication_dfa_appdocumentlocations_ApplicationId = new Collection<dfa_appdocumentlocations>(),
+                dfa_dfa_appapplication_dfa_appcleanuplog_ApplicationId = Map(form.CleanUpLogs),
+                dfa_dfa_appapplication_dfa_appdamageditem_ApplicationId = Map(form.DamagedItems),
+                dfa_appapplication_dfa_appdocumentlocations_ApplicationId = Map(form.Documents),
             };
-
-            foreach (var applicant in form.SecondaryApplicants)
-            {
-                ret.dfa_dfa_appapplication_dfa_appsecondaryapplicant_AppApplicationId.Add(new dfa_appsecondaryapplicant
-                {
-                    dfa_applicanttype = (int?)Enum.Parse<SecondaryApplicantTypeOptionSet>(applicant.ApplicantType.ToString()),
-                    dfa_firstname = applicant.FirstName,
-                    dfa_lastname = applicant.LastName,
-                    dfa_emailaddress = applicant.Email,
-                    dfa_phonenumber = applicant.Phone
-                });
-            }
-
-            foreach (var contact in form.AltContacts)
-            {
-                ret.dfa_dfa_appapplication_dfa_appothercontact_AppApplicationId.Add(new dfa_appothercontact
-                {
-                    dfa_name = contact.FirstName + " " + contact.LastName,
-                    dfa_firstname = contact.FirstName,
-                    dfa_lastname = contact.LastName,
-                    dfa_emailaddress = contact.Email,
-                    dfa_phonenumber = contact.Phone
-                });
-            }
-
-            foreach (var log in form.CleanUpLogs)
-            {
-                ret.dfa_dfa_appapplication_dfa_appcleanuplog_ApplicationId.Add(new dfa_appcleanuplog
-                {
-                    dfa_date = log.Date,
-                    dfa_contactid = new dfa_appcontact
-                    {
-                        dfa_name = log.ContactName
-                    },
-                    dfa_hoursworked = log.HoursWorked,
-                    dfa_name = log.DescriptionOfWork,
-                });
-            }
-
-            foreach (var item in form.DamagedItems)
-            {
-                ret.dfa_dfa_appapplication_dfa_appdamageditem_ApplicationId.Add(new dfa_appdamageditem
-                {
-                    dfa_roomname = item.RoomName,
-                    dfa_damagedescription = item.Description
-                });
-            }
-
-            foreach (var doc in form.Documents)
-            {
-                ret.dfa_appapplication_dfa_appdocumentlocations_ApplicationId.Add(new dfa_appdocumentlocations
-                {
-                    dfa_name = doc.FileName,
-                    dfa_documenttype = doc.FileType,
-                    dfa_url = doc.CHEFSubmissionId,
-                });
-            }
-
-            return ret;
         }
 
         public static dfa_appapplication Map(IndForm form)
         {
-            var ret = new dfa_appapplication
+            return new dfa_appapplication
             {
                 dfa_chefconfirmationnumber = form.CHEFConfirmationId,
                 dfa_applicanttype = (int?)Enum.Parse<ApplicantTypeOptionSet>(form.ApplicantType.ToString()),
@@ -165,8 +107,8 @@ namespace EMBC.DFA.Resources.Submissions
                 dfa_mailingaddressprovince = form.MailingAddress.Province,
                 dfa_mailingaddresspostalcode = form.MailingAddress.PostalCode,
 
-                dfa_dfa_appapplication_dfa_appsecondaryapplicant_AppApplicationId = new Collection<dfa_appsecondaryapplicant>(),
-                dfa_dfa_appapplication_dfa_appothercontact_AppApplicationId = new Collection<dfa_appothercontact>(),
+                dfa_dfa_appapplication_dfa_appsecondaryapplicant_AppApplicationId = Map(form.SecondaryApplicants),
+                dfa_dfa_appapplication_dfa_appothercontact_AppApplicationId = Map(form.AltContacts),
 
                 dfa_accountlegalname = form.BuildingOwner.Name,
                 dfa_BuildingOwnerLandlord = Map(form.BuildingOwner),
@@ -184,7 +126,7 @@ namespace EMBC.DFA.Resources.Submissions
                 dfa_datereturntotheresidence = form.DateReturned,
                 dfa_areyounowresidingintheresidence = form.InResidence,
 
-                dfa_dfa_appapplication_dfa_appoccupant_ApplicationId = new Collection<dfa_appoccupant>(),
+                dfa_dfa_appapplication_dfa_appoccupant_ApplicationId = Map(form.Occupants),
 
                 dfa_acopyofarentalagreementorlease = form.HasRentalAgreement,
                 dfa_haveinvoicesreceiptsforcleanuporrepairs = form.HasReceipts,
@@ -198,87 +140,15 @@ namespace EMBC.DFA.Resources.Submissions
                 dfa_secondaryapplicantsigneddate = form.OtherSignatureDate,
                 //dfa_secondaryapplicantsignature = form.OtherSignature,
 
-                dfa_dfa_appapplication_dfa_appcleanuplog_ApplicationId = new Collection<dfa_appcleanuplog>(),
-                dfa_dfa_appapplication_dfa_appdamageditem_ApplicationId = new Collection<dfa_appdamageditem>(),
-                dfa_appapplication_dfa_appdocumentlocations_ApplicationId = new Collection<dfa_appdocumentlocations>(),
+                dfa_dfa_appapplication_dfa_appcleanuplog_ApplicationId = Map(form.CleanUpLogs),
+                dfa_dfa_appapplication_dfa_appdamageditem_ApplicationId = Map(form.DamagedItems),
+                dfa_appapplication_dfa_appdocumentlocations_ApplicationId = Map(form.Documents),
             };
-
-            foreach (var applicant in form.SecondaryApplicants)
-            {
-                ret.dfa_dfa_appapplication_dfa_appsecondaryapplicant_AppApplicationId.Add(new dfa_appsecondaryapplicant
-                {
-                    dfa_applicanttype = (int?)Enum.Parse<SecondaryApplicantTypeOptionSet>(applicant.ApplicantType.ToString()),
-                    dfa_firstname = applicant.FirstName,
-                    dfa_lastname = applicant.LastName,
-                    dfa_emailaddress = applicant.Email,
-                    dfa_phonenumber = applicant.Phone
-                });
-            }
-
-            foreach (var contact in form.AltContacts)
-            {
-                ret.dfa_dfa_appapplication_dfa_appothercontact_AppApplicationId.Add(new dfa_appothercontact
-                {
-                    dfa_name = contact.FirstName + " " + contact.LastName,
-                    dfa_firstname = contact.FirstName,
-                    dfa_lastname = contact.LastName,
-                    dfa_emailaddress = contact.Email,
-                    dfa_phonenumber = contact.Phone
-                });
-            }
-
-            foreach (var occupant in form.Occupants)
-            {
-                ret.dfa_dfa_appapplication_dfa_appoccupant_ApplicationId.Add(new dfa_appoccupant
-                {
-                    dfa_ContactId = new dfa_appcontact
-                    {
-                        dfa_firstname = occupant.FirstName,
-                        dfa_lastname = occupant.LastName,
-                        dfa_title = occupant.Relationship
-                    },
-                });
-            }
-
-            foreach (var log in form.CleanUpLogs)
-            {
-                ret.dfa_dfa_appapplication_dfa_appcleanuplog_ApplicationId.Add(new dfa_appcleanuplog
-                {
-                    dfa_date = log.Date,
-                    dfa_contactid = new dfa_appcontact
-                    {
-                        dfa_name = log.ContactName
-                    },
-                    dfa_hoursworked = log.HoursWorked,
-                    dfa_name = log.DescriptionOfWork,
-                });
-            }
-
-            foreach (var item in form.DamagedItems)
-            {
-                ret.dfa_dfa_appapplication_dfa_appdamageditem_ApplicationId.Add(new dfa_appdamageditem
-                {
-                    dfa_roomname = item.RoomName,
-                    dfa_damagedescription = item.Description
-                });
-            }
-
-            foreach (var doc in form.Documents)
-            {
-                ret.dfa_appapplication_dfa_appdocumentlocations_ApplicationId.Add(new dfa_appdocumentlocations
-                {
-                    dfa_name = doc.FileName,
-                    dfa_documenttype = doc.FileType,
-                    dfa_url = doc.CHEFSubmissionId,
-                });
-            }
-
-            return ret;
         }
 
         public static dfa_appapplication Map(GovForm form)
         {
-            var ret = new dfa_appapplication
+            return new dfa_appapplication
             {
                 dfa_chefconfirmationnumber = form.CHEFConfirmationId,
                 dfa_applicanttype = (int?)Enum.Parse<ApplicantTypeOptionSet>(form.ApplicantType.ToString()),
@@ -293,8 +163,7 @@ namespace EMBC.DFA.Resources.Submissions
                 dfa_mailingaddressprovince = form.MailingAddress.Province,
                 dfa_mailingaddresspostalcode = form.MailingAddress.PostalCode,
 
-                dfa_dfa_appapplication_dfa_appsecondaryapplicant_AppApplicationId = new Collection<dfa_appsecondaryapplicant>(),
-
+                dfa_dfa_appapplication_dfa_appsecondaryapplicant_AppApplicationId = Map(form.SecondaryApplicants),
 
                 dfa_causeofdamagelos = (int?)Enum.Parse<DamageTypeOptionSet>(form.DamageInfo.DamageType, true),
                 dfa_dateofdamage = form.DamageFrom,
@@ -303,17 +172,117 @@ namespace EMBC.DFA.Resources.Submissions
                 dfa_description = form.DamageInfo.DamageDescription,
                 dfa_toreceivesupportaccessingdamage = (int?)(form.WouldLikeToReceiveSupport ? DFATwoOptions.Yes : DFATwoOptions.No),
             };
+        }
 
-            foreach (var applicant in form.SecondaryApplicants)
+        public static Collection<dfa_appsecondaryapplicant> Map(List<OtherApplicant> applicants)
+        {
+            var ret = new Collection<dfa_appsecondaryapplicant>();
+
+            foreach (var applicant in applicants)
             {
-                ret.dfa_dfa_appapplication_dfa_appsecondaryapplicant_AppApplicationId.Add(new dfa_appsecondaryapplicant
+                ret.Add(new dfa_appsecondaryapplicant
                 {
                     dfa_applicanttype = (int?)Enum.Parse<SecondaryApplicantTypeOptionSet>(applicant.ApplicantType.ToString()),
                     dfa_firstname = applicant.FirstName,
                     dfa_lastname = applicant.LastName,
-                    dfa_title = applicant.Title,
+                    dfa_title = applicant.Title ?? string.Empty,
                     dfa_emailaddress = applicant.Email,
-                    dfa_phonenumber = applicant.Phone
+                    dfa_phonenumber = applicant.Phone,
+                    dfa_organizationname = applicant.ApplicantType == SecondaryApplicantType.Organization ? applicant.LastName + ", " + applicant.FirstName : String.Empty,
+                });
+            }
+
+            return ret;
+        }
+
+        public static Collection<dfa_appothercontact> Map(List<AltContact> contacts)
+        {
+            var ret = new Collection<dfa_appothercontact>();
+
+            foreach (var contact in contacts)
+            {
+                ret.Add(new dfa_appothercontact
+                {
+                    dfa_name = contact.FirstName + " " + contact.LastName,
+                    dfa_firstname = contact.FirstName,
+                    dfa_lastname = contact.LastName,
+                    dfa_emailaddress = contact.Email,
+                    dfa_phonenumber = contact.Phone
+                });
+            }
+
+            return ret;
+        }
+
+        public static Collection<dfa_appoccupant> Map(List<Occupant> occupants)
+        {
+            var ret = new Collection<dfa_appoccupant>();
+
+            foreach (var occupant in occupants)
+            {
+                ret.Add(new dfa_appoccupant
+                {
+                    dfa_name = occupant.LastName + ", " + occupant.FirstName,
+                    dfa_ContactId = new dfa_appcontact
+                    {
+                        dfa_firstname = occupant.FirstName,
+                        dfa_lastname = occupant.LastName,
+                        dfa_title = occupant.Relationship
+                    },
+                });
+            }
+
+            return ret;
+        }
+
+        public static Collection<dfa_appcleanuplog> Map(List<CleanUpLog> cleanUpLogs)
+        {
+            var ret = new Collection<dfa_appcleanuplog>();
+
+            foreach (var log in cleanUpLogs)
+            {
+                ret.Add(new dfa_appcleanuplog
+                {
+                    dfa_date = log.Date,
+                    dfa_contactid = new dfa_appcontact
+                    {
+                        dfa_name = log.ContactName
+                    },
+                    dfa_hoursworked = log.HoursWorked,
+                    dfa_name = log.DescriptionOfWork,
+                });
+            }
+
+            return ret;
+        }
+
+        public static Collection<dfa_appdamageditem> Map(List<DamageItem> damagedItems)
+        {
+            var ret = new Collection<dfa_appdamageditem>();
+
+            foreach (var item in damagedItems)
+            {
+                ret.Add(new dfa_appdamageditem
+                {
+                    dfa_roomname = item.RoomName,
+                    dfa_damagedescription = item.Description
+                });
+            }
+
+            return ret;
+        }
+
+        public static Collection<dfa_appdocumentlocations> Map(List<AttachmentData> documents)
+        {
+            var ret = new Collection<dfa_appdocumentlocations>();
+
+            foreach (var doc in documents)
+            {
+                ret.Add(new dfa_appdocumentlocations
+                {
+                    dfa_name = doc.FileName,
+                    dfa_documenttype = doc.FileType,
+                    dfa_url = doc.CHEFSubmissionId,
                 });
             }
 

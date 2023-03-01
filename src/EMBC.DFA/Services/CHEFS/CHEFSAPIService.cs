@@ -29,8 +29,7 @@ namespace EMBC.DFA.Services.CHEFS
 
         public async Task<IEnumerable<SmbForm>> GetSmbSubmissions()
         {
-            string endpointUrl = $"{_configuration["CHEFS_API_BASE_URI"]}/app/api/v1/forms/{_configuration["SMB_FORM_ID"]}/versions/{_configuration["SMB_VERSION_ID"]}/submissions";
-            string _responseContent = await Get(endpointUrl, FormType.SMB);
+            var _responseContent = await GetSubmissionsForType(FormType.SMB);
             var result = JsonSerializer.Deserialize<IEnumerable<CHEFSmbResponse>>(_responseContent);
             if (result != null)
             {
@@ -46,8 +45,7 @@ namespace EMBC.DFA.Services.CHEFS
 
         public async Task<IEnumerable<IndForm>> GetIndSubmissions()
         {
-            string endpointUrl = $"{_configuration["CHEFS_API_BASE_URI"]}/app/api/v1/forms/{_configuration["IND_FORM_ID"]}/versions/{_configuration["IND_VERSION_ID"]}/submissions";
-            string _responseContent = await Get(endpointUrl, FormType.IND);
+            var _responseContent = await GetSubmissionsForType(FormType.IND);
             var result = JsonSerializer.Deserialize<IEnumerable<CHEFIndResponse>>(_responseContent);
             if (result != null)
             {
@@ -63,8 +61,7 @@ namespace EMBC.DFA.Services.CHEFS
 
         public async Task<IEnumerable<GovForm>> GetGovSubmissions()
         {
-            string endpointUrl = $"{_configuration["CHEFS_API_BASE_URI"]}/app/api/v1/forms/{_configuration["GOV_FORM_ID"]}/versions/{_configuration["GOV_VERSION_ID"]}/submissions";
-            string _responseContent = await Get(endpointUrl, FormType.GOV);
+            var _responseContent = await GetSubmissionsForType(FormType.GOV);
             var result = JsonSerializer.Deserialize<IEnumerable<CHEFGovResponse>>(_responseContent);
             if (result != null)
             {
@@ -78,6 +75,42 @@ namespace EMBC.DFA.Services.CHEFS
             return ret;
         }
 
+        private async Task<string> GetSubmissionsForType(FormType type)
+        {
+            var formId = GetFormIdForType(type);
+            var versionId = await GetVersionId(type, formId);
+            string endpointUrl = $"{_configuration["CHEFS_API_BASE_URI"]}/app/api/v1/forms/{formId}/versions/{versionId}/submissions";
+            return await Get(endpointUrl, type);
+        }
+
+        private async Task<string> GetVersionId(FormType type, string formId)
+        {
+            var ret = string.Empty;
+            string endpointUrl = $"{_configuration["CHEFS_API_BASE_URI"]}/app/api/v1/forms/{formId}/version";
+            string _responseContent = await Get(endpointUrl, type);
+            var result = JsonSerializer.Deserialize<CHEFVersionResponse>(_responseContent);
+            if (result != null)
+            {
+                var versionInfo = result.versions.FirstOrDefault();
+                if (versionInfo != null) ret = versionInfo.id;
+            }
+            return ret;
+        }
+
+        private string GetFormIdForType(FormType type)
+        {
+            switch (type)
+            {
+                case FormType.SMB:
+                    return _configuration["SMB_FORM_ID"];
+                case FormType.IND:
+                    return _configuration["IND_FORM_ID"];
+                case FormType.GOV:
+                    return _configuration["GOV_FORM_ID"];
+                default:
+                    return _configuration["SMB_FORM_ID"];
+            }
+        }
 
         private async Task<string> Get(string endpointUrl, FormType type)
         {
