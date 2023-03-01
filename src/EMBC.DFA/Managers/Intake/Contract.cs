@@ -163,7 +163,8 @@ namespace EMBC.DFA.Managers.Intake
         public DateTime Date { get; set; }
 
         public Applicant Applicant { get; set; }
-        public Address? MailingAddress { get; set; }
+        public Address MailingAddress { get; set; }
+        public List<OtherApplicant> SecondaryApplicants { get; set; }
 
         public string? AlternatePhoneNumber { get; set; }
         public string? AlternateCellNumber { get; set; }
@@ -171,6 +172,7 @@ namespace EMBC.DFA.Managers.Intake
         public DateTime DamageFrom { get; set; }
         public DateTime DamageTo { get; set; }
         public DamageInfo DamageInfo { get; set; }
+        public bool WouldLikeToReceiveSupport { get; set; }
     }
 
     public class Applicant
@@ -223,6 +225,7 @@ namespace EMBC.DFA.Managers.Intake
         public SecondaryApplicantType ApplicantType { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
+        public string? Title { get; set; }
         public string Email { get; set; }
         public string Phone { get; set; }
     }

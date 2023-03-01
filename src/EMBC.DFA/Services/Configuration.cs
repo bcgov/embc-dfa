@@ -49,8 +49,8 @@ namespace EMBC.DFA.Services
             services.TryAddTransient<IndBackgroundTask>();
             services.AddHostedService<BackgroundTask<IndBackgroundTask>>();
 
-            //services.TryAddTransient<GovBackgroundTask>();
-            //services.AddHostedService<BackgroundTask<GovBackgroundTask>>();
+            services.TryAddTransient<GovBackgroundTask>();
+            services.AddHostedService<BackgroundTask<GovBackgroundTask>>();
 
             return services;
         }

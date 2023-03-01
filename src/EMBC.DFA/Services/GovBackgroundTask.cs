@@ -33,13 +33,15 @@ namespace EMBC.DFA.Services
         public async Task ExecuteAsync(CancellationToken cancellationToken)
         {
             var submissions = await _chefsAPI.GetGovSubmissions();
-            var existingConfirmationIds = await _submissionsRepository.QueryConfirmationIdsByForm(FormType.GOV);
+            var existingConfirmationIds = (await _submissionsRepository.QueryConfirmationIdsByForm(FormType.GOV)).ToList();
             var newSubmissions = submissions.Where(s => !existingConfirmationIds.Any(id => !string.IsNullOrEmpty(id) && id.Equals(s.ConfirmationId, StringComparison.OrdinalIgnoreCase))).ToList();
             foreach (var submission in newSubmissions)
             {
                 var submissionId = await _intakeManager.Handle(new NewGovFormSubmissionCommand { Form = Mappings.Map(submission) });
-                Console.WriteLine("New GOV submission created: " + submissionId);
             }
+
+            if (newSubmissions.Count() > 0) Console.WriteLine($"Successfully created {newSubmissions.Count()} GOV Applications");
+            else Console.WriteLine($"No new GOV Applications");
         }
     }
 }
