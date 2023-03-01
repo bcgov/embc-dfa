@@ -80,7 +80,7 @@ namespace EMBC.DFA.Services.CHEFS
         public bool submit1 { get; set; }
         public string? nameOfFirstNationsReserve { get; set; }
         public string? Comments { get; set; }
-        public DateTime date { get; set; }
+        public string? date { get; set; }
     }
 
     public class CHEF_Attachment
@@ -99,7 +99,7 @@ namespace EMBC.DFA.Services.CHEFS
 
     public class IND_SecondaryApplicant
     {
-        public string applicantType { get; set; }
+        public string? applicantType { get; set; }
         public string FirstNameofsecondary { get; set; }
         public string? LastNameofSecondary { get; set; }
         public string lastName { get; set; }

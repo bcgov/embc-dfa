@@ -97,7 +97,7 @@ namespace EMBC.DFA.Services
             {
                 ret.SecondaryApplicants.Add(new OtherApplicant
                 {
-                    ApplicantType = (SecondaryApplicantType)Enum.Parse(typeof(SecondaryApplicantType), otherApplicant.applicantType, true),
+                    ApplicantType = SecondaryApplicantType.Contact,
                     FirstName = otherApplicant.FirstNameofSecondary,
                     LastName = otherApplicant.FirstNameofSecondary1,
                     Email = otherApplicant.emailAddress,
@@ -236,6 +236,7 @@ namespace EMBC.DFA.Services
                 EligibleForGrant = source.yes2 == "yes",
                 LossesOverOneThousand = source.yes3 == "yes",
                 WasEvacuated = source.yes4 == "yes",
+                DateReturned = !string.IsNullOrEmpty(source.date) ? DateTime.Parse(source.date) : null,
                 InResidence = source.yes5 == "yes",
 
                 Occupants = new List<Managers.Intake.Occupant>(),
@@ -260,7 +261,7 @@ namespace EMBC.DFA.Services
             {
                 ret.SecondaryApplicants.Add(new OtherApplicant
                 {
-                    ApplicantType = (SecondaryApplicantType)Enum.Parse(typeof(SecondaryApplicantType), otherApplicant.applicantType, true),
+                    ApplicantType = SecondaryApplicantType.Contact,
                     FirstName = otherApplicant.FirstNameofsecondary,
                     LastName = otherApplicant.lastName,
                     Email = otherApplicant.emailAddress,
