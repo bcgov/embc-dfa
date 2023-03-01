@@ -55,7 +55,7 @@ namespace EMBC.Tests.Integration.DFA.Api
                 metadata = new Metadata { }
             };
 
-            var host = Application.Host;
+            //var host = Application.Host;
 
             //var result = await host.Scenario(s =>
             //{
