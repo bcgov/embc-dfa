@@ -14,12 +14,13 @@ namespace EMBC.DFA.Services
         private readonly ISubmissionsRepository _submissionsRepository;
         private readonly IIntakeManager _intakeManager;
 
-        public string Schedule => "0 5-59/15 * * * *";
+        public string Schedule => "0 5-59/15 * * * *"; //Every 15 minutes, staggered by 5 minutes
+        public TimeSpan InitialDelay => TimeSpan.FromSeconds(30);
+
         //public string Schedule => "20 * * * * *"; //every minute on second 20
+        //public TimeSpan InitialDelay => TimeSpan.FromSeconds(3);
 
         public int DegreeOfParallelism => 1;
-
-        public TimeSpan InitialDelay => TimeSpan.FromSeconds(30);
 
         public TimeSpan InactivityTimeout => TimeSpan.FromMinutes(5);
 

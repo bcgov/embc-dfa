@@ -168,6 +168,7 @@ namespace EMBC.DFA.Resources.Submissions
                 dfa_dfa_appapplication_dfa_appsecondaryapplicant_AppApplicationId = new Collection<dfa_appsecondaryapplicant>(),
                 dfa_dfa_appapplication_dfa_appothercontact_AppApplicationId = new Collection<dfa_appothercontact>(),
 
+                dfa_accountlegalname = form.BuildingOwner.Name,
                 dfa_BuildingOwnerLandlord = Map(form.BuildingOwner),
 
                 dfa_manufacturedhom = form.DamageInfo.ManufacturedHome,
