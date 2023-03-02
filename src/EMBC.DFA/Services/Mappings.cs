@@ -182,7 +182,7 @@ namespace EMBC.DFA.Services
                 IndigenousStatus = source.yes7 == "yes",
                 OnFirstNationReserve = source.yes6 == "yes",
                 NameOfFirstNationsReserve = source.nameOfFirstNationsReserve,
-                FirstNationsComments = source.nameOfFirstNationsReserve,
+                FirstNationsComments = source.Comments,
 
                 Applicant = new Applicant
                 {
