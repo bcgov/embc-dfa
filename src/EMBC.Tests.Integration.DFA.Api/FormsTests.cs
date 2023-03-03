@@ -89,7 +89,7 @@ namespace EMBC.Tests.Integration.DFA.Api
                     BusinessLegalName = "Test Farm",
                     ContactName = "Test Contact"
                 },
-                SecondaryApplicants = new List<OtherApplicant>(),
+                SecondaryApplicants = new List<SecondaryApplicant>(),
                 AltContacts = new List<AltContact>(),
                 DamagePropertyAddress = new Address
                 {
@@ -166,7 +166,7 @@ namespace EMBC.Tests.Integration.DFA.Api
                     BusinessLegalName = "Test Farm",
                     ContactName = "Test Contact"
                 },
-                SecondaryApplicants = new List<OtherApplicant>(),
+                SecondaryApplicants = new List<SecondaryApplicant>(),
                 AltContacts = new List<AltContact>(),
                 DamagePropertyAddress = new Address
                 {

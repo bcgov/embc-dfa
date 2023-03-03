@@ -31,7 +31,7 @@ namespace EMBC.DFA.Services
                     ContactName = source.primaryContactNameLastFirst2,
                 },
 
-                SecondaryApplicants = new List<OtherApplicant>(),
+                SecondaryApplicants = new List<SecondaryApplicant>(),
                 AltContacts = new List<AltContact>(),
 
                 DamagePropertyAddress = new Address
@@ -95,7 +95,7 @@ namespace EMBC.DFA.Services
 
             foreach (var otherApplicant in source.cleanupLogDetails1)
             {
-                ret.SecondaryApplicants.Add(new OtherApplicant
+                ret.SecondaryApplicants.Add(new SecondaryApplicant
                 {
                     ApplicantType = SecondaryApplicantType.Contact,
                     FirstName = otherApplicant.FirstNameofSecondary,
@@ -194,7 +194,7 @@ namespace EMBC.DFA.Services
                     Email = source.eMailAddress,
                     AlternatePhone = source.AlternatePhoneNumberofPrimarycontact,
                 },
-                SecondaryApplicants = new List<OtherApplicant>(),
+                SecondaryApplicants = new List<SecondaryApplicant>(),
                 AltContacts = new List<AltContact>(),
 
                 DamagePropertyAddress = new Address
@@ -259,7 +259,7 @@ namespace EMBC.DFA.Services
 
             foreach (var otherApplicant in source.SecondaryApplicant)
             {
-                ret.SecondaryApplicants.Add(new OtherApplicant
+                ret.SecondaryApplicants.Add(new SecondaryApplicant
                 {
                     ApplicantType = SecondaryApplicantType.Contact,
                     FirstName = otherApplicant.FirstNameofsecondary,
@@ -373,7 +373,7 @@ namespace EMBC.DFA.Services
                     Province = source.province,
                     PostalCode = source.postalCode
                 },
-                SecondaryApplicants = new List<OtherApplicant>(),
+                SecondaryApplicants = new List<SecondaryApplicant>(),
 
                 DamageFrom = source.dateOfDamageLoss,
                 DamageTo = source.dateOfDamageLoss1,
@@ -388,7 +388,7 @@ namespace EMBC.DFA.Services
 
             foreach (var altContact in source.alternateContacts)
             {
-                ret.SecondaryApplicants.Add(new OtherApplicant
+                ret.SecondaryApplicants.Add(new SecondaryApplicant
                 {
                     ApplicantType = (SecondaryApplicantType)Enum.Parse(typeof(SecondaryApplicantType), altContact.applicantType, true),
                     FirstName = altContact.FirstnameOfAdditionalContact,

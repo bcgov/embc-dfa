@@ -29,7 +29,7 @@ namespace EMBC.DFA.Api
                     ContactName = source.primaryContactNameLastFirst2,
                 },
 
-                SecondaryApplicants = new List<OtherApplicant>(),
+                SecondaryApplicants = new List<SecondaryApplicant>(),
                 AltContacts = new List<AltContact>(),
 
                 DamagePropertyAddress = new Address
@@ -93,7 +93,7 @@ namespace EMBC.DFA.Api
 
             foreach (var otherApplicant in source.cleanupLogDetails1)
             {
-                ret.SecondaryApplicants.Add(new OtherApplicant
+                ret.SecondaryApplicants.Add(new SecondaryApplicant
                 {
                     ApplicantType = (SecondaryApplicantType)Enum.Parse(typeof(SecondaryApplicantType), otherApplicant.applicantType, true),
                     FirstName = otherApplicant.FirstNameofSecondary,
@@ -188,7 +188,7 @@ namespace EMBC.DFA.Api
                     Email = source.eMailAddress,
                     AlternatePhone = source.AlternatePhoneNumberofPrimarycontact,
                 },
-                SecondaryApplicants = new List<OtherApplicant>(),
+                SecondaryApplicants = new List<SecondaryApplicant>(),
                 AltContacts = new List<AltContact>(),
 
                 DamagePropertyAddress = new Address
@@ -252,7 +252,7 @@ namespace EMBC.DFA.Api
 
             foreach (var otherApplicant in source.SecondaryApplicant)
             {
-                ret.SecondaryApplicants.Add(new OtherApplicant
+                ret.SecondaryApplicants.Add(new SecondaryApplicant
                 {
                     ApplicantType = (SecondaryApplicantType)Enum.Parse(typeof(SecondaryApplicantType), otherApplicant.applicantType, true),
                     FirstName = otherApplicant.FirstNameofsecondary,
