@@ -78,7 +78,7 @@ namespace EMBC.DFA.Resources.Submissions
             ctx.AddTodfa_appcontacts(applicant);
             ctx.SetLink(application, nameof(dfa_appapplication.dfa_Applicant), applicant);
 
-            AddOtherContacts(ctx, application);
+            AddSecondaryApplicants(ctx, application);
 
             await ctx.SaveChangesAsync();
             ctx.DetachAll();

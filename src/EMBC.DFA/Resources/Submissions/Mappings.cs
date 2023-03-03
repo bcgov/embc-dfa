@@ -157,7 +157,7 @@ namespace EMBC.DFA.Resources.Submissions
 
                 dfa_Applicant = Map(form.Applicant),
 
-                dfa_mailingaddressstreet1 = form.MailingAddress.AddressLine1,
+                dfa_mailingaddressstreet1 = !string.IsNullOrEmpty(form.MailingAddress.AddressLine1) ? form.MailingAddress.AddressLine1.Substring(0, Math.Min(100, form.MailingAddress.AddressLine1.Length)) : string.Empty,
                 dfa_mailingaddressstreet2 = form.MailingAddress.AddressLine2,
                 dfa_mailingaddresscitytext = form.MailingAddress.City,
                 dfa_mailingaddressprovince = form.MailingAddress.Province,
@@ -174,7 +174,7 @@ namespace EMBC.DFA.Resources.Submissions
             };
         }
 
-        public static Collection<dfa_appsecondaryapplicant> Map(List<OtherApplicant> applicants)
+        public static Collection<dfa_appsecondaryapplicant> Map(List<SecondaryApplicant> applicants)
         {
             var ret = new Collection<dfa_appsecondaryapplicant>();
 
