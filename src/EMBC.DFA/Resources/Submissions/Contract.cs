@@ -42,4 +42,11 @@ namespace EMBC.DFA.Resources.Submissions
         Yes = 222710000,
         No = 222710001
     }
+
+    public class CRMQueryException : Exception
+    {
+        public CRMQueryException(string message) : base(message)
+        {
+        }
+    }
 }

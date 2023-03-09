@@ -36,7 +36,7 @@ namespace EMBC.DFA.Resources.Submissions
                 dfa_mailingaddresspostalcode = form.MailingAddress.PostalCode,
 
                 dfa_manufacturedhom = form.DamageInfo.ManufacturedHome,
-                dfa_causeofdamagelos = (int?)Enum.Parse<DamageTypeOptionSet>(form.DamageInfo.DamageType, true),
+                dfa_causeofdamagelos = !string.IsNullOrEmpty(form.DamageInfo.DamageType) ? (int?)Enum.Parse<DamageTypeOptionSet>(form.DamageInfo.DamageType, true) : null,
                 dfa_causeofdamageloss = form.DamageInfo.OtherDescription,
                 dfa_description = form.DamageInfo.DamageDescription,
 
@@ -114,7 +114,7 @@ namespace EMBC.DFA.Resources.Submissions
                 dfa_BuildingOwnerLandlord = Map(form.BuildingOwner),
 
                 dfa_manufacturedhom = form.DamageInfo.ManufacturedHome,
-                dfa_causeofdamagelos = (int?)Enum.Parse<DamageTypeOptionSet>(form.DamageInfo.DamageType, true),
+                dfa_causeofdamagelos = !string.IsNullOrEmpty(form.DamageInfo.DamageType) ? (int?)Enum.Parse<DamageTypeOptionSet>(form.DamageInfo.DamageType, true) : null,
                 dfa_causeofdamageloss = form.DamageInfo.OtherDescription,
                 dfa_description = form.DamageInfo.DamageDescription,
 
@@ -165,7 +165,7 @@ namespace EMBC.DFA.Resources.Submissions
 
                 dfa_dfa_appapplication_dfa_appsecondaryapplicant_AppApplicationId = Map(form.SecondaryApplicants),
 
-                dfa_causeofdamagelos = (int?)Enum.Parse<DamageTypeOptionSet>(form.DamageInfo.DamageType, true),
+                dfa_causeofdamagelos = !string.IsNullOrEmpty(form.DamageInfo.DamageType) ? (int?)Enum.Parse<DamageTypeOptionSet>(form.DamageInfo.DamageType, true) : null,
                 dfa_dateofdamage = form.DamageFrom,
                 dfa_dateofdamageto = form.DamageTo,
                 dfa_causeofdamageloss = form.DamageInfo.OtherDescription,

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Configuration;
 
@@ -30,7 +31,9 @@ namespace EMBC.DFA.Services.CHEFS
         public async Task<IEnumerable<SmbForm>> GetSmbSubmissions()
         {
             var _responseContent = await GetSubmissionsForType(FormType.SMB);
-            var result = JsonSerializer.Deserialize<IEnumerable<CHEFSmbResponse>>(_responseContent);
+            var options = new JsonSerializerOptions();
+            options.Converters.Add(new JsonInt32Converter());
+            var result = JsonSerializer.Deserialize<IEnumerable<CHEFSmbResponse>>(_responseContent, options);
             if (result != null)
             {
                 foreach (var res in result)
@@ -46,7 +49,9 @@ namespace EMBC.DFA.Services.CHEFS
         public async Task<IEnumerable<IndForm>> GetIndSubmissions()
         {
             var _responseContent = await GetSubmissionsForType(FormType.IND);
-            var result = JsonSerializer.Deserialize<IEnumerable<CHEFIndResponse>>(_responseContent);
+            var options = new JsonSerializerOptions();
+            options.Converters.Add(new JsonInt32Converter());
+            var result = JsonSerializer.Deserialize<IEnumerable<CHEFIndResponse>>(_responseContent, options);
             if (result != null)
             {
                 foreach (var res in result)
@@ -62,7 +67,9 @@ namespace EMBC.DFA.Services.CHEFS
         public async Task<IEnumerable<GovForm>> GetGovSubmissions()
         {
             var _responseContent = await GetSubmissionsForType(FormType.GOV);
-            var result = JsonSerializer.Deserialize<IEnumerable<CHEFGovResponse>>(_responseContent);
+            var options = new JsonSerializerOptions();
+            options.Converters.Add(new JsonInt32Converter());
+            var result = JsonSerializer.Deserialize<IEnumerable<CHEFGovResponse>>(_responseContent, options);
             if (result != null)
             {
                 foreach (var res in result)
@@ -175,6 +182,35 @@ namespace EMBC.DFA.Services.CHEFS
             SMB,
             IND,
             GOV
+        }
+    }
+
+
+    //CHEFS defaults no value in a number field to an empty string
+    //Handle converting an empty string to an int field
+    public class JsonInt32Converter : JsonConverter<int>
+    {
+        public override bool CanConvert(Type typeToConvert)
+        {
+            return typeToConvert == typeof(int);
+        }
+
+        public override int Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+        {
+            try
+            {
+                var value = reader.GetInt32();
+                return value;
+            }
+            catch
+            {
+                return 0;
+            }
+        }
+
+        public override void Write(Utf8JsonWriter writer, int value, JsonSerializerOptions options)
+        {
+            throw new NotImplementedException();
         }
     }
 }
