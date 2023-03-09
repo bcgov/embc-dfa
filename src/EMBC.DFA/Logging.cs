@@ -35,6 +35,7 @@ namespace EMBC.DFA
                 .MinimumLevel.Override("System.Net.Http.HttpClient", LogEventLevel.Warning)
                 .MinimumLevel.Override("Microsoft.AspNetCore.Hosting", LogEventLevel.Warning)
                 .MinimumLevel.Override("Microsoft.AspNetCore.Routing", LogEventLevel.Warning)
+                .MinimumLevel.Override("Microsoft.OData.Extensions", LogEventLevel.Warning)
                 .WriteTo.Console(outputTemplate: LogOutputTemplate)
                 ;
 
