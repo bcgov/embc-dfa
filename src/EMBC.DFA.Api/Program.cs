@@ -27,7 +27,7 @@ builder.Services.AddEndpointsApiExplorer()
 
 var app = builder.Build();
 
-//app.SetDefaultRequestLogging();
+app.SetDefaultRequestLogging();
 
 if (app.Environment.IsDevelopment())
 {
