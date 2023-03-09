@@ -11,7 +11,7 @@ using EMBC.DFA;
 
 var builder = WebApplication.CreateBuilder(args);
 
-//builder.Host.UseSerilog((ctx, services, config) => Logging.ConfigureSerilog(ctx, services, config, builder.Configuration["APP_NAME"]));
+builder.Host.UseSerilog((ctx, services, config) => Logging.ConfigureSerilog(ctx, services, config, builder.Configuration["APP_NAME"]));
 
 builder.Services.AddEndpointsApiExplorer()
     .AddSwaggerGen()
@@ -27,7 +27,7 @@ builder.Services.AddEndpointsApiExplorer()
 
 var app = builder.Build();
 
-//app.SetDefaultRequestLogging();
+app.SetDefaultRequestLogging();
 
 if (app.Environment.IsDevelopment())
 {

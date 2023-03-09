@@ -44,17 +44,20 @@ namespace EMBC.DFA
             else
             {
 #pragma warning disable S4830 // Server certificates should be verified during SSL/TLS connections
-                loggerConfiguration
-                    .WriteTo.EventCollector(
-                        splunkHost: splunkUrl,
-                        eventCollectorToken: splunkToken,
-                        messageHandler: new HttpClientHandler
-                        {
-                            ServerCertificateCustomValidationCallback = HttpClientHandler.DangerousAcceptAnyServerCertificateValidator
-                        },
-                        renderTemplate: false);
+                //loggerConfiguration
+                //    .WriteTo.EventCollector(
+                //        splunkHost: splunkUrl,
+                //        eventCollectorToken: splunkToken,
+                //        messageHandler: new HttpClientHandler
+                //        {
+                //            ServerCertificateCustomValidationCallback = HttpClientHandler.DangerousAcceptAnyServerCertificateValidator
+                //        },
+                //        renderTemplate: false);
 #pragma warning restore S4830 // Server certificates should be verified during SSL/TLS connections
-                Log.Information($"Logs will be forwarded to Splunk");
+                //Log.Information($"Logs will be forwarded to Splunk");
+
+
+                Log.Information($"Logs will NOT be forwarded to Splunk");
             }
         }
 
