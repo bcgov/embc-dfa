@@ -6,8 +6,12 @@ using EMBC.DFA.Services;
 using EMBC.Utilities.Runtime;
 using Microsoft.AspNetCore.Diagnostics.HealthChecks;
 using EMBC.DFA.Services.CHEFS;
+using Serilog;
+using EMBC.DFA;
 
 var builder = WebApplication.CreateBuilder(args);
+
+builder.Host.UseSerilog((ctx, services, config) => Logging.ConfigureSerilog(ctx, services, config, builder.Configuration["APP_NAME"]));
 
 builder.Services.AddEndpointsApiExplorer()
     .AddSwaggerGen()
@@ -23,6 +27,7 @@ builder.Services.AddEndpointsApiExplorer()
 
 var app = builder.Build();
 
+app.SetDefaultRequestLogging();
 
 if (app.Environment.IsDevelopment())
 {

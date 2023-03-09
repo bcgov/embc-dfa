@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using EMBC.DFA.Managers.Intake;
 using EMBC.DFA.Resources.Submissions;
 using EMBC.DFA.Services.CHEFS;
+using Serilog;
 
 namespace EMBC.DFA.Services
 {
@@ -36,13 +37,22 @@ namespace EMBC.DFA.Services
             var submissions = await _chefsAPI.GetGovSubmissions();
             var existingConfirmationIds = (await _submissionsRepository.QueryConfirmationIdsByForm(FormType.GOV)).ToList();
             var newSubmissions = submissions.Where(s => !existingConfirmationIds.Any(id => !string.IsNullOrEmpty(id) && id.Equals(s.ConfirmationId, StringComparison.OrdinalIgnoreCase))).ToList();
+            var count = 0;
             foreach (var submission in newSubmissions)
             {
-                var submissionId = await _intakeManager.Handle(new NewGovFormSubmissionCommand { Form = Mappings.Map(submission) });
+                try
+                {
+                    var submissionId = await _intakeManager.Handle(new NewGovFormSubmissionCommand { Form = Mappings.Map(submission) });
+                    ++count;
+                }
+                catch (Exception ex)
+                {
+                    Log.Error($"Error in GOV submission {submission.ConfirmationId}: " + ex.Message);
+                }
             }
 
-            if (newSubmissions.Count() > 0) Console.WriteLine($"Successfully created {newSubmissions.Count()} GOV Applications");
-            else Console.WriteLine($"No new GOV Applications");
+            if (count > 0) Log.Information($"Successfully created {count} GOV Applications");
+            else Log.Information($"No new GOV Applications");
         }
     }
 }

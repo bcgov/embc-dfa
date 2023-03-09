@@ -9,6 +9,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using Serilog;
 
 namespace EMBC.DFA.Services
 {
@@ -51,11 +52,11 @@ namespace EMBC.DFA.Services
 
                 if (enabled)
                 {
-                    Console.WriteLine("starting background task: initial delay {0}, schedule: {1}, parallelism: {2}", this.startupDelay, this.schedule.ToString(), task.DegreeOfParallelism);
+                    Log.Information("starting background task: initial delay {0}, schedule: {1}, parallelism: {2}", this.startupDelay, this.schedule.ToString(), task.DegreeOfParallelism);
                 }
                 else
                 {
-                    Console.WriteLine($"background task is disabled, check configuration flag 'backgroundTask:{typeof(T).Name}'");
+                    Log.Information($"background task is disabled, check configuration flag 'backgroundTask:{typeof(T).Name}'");
                 }
             }
         }
@@ -77,7 +78,7 @@ namespace EMBC.DFA.Services
                 {
                     var task = scope.ServiceProvider.GetRequiredService<T>();
 
-                    Console.WriteLine("next run in {0}s", nextExecutionDelay.TotalSeconds);
+                    Log.Information("next run in {0}s", nextExecutionDelay.TotalSeconds);
 
                     try
                     {
@@ -89,23 +90,23 @@ namespace EMBC.DFA.Services
                         if (handle == null)
                         {
                             // no lock
-                            Console.WriteLine("skipping run {0}", runNumber);
+                            Log.Information("skipping run {0}", runNumber);
                             continue;
                         }
                         try
                         {
                             // do work
-                            Console.WriteLine("executing run # {0}", runNumber);
+                            Log.Information("executing run # {0}", runNumber);
                             await task.ExecuteAsync(stoppingToken);
                         }
                         catch (Exception e)
                         {
-                            Console.WriteLine("error in run # {0}: {1}", runNumber, e.Message);
+                            Log.Error("error in run # {0}: {1}", runNumber, e.Message);
                         }
                     }
                     catch (Exception e)
                     {
-                        Console.WriteLine("unhandled error in background job: {0}", e.Message);
+                        Log.Error("unhandled error in background job: {0}", e.Message);
                     }
                     finally
                     {

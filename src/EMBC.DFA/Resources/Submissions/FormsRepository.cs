@@ -31,39 +31,46 @@ namespace EMBC.DFA.Resources.Submissions
 
         public async Task<IEnumerable<string>> QueryConfirmationIdsByForm(FormType type)
         {
-            var ct = new CancellationTokenSource().Token;
-            var ctx = dfaContextFactory.Create();
-            var query = ctx.dfa_appapplications.AsQueryable();
-            switch (type)
+            try
             {
-                case FormType.SMB:
-                    {
-                        query = query.Where(app => app.dfa_applicanttype == (int)ApplicantTypeOptionSet.SmallBusinessOwner ||
-                        app.dfa_applicanttype == (int)ApplicantTypeOptionSet.FarmOwner ||
-                        app.dfa_applicanttype == (int)ApplicantTypeOptionSet.CharitableOrganization);
-                        break;
-                    }
-                case FormType.IND:
-                    {
-                        query = query.Where(app => app.dfa_applicanttype == (int)ApplicantTypeOptionSet.HomeOwner ||
-                        app.dfa_applicanttype == (int)ApplicantTypeOptionSet.ResidentialTenant);
-                        break;
-                    }
-                case FormType.GOV:
-                    {
-                        query = query.Where(app => app.dfa_applicanttype == (int)ApplicantTypeOptionSet.GovernmentBody);
-                        break;
-                    }
-                default:
-                    {
-                        //SMB - should not happen!
-                        query = query.Where(app => app.dfa_applicanttype == (int)ApplicantTypeOptionSet.SmallBusinessOwner ||
-                        app.dfa_applicanttype == (int)ApplicantTypeOptionSet.FarmOwner ||
-                        app.dfa_applicanttype == (int)ApplicantTypeOptionSet.CharitableOrganization);
-                        break;
-                    }
+                var ct = new CancellationTokenSource().Token;
+                var ctx = dfaContextFactory.Create();
+                var query = ctx.dfa_appapplications.AsQueryable();
+                switch (type)
+                {
+                    case FormType.SMB:
+                        {
+                            query = query.Where(app => app.dfa_applicanttype == (int)ApplicantTypeOptionSet.SmallBusinessOwner ||
+                            app.dfa_applicanttype == (int)ApplicantTypeOptionSet.FarmOwner ||
+                            app.dfa_applicanttype == (int)ApplicantTypeOptionSet.CharitableOrganization);
+                            break;
+                        }
+                    case FormType.IND:
+                        {
+                            query = query.Where(app => app.dfa_applicanttype == (int)ApplicantTypeOptionSet.HomeOwner ||
+                            app.dfa_applicanttype == (int)ApplicantTypeOptionSet.ResidentialTenant);
+                            break;
+                        }
+                    case FormType.GOV:
+                        {
+                            query = query.Where(app => app.dfa_applicanttype == (int)ApplicantTypeOptionSet.GovernmentBody);
+                            break;
+                        }
+                    default:
+                        {
+                            //SMB - should not happen!
+                            query = query.Where(app => app.dfa_applicanttype == (int)ApplicantTypeOptionSet.SmallBusinessOwner ||
+                            app.dfa_applicanttype == (int)ApplicantTypeOptionSet.FarmOwner ||
+                            app.dfa_applicanttype == (int)ApplicantTypeOptionSet.CharitableOrganization);
+                            break;
+                        }
+                }
+                return (await query.GetAllPagesAsync(ct)).Select(app => app.dfa_chefconfirmationnumber);
             }
-            return (await query.GetAllPagesAsync(ct)).Select(app => app.dfa_chefconfirmationnumber);
+            catch (Exception ex)
+            {
+                throw new CRMQueryException($"Error while querying CRM Confirmation IDs for type {type.ToString()}");
+            }
         }
 
         private async Task<string> Handle(SubmitGovFormCommand f)

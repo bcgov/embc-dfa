@@ -1,5 +1,4 @@
-﻿using System;
-using System.IO;
+﻿using System.IO;
 using Medallion.Threading;
 using Medallion.Threading.Redis;
 using Medallion.Threading.WaitHandles;
@@ -7,6 +6,7 @@ using Microsoft.AspNetCore.DataProtection;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
+using Serilog;
 using StackExchange.Redis;
 
 namespace EMBC.DFA.Services
@@ -19,7 +19,7 @@ namespace EMBC.DFA.Services
             var appName = configuration.GetValue("APP_NAME", string.Empty);
             if (!string.IsNullOrEmpty(redisConnectionString))
             {
-                Console.WriteLine("Configuring Redis cache");
+                Log.Information("Configuring Redis cache");
                 services.AddStackExchangeRedisCache(options =>
                 {
                     options.Configuration = redisConnectionString;
@@ -32,7 +32,7 @@ namespace EMBC.DFA.Services
             }
             else
             {
-                Console.WriteLine("Configuring in-memory cache");
+                Log.Information("Configuring in-memory cache");
                 var dataProtectionPath = configuration.GetValue("KEY_RING_PATH", string.Empty);
                 services.AddDistributedMemoryCache();
                 var dpBuilder = services.AddDataProtection()
