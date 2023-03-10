@@ -4,6 +4,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using EMBC.DFA.Dynamics.Microsoft.Dynamics.CRM;
 using EMBC.DFA.Managers.Intake;
+using Serilog;
 
 namespace EMBC.DFA.Resources.Submissions
 {
@@ -11,167 +12,191 @@ namespace EMBC.DFA.Resources.Submissions
     {
         public static dfa_appapplication Map(SmbForm form)
         {
-            return new dfa_appapplication
+            try
             {
-                dfa_chefconfirmationnumber = form.CHEFConfirmationId,
-                dfa_applicanttype = (int?)Enum.Parse<ApplicantTypeOptionSet>(form.ApplicantType.ToString()),
-                dfa_indigenousstatus = form.IndigenousStatus,
-                dfa_indigenousreserve = form.OnFirstNationReserve,
-                dfa_nameoffirstnationsr = form.NameOfFirstNationsReserve,
-                dfa_comments = form.FirstNationsComments,
+                return new dfa_appapplication
+                {
+                    dfa_chefconfirmationnumber = form.CHEFConfirmationId,
+                    dfa_applicanttype = (int?)Enum.Parse<ApplicantTypeOptionSet>(form.ApplicantType.ToString()),
+                    dfa_indigenousstatus = form.IndigenousStatus,
+                    dfa_indigenousreserve = form.OnFirstNationReserve,
+                    dfa_nameoffirstnationsr = form.NameOfFirstNationsReserve,
+                    dfa_comments = form.FirstNationsComments,
 
-                dfa_dateofdamage = form.DamageFrom,
-                dfa_dateofdamageto = form.DamageTo,
+                    dfa_dateofdamage = form.DamageFrom,
+                    dfa_dateofdamageto = form.DamageTo,
 
-                dfa_damagedpropertystreet1 = form.DamagePropertyAddress.AddressLine1,
-                dfa_damagedpropertystreet2 = form.DamagePropertyAddress.AddressLine2,
-                dfa_damagedpropertycitytext = form.DamagePropertyAddress.City,
-                dfa_damagedpropertyprovince = form.DamagePropertyAddress.Province,
-                dfa_damagedpropertypostalcode = form.DamagePropertyAddress.PostalCode,
+                    dfa_damagedpropertystreet1 = form.DamagePropertyAddress.AddressLine1,
+                    dfa_damagedpropertystreet2 = form.DamagePropertyAddress.AddressLine2,
+                    dfa_damagedpropertycitytext = form.DamagePropertyAddress.City,
+                    dfa_damagedpropertyprovince = form.DamagePropertyAddress.Province,
+                    dfa_damagedpropertypostalcode = form.DamagePropertyAddress.PostalCode,
 
-                dfa_mailingaddressstreet1 = form.MailingAddress.AddressLine1,
-                dfa_mailingaddressstreet2 = form.MailingAddress.AddressLine2,
-                dfa_mailingaddresscitytext = form.MailingAddress.City,
-                dfa_mailingaddressprovince = form.MailingAddress.Province,
-                dfa_mailingaddresspostalcode = form.MailingAddress.PostalCode,
+                    dfa_mailingaddressstreet1 = form.MailingAddress.AddressLine1,
+                    dfa_mailingaddressstreet2 = form.MailingAddress.AddressLine2,
+                    dfa_mailingaddresscitytext = form.MailingAddress.City,
+                    dfa_mailingaddressprovince = form.MailingAddress.Province,
+                    dfa_mailingaddresspostalcode = form.MailingAddress.PostalCode,
 
-                dfa_manufacturedhom = form.DamageInfo.ManufacturedHome,
-                dfa_causeofdamagelos = !string.IsNullOrEmpty(form.DamageInfo.DamageType) ? (int?)Enum.Parse<DamageTypeOptionSet>(form.DamageInfo.DamageType, true) : null,
-                dfa_causeofdamageloss = form.DamageInfo.OtherDescription,
-                dfa_description = form.DamageInfo.DamageDescription,
+                    dfa_manufacturedhom = form.DamageInfo.ManufacturedHome,
+                    dfa_causeofdamagelos = !string.IsNullOrEmpty(form.DamageInfo.DamageType) ? (int?)Enum.Parse<DamageTypeOptionSet>(form.DamageInfo.DamageType, true) : null,
+                    dfa_causeofdamageloss = form.DamageInfo.OtherDescription,
+                    dfa_description = form.DamageInfo.DamageDescription,
 
-                dfa_accountlegalname = form.Applicant.BusinessLegalName,
+                    dfa_accountlegalname = form.Applicant.BusinessLegalName,
 
-                dfa_Applicant = Map(form.Applicant),
-                dfa_dfa_appapplication_dfa_appsecondaryapplicant_AppApplicationId = Map(form.SecondaryApplicants),
-                dfa_dfa_appapplication_dfa_appothercontact_AppApplicationId = Map(form.AltContacts),
+                    dfa_Applicant = Map(form.Applicant),
+                    dfa_dfa_appapplication_dfa_appsecondaryapplicant_AppApplicationId = Map(form.SecondaryApplicants),
+                    dfa_dfa_appapplication_dfa_appothercontact_AppApplicationId = Map(form.AltContacts),
 
-                dfa_businessmanagedbyallownersondaytodaybasis = (int?)(form.IsBusinessManaged.HasValue && form.IsBusinessManaged.Value ? DFATwoOptions.Yes : DFATwoOptions.No),
-                dfa_grossrevenues100002000000beforedisaster = (int?)(form.AreRevenuesInRange.HasValue && form.AreRevenuesInRange.Value ? DFATwoOptions.Yes : DFATwoOptions.No),
-                dfa_employlessthan50employeesatanyonetime = (int?)(form.EmployLessThanFifty.HasValue && form.EmployLessThanFifty.Value ? DFATwoOptions.Yes : DFATwoOptions.No),
+                    dfa_businessmanagedbyallownersondaytodaybasis = (int?)(form.IsBusinessManaged.HasValue && form.IsBusinessManaged.Value ? DFATwoOptions.Yes : DFATwoOptions.No),
+                    dfa_grossrevenues100002000000beforedisaster = (int?)(form.AreRevenuesInRange.HasValue && form.AreRevenuesInRange.Value ? DFATwoOptions.Yes : DFATwoOptions.No),
+                    dfa_employlessthan50employeesatanyonetime = (int?)(form.EmployLessThanFifty.HasValue && form.EmployLessThanFifty.Value ? DFATwoOptions.Yes : DFATwoOptions.No),
 
-                dfa_farmoperation = (int?)(form.DevelopingOperaton.HasValue && form.DevelopingOperaton.Value ? DFATwoOptions.Yes : DFATwoOptions.No),
-                dfa_ownedandoperatedbya = (int?)(form.FullTimeFarmer.HasValue && form.FullTimeFarmer.Value ? DFATwoOptions.Yes : DFATwoOptions.No),
-                dfa_farmoperationderivesthatpersonsmajorincom = (int?)(form.MajorityIncome.HasValue && form.MajorityIncome.Value ? DFATwoOptions.Yes : DFATwoOptions.No),
+                    dfa_farmoperation = (int?)(form.DevelopingOperaton.HasValue && form.DevelopingOperaton.Value ? DFATwoOptions.Yes : DFATwoOptions.No),
+                    dfa_ownedandoperatedbya = (int?)(form.FullTimeFarmer.HasValue && form.FullTimeFarmer.Value ? DFATwoOptions.Yes : DFATwoOptions.No),
+                    dfa_farmoperationderivesthatpersonsmajorincom = (int?)(form.MajorityIncome.HasValue && form.MajorityIncome.Value ? DFATwoOptions.Yes : DFATwoOptions.No),
 
-                dfa_writtenconfirmationofinsurancenotpurchase = form.CouldNotPurchaseInsurance,
-                dfa_acopyofarentalagreementorlease = form.HasRentalAgreement,
-                dfa_haveinvoicesreceiptsforcleanuporrepairs = form.HasReceipts,
-                dfa_mostrecentlyfiledfinancialstatements = form.HasFinancialStatements,
-                dfa_mostrecentcompletecorporateincometaxretur = form.HasTaxReturn,
-                dfa_proofofownership = form.HasProofOfOwnership,
-                dfa_alistingofthedirectors = form.HasListOfDirectors,
-                dfa_orgregistrationproofunderbcsocietya = form.HasProofOfRegistration,
-                dfa_organizationstructureandpurposestatemente = form.HasEligibilityDocuments,
+                    dfa_writtenconfirmationofinsurancenotpurchase = form.CouldNotPurchaseInsurance,
+                    dfa_acopyofarentalagreementorlease = form.HasRentalAgreement,
+                    dfa_haveinvoicesreceiptsforcleanuporrepairs = form.HasReceipts,
+                    dfa_mostrecentlyfiledfinancialstatements = form.HasFinancialStatements,
+                    dfa_mostrecentcompletecorporateincometaxretur = form.HasTaxReturn,
+                    dfa_proofofownership = form.HasProofOfOwnership,
+                    dfa_alistingofthedirectors = form.HasListOfDirectors,
+                    dfa_orgregistrationproofunderbcsocietya = form.HasProofOfRegistration,
+                    dfa_organizationstructureandpurposestatemente = form.HasEligibilityDocuments,
 
-                dfa_primaryapplicantsigned = (int?)(!string.IsNullOrEmpty(form.Signature) ? DFATwoOptions.Yes : DFATwoOptions.No),
-                dfa_primaryapplicantprintname = form.SignerName,
-                dfa_primaryapplicantsigneddate = form.SignatureDate,
-                entityimage = Convert.FromBase64String(form.Signature.Substring(form.Signature.IndexOf(',') + 1)),
-                dfa_secondaryapplicantsigned = (int?)(!string.IsNullOrEmpty(form.OtherSignature) ? DFATwoOptions.Yes : DFATwoOptions.No),
-                dfa_secondaryapplicantprintname = form.OtherSignerName,
-                dfa_secondaryapplicantsigneddate = form.OtherSignatureDate,
-                //dfa_secondaryapplicantsignature = form.OtherSignature,
-                //signature
-                dfa_dfa_appapplication_dfa_appcleanuplog_ApplicationId = Map(form.CleanUpLogs),
-                dfa_dfa_appapplication_dfa_appdamageditem_ApplicationId = Map(form.DamagedItems),
-                dfa_appapplication_dfa_appdocumentlocations_ApplicationId = Map(form.Documents),
-            };
+                    dfa_primaryapplicantsigned = (int?)(!string.IsNullOrEmpty(form.Signature) ? DFATwoOptions.Yes : DFATwoOptions.No),
+                    dfa_primaryapplicantprintname = form.SignerName,
+                    dfa_primaryapplicantsigneddate = form.SignatureDate,
+                    entityimage = Convert.FromBase64String(form.Signature.Substring(form.Signature.IndexOf(',') + 1)),
+                    dfa_secondaryapplicantsigned = (int?)(!string.IsNullOrEmpty(form.OtherSignature) ? DFATwoOptions.Yes : DFATwoOptions.No),
+                    dfa_secondaryapplicantprintname = form.OtherSignerName,
+                    dfa_secondaryapplicantsigneddate = form.OtherSignatureDate,
+                    //dfa_secondaryapplicantsignature = form.OtherSignature,
+                    //signature
+                    dfa_dfa_appapplication_dfa_appcleanuplog_ApplicationId = Map(form.CleanUpLogs),
+                    dfa_dfa_appapplication_dfa_appdamageditem_ApplicationId = Map(form.DamagedItems),
+                    dfa_appapplication_dfa_appdocumentlocations_ApplicationId = Map(form.Documents),
+                };
+            }
+            catch
+            {
+                Log.Error("Error mapping SmbForm to dfa_appapplication");
+                throw;
+            }
         }
 
         public static dfa_appapplication Map(IndForm form)
         {
-            return new dfa_appapplication
+            try
             {
-                dfa_chefconfirmationnumber = form.CHEFConfirmationId,
-                dfa_applicanttype = (int?)Enum.Parse<ApplicantTypeOptionSet>(form.ApplicantType.ToString()),
-                dfa_indigenousstatus = form.IndigenousStatus,
-                dfa_indigenousreserve = form.OnFirstNationReserve,
-                dfa_nameoffirstnationsr = form.NameOfFirstNationsReserve,
-                dfa_comments = form.FirstNationsComments,
+                return new dfa_appapplication
+                {
+                    dfa_chefconfirmationnumber = form.CHEFConfirmationId,
+                    dfa_applicanttype = (int?)Enum.Parse<ApplicantTypeOptionSet>(form.ApplicantType.ToString()),
+                    dfa_indigenousstatus = form.IndigenousStatus,
+                    dfa_indigenousreserve = form.OnFirstNationReserve,
+                    dfa_nameoffirstnationsr = form.NameOfFirstNationsReserve,
+                    dfa_comments = form.FirstNationsComments,
 
-                dfa_Applicant = Map(form.Applicant),
+                    dfa_Applicant = Map(form.Applicant),
 
-                dfa_dateofdamage = form.DamageFrom,
-                dfa_dateofdamageto = form.DamageTo,
+                    dfa_dateofdamage = form.DamageFrom,
+                    dfa_dateofdamageto = form.DamageTo,
 
-                dfa_damagedpropertystreet1 = form.DamagePropertyAddress.AddressLine1,
-                dfa_damagedpropertystreet2 = form.DamagePropertyAddress.AddressLine2,
-                dfa_damagedpropertycitytext = form.DamagePropertyAddress.City,
-                dfa_damagedpropertyprovince = form.DamagePropertyAddress.Province,
-                dfa_damagedpropertypostalcode = form.DamagePropertyAddress.PostalCode,
+                    dfa_damagedpropertystreet1 = form.DamagePropertyAddress.AddressLine1,
+                    dfa_damagedpropertystreet2 = form.DamagePropertyAddress.AddressLine2,
+                    dfa_damagedpropertycitytext = form.DamagePropertyAddress.City,
+                    dfa_damagedpropertyprovince = form.DamagePropertyAddress.Province,
+                    dfa_damagedpropertypostalcode = form.DamagePropertyAddress.PostalCode,
 
-                dfa_mailingaddressstreet1 = form.MailingAddress.AddressLine1,
-                dfa_mailingaddressstreet2 = form.MailingAddress.AddressLine2,
-                dfa_mailingaddresscitytext = form.MailingAddress.City,
-                dfa_mailingaddressprovince = form.MailingAddress.Province,
-                dfa_mailingaddresspostalcode = form.MailingAddress.PostalCode,
+                    dfa_mailingaddressstreet1 = form.MailingAddress.AddressLine1,
+                    dfa_mailingaddressstreet2 = form.MailingAddress.AddressLine2,
+                    dfa_mailingaddresscitytext = form.MailingAddress.City,
+                    dfa_mailingaddressprovince = form.MailingAddress.Province,
+                    dfa_mailingaddresspostalcode = form.MailingAddress.PostalCode,
 
-                dfa_dfa_appapplication_dfa_appsecondaryapplicant_AppApplicationId = Map(form.SecondaryApplicants),
-                dfa_dfa_appapplication_dfa_appothercontact_AppApplicationId = Map(form.AltContacts),
+                    dfa_dfa_appapplication_dfa_appsecondaryapplicant_AppApplicationId = Map(form.SecondaryApplicants),
+                    dfa_dfa_appapplication_dfa_appothercontact_AppApplicationId = Map(form.AltContacts),
 
-                dfa_accountlegalname = form.BuildingOwner.Name,
-                dfa_BuildingOwnerLandlord = Map(form.BuildingOwner),
+                    dfa_accountlegalname = form.BuildingOwner.Name,
+                    dfa_BuildingOwnerLandlord = Map(form.BuildingOwner),
 
-                dfa_manufacturedhom = form.DamageInfo.ManufacturedHome,
-                dfa_causeofdamagelos = !string.IsNullOrEmpty(form.DamageInfo.DamageType) ? (int?)Enum.Parse<DamageTypeOptionSet>(form.DamageInfo.DamageType, true) : null,
-                dfa_causeofdamageloss = form.DamageInfo.OtherDescription,
-                dfa_description = form.DamageInfo.DamageDescription,
+                    dfa_manufacturedhom = form.DamageInfo.ManufacturedHome,
+                    dfa_causeofdamagelos = !string.IsNullOrEmpty(form.DamageInfo.DamageType) ? (int?)Enum.Parse<DamageTypeOptionSet>(form.DamageInfo.DamageType, true) : null,
+                    dfa_causeofdamageloss = form.DamageInfo.OtherDescription,
+                    dfa_description = form.DamageInfo.DamageDescription,
 
-                dfa_doyouhaveinsurancecoverage = form.HasInsurance,
-                dfa_isthispropertyyourp = form.IsPrimaryResidence,
-                dfa_eligibleforbchomegrantonthisproperty = form.EligibleForGrant,
-                dfa_doyourlossestotalmorethan1000 = form.LossesOverOneThousand,
-                dfa_wereyouevacuatedduringtheevent = form.WasEvacuated,
-                dfa_datereturntotheresidence = form.DateReturned,
-                dfa_areyounowresidingintheresidence = form.InResidence,
+                    dfa_doyouhaveinsurancecoverage = form.HasInsurance,
+                    dfa_isthispropertyyourp = form.IsPrimaryResidence,
+                    dfa_eligibleforbchomegrantonthisproperty = form.EligibleForGrant,
+                    dfa_doyourlossestotalmorethan1000 = form.LossesOverOneThousand,
+                    dfa_wereyouevacuatedduringtheevent = form.WasEvacuated,
+                    dfa_datereturntotheresidence = form.DateReturned,
+                    dfa_areyounowresidingintheresidence = form.InResidence,
 
-                dfa_dfa_appapplication_dfa_appoccupant_ApplicationId = Map(form.Occupants),
+                    dfa_dfa_appapplication_dfa_appoccupant_ApplicationId = Map(form.Occupants),
 
-                dfa_acopyofarentalagreementorlease = form.HasRentalAgreement,
-                dfa_haveinvoicesreceiptsforcleanuporrepairs = form.HasReceipts,
+                    dfa_acopyofarentalagreementorlease = form.HasRentalAgreement,
+                    dfa_haveinvoicesreceiptsforcleanuporrepairs = form.HasReceipts,
 
-                dfa_primaryapplicantsigned = (int?)(!string.IsNullOrEmpty(form.Signature) ? DFATwoOptions.Yes : DFATwoOptions.No),
-                dfa_primaryapplicantprintname = form.SignerName,
-                dfa_primaryapplicantsigneddate = form.SignatureDate,
-                entityimage = Convert.FromBase64String(form.Signature.Substring(form.Signature.IndexOf(',') + 1)),
-                dfa_secondaryapplicantsigned = (int?)(!string.IsNullOrEmpty(form.OtherSignature) ? DFATwoOptions.Yes : DFATwoOptions.No),
-                dfa_secondaryapplicantprintname = form.OtherSignerName,
-                dfa_secondaryapplicantsigneddate = form.OtherSignatureDate,
-                //dfa_secondaryapplicantsignature = form.OtherSignature,
+                    dfa_primaryapplicantsigned = (int?)(!string.IsNullOrEmpty(form.Signature) ? DFATwoOptions.Yes : DFATwoOptions.No),
+                    dfa_primaryapplicantprintname = form.SignerName,
+                    dfa_primaryapplicantsigneddate = form.SignatureDate,
+                    entityimage = Convert.FromBase64String(form.Signature.Substring(form.Signature.IndexOf(',') + 1)),
+                    dfa_secondaryapplicantsigned = (int?)(!string.IsNullOrEmpty(form.OtherSignature) ? DFATwoOptions.Yes : DFATwoOptions.No),
+                    dfa_secondaryapplicantprintname = form.OtherSignerName,
+                    dfa_secondaryapplicantsigneddate = form.OtherSignatureDate,
+                    //dfa_secondaryapplicantsignature = form.OtherSignature,
 
-                dfa_dfa_appapplication_dfa_appcleanuplog_ApplicationId = Map(form.CleanUpLogs),
-                dfa_dfa_appapplication_dfa_appdamageditem_ApplicationId = Map(form.DamagedItems),
-                dfa_appapplication_dfa_appdocumentlocations_ApplicationId = Map(form.Documents),
-            };
+                    dfa_dfa_appapplication_dfa_appcleanuplog_ApplicationId = Map(form.CleanUpLogs),
+                    dfa_dfa_appapplication_dfa_appdamageditem_ApplicationId = Map(form.DamagedItems),
+                    dfa_appapplication_dfa_appdocumentlocations_ApplicationId = Map(form.Documents),
+                };
+            }
+            catch
+            {
+                Log.Error("Error mapping IndForm to dfa_appapplication");
+                throw;
+            }
         }
 
         public static dfa_appapplication Map(GovForm form)
         {
-            return new dfa_appapplication
+            try
             {
-                dfa_chefconfirmationnumber = form.CHEFConfirmationId,
-                dfa_applicanttype = (int?)Enum.Parse<ApplicantTypeOptionSet>(form.ApplicantType.ToString()),
-                dfa_governmentbodylegalname = form.GovLegalName,
-                dfa_datereceived = form.Date,
+                return new dfa_appapplication
+                {
+                    dfa_chefconfirmationnumber = form.CHEFConfirmationId,
+                    dfa_applicanttype = (int?)Enum.Parse<ApplicantTypeOptionSet>(form.ApplicantType.ToString()),
+                    dfa_governmentbodylegalname = form.GovLegalName,
+                    dfa_datereceived = form.Date,
 
-                dfa_Applicant = Map(form.Applicant),
+                    dfa_Applicant = Map(form.Applicant),
 
-                dfa_mailingaddressstreet1 = !string.IsNullOrEmpty(form.MailingAddress.AddressLine1) ? form.MailingAddress.AddressLine1.Substring(0, Math.Min(100, form.MailingAddress.AddressLine1.Length)) : string.Empty,
-                dfa_mailingaddressstreet2 = form.MailingAddress.AddressLine2,
-                dfa_mailingaddresscitytext = form.MailingAddress.City,
-                dfa_mailingaddressprovince = form.MailingAddress.Province,
-                dfa_mailingaddresspostalcode = form.MailingAddress.PostalCode,
+                    dfa_mailingaddressstreet1 = !string.IsNullOrEmpty(form.MailingAddress.AddressLine1) ? form.MailingAddress.AddressLine1.Substring(0, Math.Min(100, form.MailingAddress.AddressLine1.Length)) : string.Empty,
+                    dfa_mailingaddressstreet2 = form.MailingAddress.AddressLine2,
+                    dfa_mailingaddresscitytext = form.MailingAddress.City,
+                    dfa_mailingaddressprovince = form.MailingAddress.Province,
+                    dfa_mailingaddresspostalcode = form.MailingAddress.PostalCode,
 
-                dfa_dfa_appapplication_dfa_appsecondaryapplicant_AppApplicationId = Map(form.SecondaryApplicants),
+                    dfa_dfa_appapplication_dfa_appsecondaryapplicant_AppApplicationId = Map(form.SecondaryApplicants),
 
-                dfa_causeofdamagelos = !string.IsNullOrEmpty(form.DamageInfo.DamageType) ? (int?)Enum.Parse<DamageTypeOptionSet>(form.DamageInfo.DamageType, true) : null,
-                dfa_dateofdamage = form.DamageFrom,
-                dfa_dateofdamageto = form.DamageTo,
-                dfa_causeofdamageloss = form.DamageInfo.OtherDescription,
-                dfa_description = form.DamageInfo.DamageDescription,
-                dfa_toreceivesupportaccessingdamage = (int?)(form.WouldLikeToReceiveSupport ? DFATwoOptions.Yes : DFATwoOptions.No),
-            };
+                    dfa_causeofdamagelos = !string.IsNullOrEmpty(form.DamageInfo.DamageType) ? (int?)Enum.Parse<DamageTypeOptionSet>(form.DamageInfo.DamageType, true) : null,
+                    dfa_dateofdamage = form.DamageFrom,
+                    dfa_dateofdamageto = form.DamageTo,
+                    dfa_causeofdamageloss = form.DamageInfo.OtherDescription,
+                    dfa_description = form.DamageInfo.DamageDescription,
+                    dfa_toreceivesupportaccessingdamage = (int?)(form.WouldLikeToReceiveSupport ? DFATwoOptions.Yes : DFATwoOptions.No),
+                };
+            }
+            catch
+            {
+                Log.Error("Error mapping GovForm to dfa_appapplication");
+                throw;
+            }
         }
 
         public static Collection<dfa_appsecondaryapplicant> Map(List<SecondaryApplicant> applicants)

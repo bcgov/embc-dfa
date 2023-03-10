@@ -58,8 +58,8 @@ namespace EMBC.DFA.Managers.Intake
         public Address DamagePropertyAddress { get; set; }
         public Address MailingAddress { get; set; }
 
-        public DateTime DamageFrom { get; set; }
-        public DateTime DamageTo { get; set; }
+        public DateTime? DamageFrom { get; set; }
+        public DateTime? DamageTo { get; set; }
 
         public DamageInfo DamageInfo { get; set; }
 
@@ -85,7 +85,7 @@ namespace EMBC.DFA.Managers.Intake
 
         public string Signature { get; set; }
         public string SignerName { get; set; }
-        public DateTime SignatureDate { get; set; }
+        public DateTime? SignatureDate { get; set; }
         public string OtherSignature { get; set; }
         public string OtherSignerName { get; set; }
         public DateTime? OtherSignatureDate { get; set; }
@@ -108,8 +108,8 @@ namespace EMBC.DFA.Managers.Intake
         public List<SecondaryApplicant> SecondaryApplicants { get; set; }
         public List<AltContact> AltContacts { get; set; }
 
-        public DateTime DamageFrom { get; set; }
-        public DateTime DamageTo { get; set; }
+        public DateTime? DamageFrom { get; set; }
+        public DateTime? DamageTo { get; set; }
 
         public Address DamagePropertyAddress { get; set; }
         public Address MailingAddress { get; set; }
@@ -131,7 +131,7 @@ namespace EMBC.DFA.Managers.Intake
 
         public string Signature { get; set; }
         public string SignerName { get; set; }
-        public DateTime SignatureDate { get; set; }
+        public DateTime? SignatureDate { get; set; }
         public string OtherSignature { get; set; }
         public string OtherSignerName { get; set; }
         public DateTime? OtherSignatureDate { get; set; }
@@ -140,19 +140,6 @@ namespace EMBC.DFA.Managers.Intake
         public List<CleanUpLog> CleanUpLogs { get; set; }
         public List<DamageItem> DamagedItems { get; set; }
         public List<AttachmentData> Documents { get; set; }
-
-        //Not seeing these fields anywhere in CRM
-        //public string Signature { get; set; }
-        //public string SignerName { get; set; }
-        //public DateTime SignatureDate { get; set; }
-        //public string OtherSignature { get; set; }
-        //public string OtherSignerName { get; set; }
-        //public DateTime OtherSignatureDate { get; set; }
-        //public string AppendixAFirstName { get; set; }
-        //public string AppendixALastName { get; set; }
-        //public string AppendixBFirstName { get; set; }
-        //public string AppendixBLastName { get; set; }
-        //public bool IsSubmit { get; set; }
     }
 
     public class GovForm
@@ -160,7 +147,7 @@ namespace EMBC.DFA.Managers.Intake
         public string CHEFConfirmationId { get; set; }
         public ApplicantType ApplicantType { get; set; }
         public string GovLegalName { get; set; }
-        public DateTime Date { get; set; }
+        public DateTime? Date { get; set; }
 
         public Applicant Applicant { get; set; }
         public Address MailingAddress { get; set; }
@@ -169,8 +156,8 @@ namespace EMBC.DFA.Managers.Intake
         public string? AlternatePhoneNumber { get; set; }
         public string? AlternateCellNumber { get; set; }
 
-        public DateTime DamageFrom { get; set; }
-        public DateTime DamageTo { get; set; }
+        public DateTime? DamageFrom { get; set; }
+        public DateTime? DamageTo { get; set; }
         public DamageInfo DamageInfo { get; set; }
         public bool WouldLikeToReceiveSupport { get; set; }
     }

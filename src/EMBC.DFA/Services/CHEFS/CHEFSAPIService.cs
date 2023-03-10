@@ -7,6 +7,7 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Configuration;
+using Serilog;
 
 namespace EMBC.DFA.Services.CHEFS
 {
@@ -30,56 +31,80 @@ namespace EMBC.DFA.Services.CHEFS
 
         public async Task<IEnumerable<SmbForm>> GetSmbSubmissions()
         {
-            var _responseContent = await GetSubmissionsForType(FormType.SMB);
-            var options = new JsonSerializerOptions();
-            options.Converters.Add(new JsonInt32Converter());
-            var result = JsonSerializer.Deserialize<IEnumerable<CHEFSmbResponse>>(_responseContent, options);
-            if (result != null)
+            try
             {
-                foreach (var res in result)
+                var _responseContent = await GetSubmissionsForType(FormType.SMB);
+                var options = new JsonSerializerOptions();
+                options.Converters.Add(new JsonInt32Converter());
+                var result = JsonSerializer.Deserialize<IEnumerable<CHEFSmbResponse>>(_responseContent, options);
+                if (result != null)
                 {
-                    res.submission.SubmissionId = res.id;
-                    res.submission.ConfirmationId = res.confirmationId;
+                    foreach (var res in result)
+                    {
+                        res.submission.SubmissionId = res.id;
+                        res.submission.ConfirmationId = res.confirmationId;
+                    }
                 }
+                var ret = result.Where(s => !s.draft).Select(s => s.submission);
+                return ret;
             }
-            var ret = result.Select(s => s.submission);
-            return ret;
+            catch
+            {
+                Log.Error("Error retrieving/mapping Smb Submssions from CHEFS");
+                throw;
+            }
         }
 
         public async Task<IEnumerable<IndForm>> GetIndSubmissions()
         {
-            var _responseContent = await GetSubmissionsForType(FormType.IND);
-            var options = new JsonSerializerOptions();
-            options.Converters.Add(new JsonInt32Converter());
-            var result = JsonSerializer.Deserialize<IEnumerable<CHEFIndResponse>>(_responseContent, options);
-            if (result != null)
+            try
             {
-                foreach (var res in result)
+                var _responseContent = await GetSubmissionsForType(FormType.IND);
+                var options = new JsonSerializerOptions();
+                options.Converters.Add(new JsonInt32Converter());
+                var result = JsonSerializer.Deserialize<IEnumerable<CHEFIndResponse>>(_responseContent, options);
+                if (result != null)
                 {
-                    res.submission.SubmissionId = res.id;
-                    res.submission.ConfirmationId = res.confirmationId;
+                    foreach (var res in result)
+                    {
+                        res.submission.SubmissionId = res.id;
+                        res.submission.ConfirmationId = res.confirmationId;
+                    }
                 }
+                var ret = result.Where(s => !s.draft).Select(s => s.submission);
+                return ret;
             }
-            var ret = result.Select(s => s.submission);
-            return ret;
+            catch
+            {
+                Log.Error("Error retrieving/mapping Ind Submssions from CHEFS");
+                throw;
+            }
         }
 
         public async Task<IEnumerable<GovForm>> GetGovSubmissions()
         {
-            var _responseContent = await GetSubmissionsForType(FormType.GOV);
-            var options = new JsonSerializerOptions();
-            options.Converters.Add(new JsonInt32Converter());
-            var result = JsonSerializer.Deserialize<IEnumerable<CHEFGovResponse>>(_responseContent, options);
-            if (result != null)
+            try
             {
-                foreach (var res in result)
+                var _responseContent = await GetSubmissionsForType(FormType.GOV);
+                var options = new JsonSerializerOptions();
+                options.Converters.Add(new JsonInt32Converter());
+                var result = JsonSerializer.Deserialize<IEnumerable<CHEFGovResponse>>(_responseContent, options);
+                if (result != null)
                 {
-                    res.submission.SubmissionId = res.id;
-                    res.submission.ConfirmationId = res.confirmationId;
+                    foreach (var res in result)
+                    {
+                        res.submission.SubmissionId = res.id;
+                        res.submission.ConfirmationId = res.confirmationId;
+                    }
                 }
+                var ret = result.Where(s => !s.draft).Select(s => s.submission);
+                return ret;
             }
-            var ret = result.Select(s => s.submission);
-            return ret;
+            catch
+            {
+                Log.Error("Error retrieving/mapping Gov Submssions from CHEFS");
+                throw;
+            }
         }
 
         private async Task<string> GetSubmissionsForType(FormType type)
