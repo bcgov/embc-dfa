@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace EMBC.DFA.Services.CHEFS
+﻿namespace EMBC.DFA.Services.CHEFS
 {
     public class GovForm
     {
@@ -14,7 +12,7 @@ namespace EMBC.DFA.Services.CHEFS
     public class GovFormData
     {
         public string indigenousGoverningBodyAndLocalGovernmentApplicationForDisasterFinancialAssistanceDfa1 { get; set; } //Legal Name
-        public DateTime date { get; set; }
+        public string date { get; set; }
         public string primaryContactNameLastFirst { get; set; } //Primary Contact First name
         public string primaryContactNameLastFirst1 { get; set; } //Primary Contact Last name
         public string title { get; set; } //Primary Contact title
@@ -30,8 +28,8 @@ namespace EMBC.DFA.Services.CHEFS
         public GOV_AlternateContact[] alternateContacts { get; set; }
         public string flooding { get; set; } //Cause of damage type...
         public string pleaseSpecifyIfSelectedOthers { get; set; } //Other damage loss
-        public DateTime dateOfDamageLoss { get; set; } //From
-        public DateTime dateOfDamageLoss1 { get; set; } //To
+        public string dateOfDamageLoss { get; set; } //From
+        public string dateOfDamageLoss1 { get; set; } //To
         public string provideABriefDescriptionOfDamage { get; set; }
         public string ifThereWasOpportunityToReceiveGuidanceAndSupportInAssessingYourDamagedInfrastructureWouldYouLikeToReceiveThisSupport { get; set; }
         public bool submit1 { get; set; }

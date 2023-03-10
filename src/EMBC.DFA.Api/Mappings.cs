@@ -84,7 +84,7 @@ namespace EMBC.DFA.Api
 
                 OtherSignature = source.signature2,
                 OtherSignerName = source.printName2,
-                OtherSignatureDate = !string.IsNullOrEmpty(source.dateYyyyMDay2) ? DateTime.Parse(source.dateYyyyMDay2) : null,
+                OtherSignatureDate = !string.IsNullOrEmpty(source.dateYyyyMDay2) && DateTime.TryParse(source.dateYyyyMDay2, out _) ? DateTime.Parse(source.dateYyyyMDay2) : null,
 
                 CleanUpLogs = new List<CleanUpLog>(),
                 DamagedItems = new List<DamageItem>(),
@@ -119,7 +119,7 @@ namespace EMBC.DFA.Api
                 ret.CleanUpLogs.Add(new CleanUpLog
                 {
                     HoursWorked = log.hoursWorked,
-                    Date = !string.IsNullOrEmpty(log.dateYyyyMDay) ? DateTime.Parse(log.dateYyyyMDay) : null,
+                    Date = !string.IsNullOrEmpty(log.dateYyyyMDay) && DateTime.TryParse(log.dateYyyyMDay, out _) ? DateTime.Parse(log.dateYyyyMDay) : null,
                     DescriptionOfWork = log.descriptionOfWork,
                     ContactName = log.nameOfFamilyMemberVolunteer,
                 });
@@ -243,7 +243,7 @@ namespace EMBC.DFA.Api
 
                 OtherSignature = source.signature2,
                 OtherSignerName = source.printName2,
-                OtherSignatureDate = !string.IsNullOrEmpty(source.dateYyyyMDay2) ? DateTime.Parse(source.dateYyyyMDay2) : null,
+                OtherSignatureDate = !string.IsNullOrEmpty(source.dateYyyyMDay2) && DateTime.TryParse(source.dateYyyyMDay2, out _) ? DateTime.Parse(source.dateYyyyMDay2) : null,
 
                 CleanUpLogs = new List<CleanUpLog>(),
                 DamagedItems = new List<DamageItem>(),
@@ -288,7 +288,7 @@ namespace EMBC.DFA.Api
                 ret.CleanUpLogs.Add(new CleanUpLog
                 {
                     HoursWorked = log.hoursWorked,
-                    Date = !string.IsNullOrEmpty(log.dateYyyyMDay) ? DateTime.Parse(log.dateYyyyMDay) : null,
+                    Date = !string.IsNullOrEmpty(log.dateYyyyMDay) && DateTime.TryParse(log.dateYyyyMDay, out _) ? DateTime.Parse(log.dateYyyyMDay) : null,
                     DescriptionOfWork = log.descriptionOfWork,
                     ContactName = log.nameOfFamilyMemberVolunteer,
                 });

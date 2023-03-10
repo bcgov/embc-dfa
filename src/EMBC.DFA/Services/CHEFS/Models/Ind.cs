@@ -44,8 +44,8 @@ namespace EMBC.DFA.Services.CHEFS
         public string contactTelephoneNumberS { get; set; }
         public string emailOfLandlord { get; set; }
 
-        public DateTime dateOfDamageFrom { get; set; } //From
-        public DateTime dateOfDamageTo { get; set; } //To
+        public string dateOfDamageFrom { get; set; } //From
+        public string dateOfDamageTo { get; set; } //To
         public ManufacturedHome manufacturedHome { get; set; }
         public string causeOfDamageLoss1 { get; set; }
         public string pleaseSpecifyIfOthers { get; set; } //Other damage loss

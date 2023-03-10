@@ -52,7 +52,7 @@ namespace EMBC.DFA.Services
 
                 if (enabled)
                 {
-                    Log.Information("starting background task: initial delay {0}, schedule: {1}, parallelism: {2}", this.startupDelay, this.schedule.ToString(), task.DegreeOfParallelism);
+                    Log.Information("starting {0}: initial delay {1}, schedule: {2}, parallelism: {3}", typeof(T).Name, this.startupDelay, this.schedule.ToString(), task.DegreeOfParallelism);
                 }
                 else
                 {
@@ -78,7 +78,7 @@ namespace EMBC.DFA.Services
                 {
                     var task = scope.ServiceProvider.GetRequiredService<T>();
 
-                    Log.Information("next run in {0}s", nextExecutionDelay.TotalSeconds);
+                    Log.Information("next {0} run in {1}s", typeof(T).Name, nextExecutionDelay.TotalSeconds);
 
                     try
                     {
@@ -90,23 +90,23 @@ namespace EMBC.DFA.Services
                         if (handle == null)
                         {
                             // no lock
-                            Log.Information("skipping run {0}", runNumber);
+                            Log.Information("skipping {0} run {1}", typeof(T).Name, runNumber);
                             continue;
                         }
                         try
                         {
                             // do work
-                            Log.Information("executing run # {0}", runNumber);
+                            Log.Information("executing {0} run # {1}", typeof(T).Name, runNumber);
                             await task.ExecuteAsync(stoppingToken);
                         }
                         catch (Exception e)
                         {
-                            Log.Error("error in run # {0}: {1}", runNumber, e.Message);
+                            Log.Error("error in {0} run # {1}: {2}", typeof(T).Name, runNumber, e.Message);
                         }
                     }
                     catch (Exception e)
                     {
-                        Log.Error("unhandled error in background job: {0}", e.Message);
+                        Log.Error("unhandled error in {0}: {1}", typeof(T).Name, e.Message);
                     }
                     finally
                     {
