@@ -16,8 +16,10 @@ namespace EMBC.DFA.Services
     public interface IBackgroundTask
     {
         public string Schedule { get; }
+        public string TestSchedule { get; } //increased frequency schedule for TEST environment
         public int DegreeOfParallelism { get; }
         public TimeSpan InitialDelay { get; }
+        public TimeSpan FastDelay { get; }
         TimeSpan InactivityTimeout { get; }
 
         public Task ExecuteAsync(CancellationToken cancellationToken);
@@ -42,8 +44,10 @@ namespace EMBC.DFA.Services
                 var task = scope.ServiceProvider.GetRequiredService<T>();
                 var appName = Environment.GetEnvironmentVariable("APP_NAME") ?? Assembly.GetEntryAssembly()?.GetName().Name ?? string.Empty;
 
-                schedule = CronExpression.Parse(configuration.GetValue("schedule", task.Schedule), CronFormat.IncludeSeconds);
-                startupDelay = configuration.GetValue("initialDelay", task.InitialDelay);
+                var scheduleToUse = serviceProvider.GetRequiredService<IConfiguration>().GetValue("USE_TEST_SCHEDULE", false) ? task.TestSchedule : task.Schedule;
+
+                schedule = CronExpression.Parse(configuration.GetValue("schedule", scheduleToUse), CronFormat.IncludeSeconds);
+                startupDelay = serviceProvider.GetRequiredService<IConfiguration>().GetValue("USE_FAST_DELAY", false) ? configuration.GetValue("initialDelay", task.FastDelay) : configuration.GetValue("initialDelay", task.InitialDelay);
                 enabled = configuration.GetValue("enabled", true);
                 var degreeOfParallelism = configuration.GetValue("degreeOfParallelism", task.DegreeOfParallelism);
 

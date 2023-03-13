@@ -40,9 +40,10 @@ namespace EMBC.DFA.Services.CHEFS
         public string province { get; set; } //Mailing addres
         public string postalCode { get; set; } //Mailing addres
 
-        public string provideRegisteredBuildingOwnerSAndOrLandlordSNameS { get; set; }
-        public string contactTelephoneNumberS { get; set; }
-        public string emailOfLandlord { get; set; }
+        public string provideRegisteredBuildingOwnerSAndOrLandlordSNameS { get; set; } //Building Owner First Name
+        public string provideRegisteredBuildingOwnerSAndOrLandlordSNameS1 { get; set; } //Building Owner Last Name
+        public string contactTelephoneNumberS { get; set; } //Building Owner telephone number
+        public string emailOfLandlord { get; set; } //Building Owner email
 
         public string dateOfDamageFrom { get; set; } //From
         public string dateOfDamageTo { get; set; } //To
