@@ -121,7 +121,7 @@ namespace EMBC.DFA.Resources.Submissions
                     dfa_dfa_appapplication_dfa_appsecondaryapplicant_AppApplicationId = Map(form.SecondaryApplicants),
                     dfa_dfa_appapplication_dfa_appothercontact_AppApplicationId = Map(form.AltContacts),
 
-                    dfa_accountlegalname = form.BuildingOwner.Name,
+                    //dfa_accountlegalname = form.BuildingOwner.FirstName,
                     dfa_BuildingOwnerLandlord = Map(form.BuildingOwner),
 
                     dfa_manufacturedhom = form.DamageInfo.ManufacturedHome,
@@ -349,7 +349,8 @@ namespace EMBC.DFA.Resources.Submissions
         {
             return new dfa_appbuildingownerlandlord
             {
-                dfa_contactfirstname = owner.Name,
+                dfa_contactfirstname = owner.FirstName,
+                dfa_contactlastname = owner.LastName,
                 dfa_contactphone1 = owner.Phone,
                 dfa_contactemail = owner.Email,
             };

@@ -227,7 +227,8 @@ namespace EMBC.DFA.Services
                     },
                     BuildingOwner = new BuildingOwner
                     {
-                        Name = source.provideRegisteredBuildingOwnerSAndOrLandlordSNameS,
+                        FirstName = source.provideRegisteredBuildingOwnerSAndOrLandlordSNameS,
+                        LastName = source.provideRegisteredBuildingOwnerSAndOrLandlordSNameS1,
                         Phone = source.contactTelephoneNumberS,
                         Email = source.emailOfLandlord
                     },

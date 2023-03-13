@@ -1,7 +1,8 @@
 ﻿using System.Net;
 using System.Text.Json;
-using EMBC.DFA.Api.Models;
+//using EMBC.DFA.Api.Models;
 using EMBC.DFA.Managers.Intake;
+using EMBC.DFA.Services.CHEFS;
 using Microsoft.Extensions.DependencyInjection;
 using Shouldly;
 
@@ -29,12 +30,12 @@ namespace EMBC.Tests.Integration.DFA.Api
             [Test]
         public async Task SubmitGovForm()
         {
-            var form = new EMBC.DFA.Api.Models.GovForm
+            var form = new EMBC.DFA.Services.CHEFS.GovForm
             {
                 data = new GovFormData
                 {
                     indigenousGoverningBodyAndLocalGovernmentApplicationForDisasterFinancialAssistanceDfa1 = "Test Legal Name",
-                    date = DateTime.Now,
+                    //date = DateTime.Now,
                     primaryContactNameLastFirst = "John",
                     primaryContactNameLastFirst1 = "Test",
                     title = "Supreme Leader of the Universe",
@@ -43,12 +44,12 @@ namespace EMBC.Tests.Integration.DFA.Api
                     cityTown = "Calgary",
                     province = "AB",
                     postalCode = "C2C2C2",
-                    businessTelephoneNumber = "(778) 321-4567",
-                    cellularTelephoneNumber = "(778) 123-4567",
-                    eMailAddress = "test@test.com",
-                    businessTelephoneNumber1 = "(779) 321-4567",
-                    cellularTelephoneNumber1 = "(779) 123-4567",
-                    eMailAddress1 = String.Empty,
+                    //businessTelephoneNumber = "(778) 321-4567",
+                    //cellularTelephoneNumber = "(778) 123-4567",
+                    //eMailAddress = "test@test.com",
+                    //businessTelephoneNumber1 = "(779) 321-4567",
+                    //cellularTelephoneNumber1 = "(779) 123-4567",
+                    //eMailAddress1 = String.Empty,
                     //causeOfDamageLoss = new DamageLoss
                     //{
                     //    flooding = true,
@@ -56,9 +57,9 @@ namespace EMBC.Tests.Integration.DFA.Api
                     //    windstorm = false,
                     //    other = false
                     //},
-                    pleaseSpecifyIfOthers = String.Empty,
-                    dateOfDamageLoss = DateTime.Now,
-                    dateOfDamageLoss1 = DateTime.Now,
+                    //pleaseSpecifyIfOthers = String.Empty,
+                    //dateOfDamageLoss = DateTime.Now,
+                    //dateOfDamageLoss1 = DateTime.Now,
                     provideABriefDescriptionOfDamage = "Too much water",
                     submit1 = true,
                 },
