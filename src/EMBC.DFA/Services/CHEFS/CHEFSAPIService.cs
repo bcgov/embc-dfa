@@ -36,6 +36,7 @@ namespace EMBC.DFA.Services.CHEFS
             try
             {
                 var responseContent = await GetSubmissionsForType(FormType.SMB);
+                if (string.IsNullOrEmpty(responseContent)) return Enumerable.Empty<SmbForm>();
                 var options = new JsonSerializerOptions { Converters = { new JsonInt32Converter() } };
                 var result = JsonSerializer.Deserialize<IEnumerable<CHEFSmbResponse>>(responseContent, options);
 
@@ -75,6 +76,7 @@ namespace EMBC.DFA.Services.CHEFS
             try
             {
                 var responseContent = await GetSubmissionsForType(FormType.IND);
+                if (string.IsNullOrEmpty(responseContent)) return Enumerable.Empty<IndForm>();
                 var options = new JsonSerializerOptions { Converters = { new JsonInt32Converter() } };
                 var result = JsonSerializer.Deserialize<IEnumerable<CHEFIndResponse>>(responseContent, options);
 
@@ -114,6 +116,7 @@ namespace EMBC.DFA.Services.CHEFS
             try
             {
                 var responseContent = await GetSubmissionsForType(FormType.GOV);
+                if (string.IsNullOrEmpty(responseContent)) return Enumerable.Empty<GovForm>();
                 var options = new JsonSerializerOptions { Converters = { new JsonInt32Converter() } };
                 var result = JsonSerializer.Deserialize<IEnumerable<CHEFGovResponse>>(responseContent, options);
 
@@ -152,6 +155,7 @@ namespace EMBC.DFA.Services.CHEFS
         {
             var formId = GetFormIdForType(type);
             var versionId = await GetVersionId(type, formId);
+            if (string.IsNullOrEmpty(versionId)) return string.Empty;
             string endpointUrl = $"{_configuration["CHEFS_API_BASE_URI"]}/app/api/v1/forms/{formId}/versions/{versionId}/submissions";
             return await Get(endpointUrl, type);
         }
@@ -164,7 +168,7 @@ namespace EMBC.DFA.Services.CHEFS
             var result = JsonSerializer.Deserialize<CHEFVersionResponse>(_responseContent);
             if (result != null)
             {
-                var versionInfo = result.versions.FirstOrDefault();
+                var versionInfo = result.versions.SingleOrDefault(v => v.published);
                 if (versionInfo != null) ret = versionInfo.id;
             }
             return ret;
