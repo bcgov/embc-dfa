@@ -44,5 +44,6 @@ namespace EMBC.DFA.Services.CHEFS
     public class CHEFVersionInfo
     {
         public string id { get; set; }
+        public bool published { get; set; }
     }
 }
