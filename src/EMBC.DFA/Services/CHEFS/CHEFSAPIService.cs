@@ -22,10 +22,12 @@ namespace EMBC.DFA.Services.CHEFS
     {
         private HttpClient _client;
         private IConfiguration _configuration;
+        private INotificationManager _notification;
 
-        public CHEFSAPIService(IConfiguration configuration, HttpClient httpClient)
+        public CHEFSAPIService(IConfiguration configuration, INotificationManager notification, HttpClient httpClient)
         {
             _configuration = configuration;
+            _notification = notification;
             _client = httpClient;
         }
 
@@ -33,10 +35,10 @@ namespace EMBC.DFA.Services.CHEFS
         {
             try
             {
-                var _responseContent = await GetSubmissionsForType(FormType.SMB);
-                var options = new JsonSerializerOptions();
-                options.Converters.Add(new JsonInt32Converter());
-                var result = JsonSerializer.Deserialize<IEnumerable<CHEFSmbResponse>>(_responseContent, options);
+                var responseContent = await GetSubmissionsForType(FormType.SMB);
+                var options = new JsonSerializerOptions { Converters = { new JsonInt32Converter() } };
+                var result = JsonSerializer.Deserialize<IEnumerable<CHEFSmbResponse>>(responseContent, options);
+
                 if (result != null)
                 {
                     foreach (var res in result)
@@ -45,12 +47,25 @@ namespace EMBC.DFA.Services.CHEFS
                         res.submission.ConfirmationId = res.confirmationId;
                     }
                 }
-                var ret = result.Where(s => !s.draft).Select(s => s.submission);
-                return ret;
+
+                var submissions = result
+                    .Where(response => !response.deleted && !response.draft)
+                    .Select(response => response.submission)
+                    .ToList();
+
+                var submissionLimit = _configuration.GetValue("CHEFS_SUBMISSION_LIMIT", 2500);
+
+                if (submissions.Count > submissionLimit)
+                {
+                    Log.Information("SMB - Over submission limit");
+                    await _notification.SendSubmissionLimitWarning(Resources.Submissions.FormType.SMB);
+                }
+
+                return submissions;
             }
-            catch
+            catch (Exception ex)
             {
-                Log.Error("Error retrieving/mapping Smb Submssions from CHEFS");
+                Log.Error(ex, "Error retrieving/mapping Smb Submissions from CHEFS");
                 throw;
             }
         }
@@ -59,10 +74,10 @@ namespace EMBC.DFA.Services.CHEFS
         {
             try
             {
-                var _responseContent = await GetSubmissionsForType(FormType.IND);
-                var options = new JsonSerializerOptions();
-                options.Converters.Add(new JsonInt32Converter());
-                var result = JsonSerializer.Deserialize<IEnumerable<CHEFIndResponse>>(_responseContent, options);
+                var responseContent = await GetSubmissionsForType(FormType.IND);
+                var options = new JsonSerializerOptions { Converters = { new JsonInt32Converter() } };
+                var result = JsonSerializer.Deserialize<IEnumerable<CHEFIndResponse>>(responseContent, options);
+
                 if (result != null)
                 {
                     foreach (var res in result)
@@ -71,12 +86,25 @@ namespace EMBC.DFA.Services.CHEFS
                         res.submission.ConfirmationId = res.confirmationId;
                     }
                 }
-                var ret = result.Where(s => !s.draft).Select(s => s.submission);
-                return ret;
+
+                var submissions = result
+                    .Where(response => !response.deleted && !response.draft)
+                    .Select(response => response.submission)
+                    .ToList();
+
+                var submissionLimit = _configuration.GetValue("CHEFS_SUBMISSION_LIMIT", 2500);
+
+                if (submissions.Count > submissionLimit)
+                {
+                    Log.Information("IND - Over submission limit");
+                    await _notification.SendSubmissionLimitWarning(Resources.Submissions.FormType.IND);
+                }
+
+                return submissions;
             }
-            catch
+            catch (Exception ex)
             {
-                Log.Error("Error retrieving/mapping Ind Submssions from CHEFS");
+                Log.Error(ex, "Error retrieving/mapping Ind Submissions from CHEFS");
                 throw;
             }
         }
@@ -85,10 +113,10 @@ namespace EMBC.DFA.Services.CHEFS
         {
             try
             {
-                var _responseContent = await GetSubmissionsForType(FormType.GOV);
-                var options = new JsonSerializerOptions();
-                options.Converters.Add(new JsonInt32Converter());
-                var result = JsonSerializer.Deserialize<IEnumerable<CHEFGovResponse>>(_responseContent, options);
+                var responseContent = await GetSubmissionsForType(FormType.GOV);
+                var options = new JsonSerializerOptions { Converters = { new JsonInt32Converter() } };
+                var result = JsonSerializer.Deserialize<IEnumerable<CHEFGovResponse>>(responseContent, options);
+
                 if (result != null)
                 {
                     foreach (var res in result)
@@ -97,12 +125,25 @@ namespace EMBC.DFA.Services.CHEFS
                         res.submission.ConfirmationId = res.confirmationId;
                     }
                 }
-                var ret = result.Where(s => !s.draft).Select(s => s.submission);
-                return ret;
+
+                var submissions = result
+                    .Where(response => !response.deleted && !response.draft)
+                    .Select(response => response.submission)
+                    .ToList();
+
+                var submissionLimit = _configuration.GetValue("CHEFS_SUBMISSION_LIMIT", 2500);
+
+                if (submissions.Count > submissionLimit)
+                {
+                    Log.Information("GOV - Over submission limit");
+                    await _notification.SendSubmissionLimitWarning(Resources.Submissions.FormType.GOV);
+                }
+
+                return submissions;
             }
-            catch
+            catch (Exception ex)
             {
-                Log.Error("Error retrieving/mapping Gov Submssions from CHEFS");
+                Log.Error(ex, "Error retrieving/mapping Gov Submissions from CHEFS");
                 throw;
             }
         }
