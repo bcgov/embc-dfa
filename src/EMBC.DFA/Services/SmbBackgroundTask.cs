@@ -16,10 +16,7 @@ namespace EMBC.DFA.Services
         private readonly IIntakeManager _intakeManager;
 
         public string Schedule => "0 */15 * * * *"; //every 15 minutes
-        public TimeSpan InitialDelay => TimeSpan.FromSeconds(30);
-
-        public string TestSchedule => "0 * * * * *"; //every minute on second 0
-        public TimeSpan FastDelay => TimeSpan.FromSeconds(3);
+        public int InitialDelay => 30;
 
         public int DegreeOfParallelism => 1;
 
