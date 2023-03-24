@@ -205,16 +205,19 @@ namespace EMBC.DFA.Resources.Submissions
 
             foreach (var applicant in applicants)
             {
-                ret.Add(new dfa_appsecondaryapplicant
+                if (!string.IsNullOrEmpty(applicant.FirstName) || !string.IsNullOrEmpty(applicant.LastName) || !string.IsNullOrEmpty(applicant.Email))
                 {
-                    dfa_applicanttype = (int?)Enum.Parse<SecondaryApplicantTypeOptionSet>(applicant.ApplicantType.ToString()),
-                    dfa_firstname = applicant.FirstName,
-                    dfa_lastname = applicant.LastName,
-                    dfa_title = applicant.Title ?? string.Empty,
-                    dfa_emailaddress = applicant.Email,
-                    dfa_phonenumber = applicant.Phone,
-                    dfa_organizationname = applicant.ApplicantType == SecondaryApplicantType.Organization ? applicant.LastName + ", " + applicant.FirstName : String.Empty,
-                });
+                    ret.Add(new dfa_appsecondaryapplicant
+                    {
+                        dfa_applicanttype = (int?)Enum.Parse<SecondaryApplicantTypeOptionSet>(applicant.ApplicantType.ToString()),
+                        dfa_firstname = applicant.FirstName,
+                        dfa_lastname = applicant.LastName,
+                        dfa_title = applicant.Title ?? string.Empty,
+                        dfa_emailaddress = applicant.Email,
+                        dfa_phonenumber = applicant.Phone,
+                        dfa_organizationname = applicant.ApplicantType == SecondaryApplicantType.Organization ? applicant.LastName + ", " + applicant.FirstName : String.Empty,
+                    });
+                }
             }
 
             return ret;
@@ -266,16 +269,19 @@ namespace EMBC.DFA.Resources.Submissions
 
             foreach (var log in cleanUpLogs)
             {
-                ret.Add(new dfa_appcleanuplog
+                if (log.Date != null || !string.IsNullOrEmpty(log.ContactName) || log.HoursWorked > 0 || !string.IsNullOrEmpty(log.DescriptionOfWork))
                 {
-                    dfa_date = log.Date,
-                    dfa_contactid = new dfa_appcontact
+                    ret.Add(new dfa_appcleanuplog
                     {
-                        dfa_name = log.ContactName
-                    },
-                    dfa_hoursworked = log.HoursWorked,
-                    dfa_name = log.DescriptionOfWork,
-                });
+                        dfa_date = log.Date,
+                        dfa_contactid = new dfa_appcontact
+                        {
+                            dfa_name = log.ContactName
+                        },
+                        dfa_hoursworked = log.HoursWorked,
+                        dfa_name = log.DescriptionOfWork,
+                    });
+                }
             }
 
             return ret;
@@ -327,20 +333,6 @@ namespace EMBC.DFA.Resources.Submissions
                 dfa_emailaddress = applicant.Email,
                 dfa_alternatephonenumber = applicant.AlternatePhone,
             };
-
-            if (!string.IsNullOrEmpty(applicant.ContactName))
-            {
-                ret.dfa_dfa_appcontact_dfa_apporganization_ContactId = new Collection<dfa_apporganization>
-                {
-                    new dfa_apporganization
-                    {
-                        dfa_ContactId = new dfa_appcontact
-                        {
-                            dfa_name = applicant.ContactName
-                        }
-                    }
-                };
-            }
 
             return ret;
         }

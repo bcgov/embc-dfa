@@ -203,7 +203,7 @@ namespace EMBC.DFA.Resources.Submissions
 
         private void AddDocuments(DfaContext ctx, dfa_appapplication application)
         {
-            var chefApiBaseUri = configuration.GetValue<string>("CHEFS_API_BASE_URI", string.Empty) + "/app/user/view?s=";
+            var chefApiBaseUri = configuration.GetValue<string>("CHEFS_API_BASE_URI", string.Empty) + "/app/form/view?s=";
             foreach (var doc in application.dfa_appapplication_dfa_appdocumentlocations_ApplicationId)
             {
                 doc.dfa_url = chefApiBaseUri + doc.dfa_url;

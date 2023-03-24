@@ -97,8 +97,7 @@ namespace EMBC.Tests.Integration.DFA.Api
                     Email = "john@test.com",
                     Phone = "(778) 987-8978",
                     Mobile = "(778) 987-8978",
-                    BusinessLegalName = "Test Farm",
-                    ContactName = "Test Contact"
+                    BusinessLegalName = "Test Farm"
                 },
                 SecondaryApplicants = new List<SecondaryApplicant>(),
                 AltContacts = new List<AltContact>(),
@@ -174,8 +173,7 @@ namespace EMBC.Tests.Integration.DFA.Api
                     Email = "john@test.com",
                     Phone = "(778) 987-8978",
                     Mobile = "(778) 987-8978",
-                    BusinessLegalName = "Test Farm",
-                    ContactName = "Test Contact"
+                    BusinessLegalName = "Test Farm"
                 },
                 SecondaryApplicants = new List<SecondaryApplicant>(),
                 AltContacts = new List<AltContact>(),
