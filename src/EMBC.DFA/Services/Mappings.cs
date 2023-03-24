@@ -31,7 +31,6 @@ namespace EMBC.DFA.Services
                         Mobile = source.cellularTelephoneNumber1,
                         AlternatePhone = source.alternatePhoneNumber1,
                         BusinessLegalName = source.primaryContactNameLastFirst1,
-                        ContactName = source.primaryContactNameLastFirst2,
                     },
 
                     SecondaryApplicants = new List<SecondaryApplicant>(),
@@ -116,6 +115,14 @@ namespace EMBC.DFA.Services
                         LastName = contact.alternateContactNameWhereYouCanBeReachedIfApplicable1,
                         Email = contact.eMailAddress1,
                         Phone = contact.alternatePhoneNumber,
+                    });
+                }
+
+                if (!string.IsNullOrEmpty(source.primaryContactNameLastFirst2))
+                {
+                    ret.AltContacts.Add(new AltContact
+                    {
+                        FirstName = source.primaryContactNameLastFirst2
                     });
                 }
 

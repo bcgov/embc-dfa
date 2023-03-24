@@ -173,7 +173,6 @@ namespace EMBC.DFA.Managers.Intake
         public string Mobile { get; set; }
         public string? AlternatePhone { get; set; }
         public string BusinessLegalName { get; set; }
-        public string ContactName { get; set; }
     }
 
     public class Address
